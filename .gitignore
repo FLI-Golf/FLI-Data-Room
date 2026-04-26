@@ -1,0 +1,17 @@
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# PocketBase data (never commit user data or uploads)
+pocketbase/pb_data/
+
+# Node
+frontend/node_modules/
+frontend/.svelte-kit/
+frontend/build/
+frontend/.netlify/
+
+# OS
+.DS_Store
+Thumbs.db

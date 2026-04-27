@@ -4,9 +4,6 @@
     "context": ".",
     "dockerfile": "Dockerfile"
   },
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
   "forwardPorts": [5173, 8090],
   "portsAttributes": {
     "5173": {

@@ -52,7 +52,7 @@
 						</td>
 						<td class="px-5 py-3">
 							{#if user.ndaAccepted}
-								<span class="inline-flex items-center gap-1 rounded-full bg-green-500/20 px-2.5 py-0.5 text-xs font-medium text-green-400">
+								<span class="inline-flex items-center gap-1 rounded-full bg-green-500/20 px-2.5 py-0.5 text-xs font-medium text-green-600">
 									Accepted
 								</span>
 							{:else}
@@ -67,7 +67,7 @@
 									<input type="hidden" name="userId" value={user.id} />
 									<button
 										type="submit"
-										class="text-xs text-red-400 hover:text-red-300 transition-colors"
+										class="text-xs text-red-500 hover:text-red-300 transition-colors"
 									>
 										Revoke NDA
 									</button>

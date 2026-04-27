@@ -1,0 +1,18 @@
+services:
+  dev-server:
+    name: SvelteKit Dev Server
+    description: Installs Node if needed, then runs the Vite dev server
+    commands:
+      start: |
+        # Install Node if not present (fallback until devcontainer build succeeds)
+        if ! command -v node &>/dev/null; then
+          curl -fsSL https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.gz -o /tmp/node.tar.gz
+          tar -xzf /tmp/node.tar.gz -C /usr/local --strip-components=1
+        fi
+        cd /workspaces/FLI-Data-Room/frontend
+        npm install
+        npm run dev -- --host 0.0.0.0 --port 5173
+      stop: kill $(lsof -t -i:5173) 2>/dev/null || true
+    ready: "$(curl -sf http://localhost:5173 > /dev/null && echo 'ready')"
+    triggeredBy:
+      - postEnvironmentStart

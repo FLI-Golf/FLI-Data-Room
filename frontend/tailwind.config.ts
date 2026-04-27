@@ -5,15 +5,34 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				// Navy — primary backgrounds
+				navy: {
+					950: '#111f6a',
+					900: '#172a85',
+					800: '#1e3499',
+					700: '#2540b0',
+					600: '#2d4dc5'
+				},
+				// brand mapped to red — all existing brand- classes become red
 				brand: {
-					50: '#f0f9ff',
-					100: '#e0f2fe',
-					300: '#7dd3fc',
-					400: '#38bdf8',
-					500: '#0ea5e9',
-					600: '#0284c7',
-					700: '#0369a1',
-					900: '#0c4a6e'
+					50:  '#fff1f1',
+					100: '#ffe0e0',
+					300: '#fca5a5',
+					400: '#fc5c5c',
+					500: '#e53e3e',
+					600: '#c0392b',
+					700: '#991b1b',
+					900: '#450f0f'
+				},
+				// fli-blue — supporting UI, financial positives, info
+				'fli-blue': {
+					900: '#1e3a5f',
+					800: '#1e4080',
+					700: '#1d4ed8',
+					600: '#2563eb',
+					500: '#3b82f6',
+					400: '#60a5fa',
+					300: '#93c5fd'
 				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

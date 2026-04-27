@@ -20,7 +20,7 @@
 		<h2 class="text-base font-bold text-white mb-4">Upload Document</h2>
 
 		{#if form?.error}
-			<div class="mb-4 rounded-md bg-destructive/10 px-4 py-3 text-sm text-destructive">
+			<div class="mb-4 rounded-md bg-brand-600/10 border border-brand-600/20 px-4 py-3 text-sm text-brand-600">
 				{form.error}
 			</div>
 		{/if}
@@ -107,7 +107,7 @@
 						<input type="hidden" name="docId" value={doc.id} />
 						<button
 							type="submit"
-							class="text-xs text-red-400 hover:text-red-300 transition-colors"
+							class="text-xs text-red-500 hover:text-red-300 transition-colors"
 							onclick="return confirm('Delete this document?')"
 						>
 							Delete

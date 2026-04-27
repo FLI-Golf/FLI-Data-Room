@@ -192,10 +192,26 @@
 	</div>
 
 	<!-- Quick links -->
-	<div class="grid sm:grid-cols-3 gap-4">
+	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		<a href="/dashboard/pitch-deck" class="rounded-xl border border-brand-600/30 bg-brand-600/15 p-6 hover:bg-brand-600/20 transition-colors group">
-			<div class="text-brand-600 font-semibold mb-1 group-hover:text-brand-300">Pitch Deck →</div>
+			<div class="text-brand-500 font-semibold mb-1 group-hover:text-brand-300">Pitch Deck →</div>
 			<div class="text-sm text-white/50">Full investor presentation</div>
+		</a>
+		<a href="/dashboard/the-sport" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">The Sport →</div>
+			<div class="text-sm text-white/50">17K courses · 86% growth · 99 countries</div>
+		</a>
+		<a href="/dashboard/market-opportunity" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Market Opportunity →</div>
+			<div class="text-sm text-white/50">9 revenue pools · $18B SAM</div>
+		</a>
+		<a href="/dashboard/why-fli-wins" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Why FLI Wins →</div>
+			<div class="text-sm text-white/50">Stadium format · living analogs</div>
+		</a>
+		<a href="/dashboard/investment-thesis" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Investment Thesis →</div>
+			<div class="text-sm text-white/50">$7.5M seed · Q2 2026</div>
 		</a>
 		<a href="/dashboard/celebrity-network" class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-800/20 p-6 hover:bg-yellow-500/10 transition-colors group">
 			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Celebrity Network →</div>

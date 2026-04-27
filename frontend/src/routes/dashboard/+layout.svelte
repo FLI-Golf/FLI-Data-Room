@@ -4,9 +4,13 @@
 	export let data: LayoutData;
 
 	const coreNav = [
-		{ href: '/dashboard',                   label: 'Overview' },
-		{ href: '/dashboard/pitch-deck',         label: 'Pitch Deck' },
-		{ href: '/dashboard/celebrity-network',  label: 'Celebrity Network' }
+		{ href: '/dashboard',                        label: 'Overview' },
+		{ href: '/dashboard/pitch-deck',             label: 'Pitch Deck' },
+		{ href: '/dashboard/the-sport',              label: 'The Sport' },
+		{ href: '/dashboard/market-opportunity',     label: 'Market Opportunity' },
+		{ href: '/dashboard/why-fli-wins',           label: 'Why FLI Wins' },
+		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis' },
+		{ href: '/dashboard/celebrity-network',      label: 'Celebrity Network' }
 	];
 </script>
 

@@ -27,7 +27,7 @@
 	</a>
 
 	<!-- Section settings -->
-	<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<h2 class="text-base font-bold text-white mb-5">Section Settings</h2>
 
 		{#if form?.error}
@@ -39,12 +39,12 @@
 				<div class="space-y-1">
 					<label for="name" class="block text-xs font-medium text-white/60">Name</label>
 					<input id="name" name="name" type="text" required value={data.section.name}
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50" />
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50" />
 				</div>
 				<div class="space-y-1">
 					<label for="role" class="block text-xs font-medium text-white/60">Access Level</label>
 					<select id="role" name="role"
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50">
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50">
 						<option value="basic"    selected={data.section.role === 'basic'}>Basic — all authenticated users</option>
 						<option value="advanced" selected={data.section.role === 'advanced'}>Advanced — advanced + admin only</option>
 						<option value="admin"    selected={data.section.role === 'admin'}>Admin — admin only</option>
@@ -54,7 +54,7 @@
 			<div class="space-y-1">
 				<label for="description" class="block text-xs font-medium text-white/60">Description</label>
 				<input id="description" name="description" type="text" value={data.section.description ?? ''}
-					class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 					placeholder="Short description shown in the sidebar" />
 			</div>
 			<div class="flex items-center justify-between">
@@ -98,13 +98,13 @@
 					<div class="space-y-1">
 						<label class="block text-xs font-medium text-white/60">Heading <span class="text-white/30">(optional)</span></label>
 						<input name="heading" type="text"
-							class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+							class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 							placeholder="Section heading" />
 					</div>
 					<div class="space-y-1">
 						<label class="block text-xs font-medium text-white/60">Body</label>
 						<textarea name="body" rows="5"
-							class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50 resize-y"
+							class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50 resize-y"
 							placeholder="Write your content here..."></textarea>
 					</div>
 					<div class="flex gap-2">
@@ -126,16 +126,16 @@
 						<div class="space-y-1">
 							<label class="block text-xs font-medium text-white/60">Caption <span class="text-white/30">(optional)</span></label>
 							<input name="heading" type="text"
-								class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+								class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 								placeholder="Image caption" />
 						</div>
 						<div class="space-y-1">
 							<label class="block text-xs font-medium text-white/60">Select from Media Library</label>
-							<div class="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-56 overflow-y-auto rounded-md border border-white/10 bg-navy-900/60 p-2">
+							<div class="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-56 overflow-y-auto rounded-md border border-white/15 bg-navy-800/50 p-2">
 								{#each data.mediaLibrary as m}
 									<label class="cursor-pointer group">
 										<input type="radio" name="media" value={m.id} required class="sr-only peer" />
-										<div class="rounded-lg border border-white/10 bg-navy-800/60 p-2 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-colors">
+										<div class="rounded-lg border border-white/15 bg-navy-700/50 p-2 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-colors">
 											<img src={mediaUrl(m)} alt={m.alt || m.name} class="h-14 w-full object-contain" />
 											<div class="text-xs text-white/50 truncate mt-1 text-center">{m.name}</div>
 										</div>
@@ -154,12 +154,12 @@
 
 		<!-- Existing blocks -->
 		{#if data.blocks.length === 0}
-			<div class="rounded-xl border border-white/10 bg-navy-800/60 p-10 text-center text-sm text-white/30">
+			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-10 text-center text-sm text-white/30">
 				No content yet. Add a text or media block above.
 			</div>
 		{:else}
 			{#each data.blocks as block, i}
-				<div class="rounded-xl border border-white/10 bg-navy-800/60 p-5">
+				<div class="rounded-xl border border-white/15 bg-navy-700/50 p-5">
 					<div class="flex items-start justify-between gap-4">
 						<div class="flex items-center gap-2 shrink-0">
 							<!-- Move up/down -->
@@ -182,7 +182,7 @@
 								</form>
 							</div>
 							<!-- Type badge -->
-							<span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/40 capitalize">
+							<span class="rounded-full border border-white/15 bg-white/8 px-2 py-0.5 text-xs text-white/40 capitalize">
 								{block.type}
 							</span>
 						</div>

@@ -16,7 +16,7 @@
 		admin:    'Admin Only'
 	};
 	const roleStyle: Record<string, string> = {
-		basic:    'border-white/20 bg-white/5 text-white/50',
+		basic:    'border-white/20 bg-white/8 text-white/50',
 		advanced: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-400',
 		admin:    'border-brand-600/30 bg-brand-600/10 text-brand-500'
 	};
@@ -43,14 +43,14 @@
 	</div>
 
 	{#if data.blocks.length === 0}
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-12 text-center text-sm text-white/30">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-12 text-center text-sm text-white/30">
 			No content has been added to this section yet.
 		</div>
 	{:else}
 		<div class="space-y-6">
 			{#each data.blocks as block}
 				{#if block.type === 'text'}
-					<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+					<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 						{#if block.heading}
 							<h2 class="text-lg font-bold text-white mb-3">{block.heading}</h2>
 						{/if}
@@ -59,7 +59,7 @@
 						{/if}
 					</div>
 				{:else if block.type === 'media' && block.expand?.media}
-					<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+					<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 						{#if block.heading}
 							<p class="text-sm text-white/50 mb-3">{block.heading}</p>
 						{/if}

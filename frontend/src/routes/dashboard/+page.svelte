@@ -107,7 +107,7 @@
 			{ value: '20M+', label: 'Global Players', red: false },
 			{ value: '86%', label: 'Growth Since 2020', red: false }
 		] as stat}
-			<div class="rounded-xl border {stat.red ? 'border-brand-700/40 bg-brand-600/15' : 'border-white/10 bg-navy-800/60'} p-5 text-center">
+			<div class="rounded-xl border {stat.red ? 'border-brand-700/40 bg-brand-600/15' : 'border-white/15 bg-navy-700/50'} p-5 text-center">
 				<div class="text-2xl font-black {stat.red ? 'text-brand-500' : 'text-white'}">{stat.value}</div>
 				<div class="text-xs text-white/40 mt-1 uppercase tracking-wide">{stat.label}</div>
 			</div>
@@ -115,7 +115,7 @@
 	</div>
 
 	<!-- Use of proceeds -->
-	<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<h2 class="text-lg font-bold text-white mb-4">Use of Proceeds</h2>
 		<div class="grid sm:grid-cols-4 gap-4">
 			{#each [
@@ -124,7 +124,7 @@
 				{ pct: '20%', label: 'Media & Content Buildout' },
 				{ pct: '20%', label: 'Marketing, Working Capital & Reserve' }
 			] as item}
-				<div class="rounded-lg bg-navy-900/80 border border-white/10 p-4 text-center">
+				<div class="rounded-lg bg-navy-900/80 border border-white/15 p-4 text-center">
 					<div class="text-2xl font-black text-brand-600">{item.pct}</div>
 					<div class="text-xs text-white/50 mt-1 leading-snug">{item.label}</div>
 				</div>
@@ -133,11 +133,11 @@
 	</div>
 
 	<!-- Financial forecast -->
-	<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<!-- Header + tab toggle -->
 		<div class="flex items-center justify-between mb-5">
 			<h2 class="text-lg font-bold text-white">Financial Forecast</h2>
-			<div class="flex items-center rounded-lg border border-white/10 bg-navy-900/60 p-0.5">
+			<div class="flex items-center rounded-lg border border-white/15 bg-navy-800/50 p-0.5">
 				<button
 					on:click={() => tab = 'table'}
 					class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
@@ -161,7 +161,7 @@
 			<div class="overflow-x-auto">
 				<table class="w-full text-sm">
 					<thead>
-						<tr class="border-b border-white/10 text-white/40 text-xs uppercase tracking-wide">
+						<tr class="border-b border-white/15 text-white/40 text-xs uppercase tracking-wide">
 							<th class="text-left py-2 pr-4">Year</th>
 							<th class="text-right py-2 px-4">Revenue</th>
 							<th class="text-right py-2 px-4">Net Profit</th>
@@ -192,17 +192,33 @@
 	</div>
 
 	<!-- Quick links -->
-	<div class="grid sm:grid-cols-3 gap-4">
+	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		<a href="/dashboard/pitch-deck" class="rounded-xl border border-brand-600/30 bg-brand-600/15 p-6 hover:bg-brand-600/20 transition-colors group">
-			<div class="text-brand-600 font-semibold mb-1 group-hover:text-brand-300">Pitch Deck →</div>
+			<div class="text-brand-500 font-semibold mb-1 group-hover:text-brand-300">Pitch Deck →</div>
 			<div class="text-sm text-white/50">Full investor presentation</div>
+		</a>
+		<a href="/dashboard/the-sport" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">The Sport →</div>
+			<div class="text-sm text-white/50">17K courses · 86% growth · 99 countries</div>
+		</a>
+		<a href="/dashboard/market-opportunity" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Market Opportunity →</div>
+			<div class="text-sm text-white/50">9 revenue pools · $18B SAM</div>
+		</a>
+		<a href="/dashboard/why-fli-wins" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Why FLI Wins →</div>
+			<div class="text-sm text-white/50">Stadium format · living analogs</div>
+		</a>
+		<a href="/dashboard/investment-thesis" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
+			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Investment Thesis →</div>
+			<div class="text-sm text-white/50">$7.5M seed · Q2 2026</div>
 		</a>
 		<a href="/dashboard/celebrity-network" class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-800/20 p-6 hover:bg-yellow-500/10 transition-colors group">
 			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Celebrity Network →</div>
 			<div class="text-sm text-white/50">35 celebrities · 500M+ reach</div>
 		</a>
 		{#if data.user?.role === 'admin'}
-			<a href="/dashboard/documents" class="rounded-xl border border-white/10 bg-navy-800/60 p-6 hover:bg-navy-700/60 transition-colors group">
+			<a href="/dashboard/documents" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
 				<div class="text-white font-semibold mb-1">Supporting Documents →</div>
 				<div class="text-sm text-white/50">Financials, legal, and supplemental materials</div>
 			</a>

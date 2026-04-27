@@ -13,10 +13,14 @@ interface MediaRecord {
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const media = await locals.pb
-		.collection('media')
-		.getFullList<MediaRecord>({ sort: '-created' });
-	return { media };
+	try {
+		const media = await locals.pb
+			.collection('media')
+			.getFullList<MediaRecord>({ sort: '-created' });
+		return { media };
+	} catch {
+		return { media: [] as MediaRecord[] };
+	}
 };
 
 export const actions: Actions = {

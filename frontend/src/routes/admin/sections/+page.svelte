@@ -27,7 +27,7 @@
 	</div>
 
 	<!-- Create form -->
-	<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<div class="flex items-center gap-2 mb-5">
 			<Plus class="h-4 w-4 text-yellow-400" />
 			<h2 class="text-base font-bold text-white">New Section</h2>
@@ -45,7 +45,7 @@
 					<label for="name" class="block text-xs font-medium text-white/60">Section Name</label>
 					<input
 						id="name" name="name" type="text" required
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 						placeholder="e.g. Market Analysis"
 					/>
 				</div>
@@ -53,7 +53,7 @@
 					<label for="role" class="block text-xs font-medium text-white/60">Access Level</label>
 					<select
 						id="role" name="role"
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 					>
 						<option value="basic">Basic — all authenticated users</option>
 						<option value="advanced">Advanced — advanced + admin only</option>
@@ -65,7 +65,7 @@
 				<label for="description" class="block text-xs font-medium text-white/60">Description <span class="text-white/30">(optional)</span></label>
 				<input
 					id="description" name="description" type="text"
-					class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
+					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 					placeholder="Short description shown in the sidebar"
 				/>
 			</div>
@@ -83,12 +83,12 @@
 		</h2>
 
 		{#if data.sections.length === 0}
-			<div class="rounded-xl border border-white/10 bg-navy-800/60 p-10 text-center text-sm text-white/30">
+			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-10 text-center text-sm text-white/30">
 				No sections yet. Create one above.
 			</div>
 		{:else}
 			{#each data.sections as section}
-				<div class="flex items-center justify-between rounded-xl border border-white/10 bg-navy-800/60 px-5 py-4">
+				<div class="flex items-center justify-between rounded-xl border border-white/15 bg-navy-700/50 px-5 py-4">
 					<div class="flex items-center gap-4 min-w-0">
 						<!-- Published indicator -->
 						<div class="h-2 w-2 rounded-full shrink-0 {section.published ? 'bg-green-500' : 'bg-white/20'}"></div>

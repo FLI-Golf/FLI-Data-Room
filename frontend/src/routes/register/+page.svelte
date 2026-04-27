@@ -32,7 +32,7 @@
 			<p class="mt-1 text-sm text-white/50">Create an account to access the data room</p>
 		</div>
 
-		<form method="POST" use:enhance class="space-y-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-8">
+		<form method="POST" use:enhance class="space-y-4 rounded-xl border border-white/15 bg-white/8 backdrop-blur-sm p-8">
 			{#if form?.error}
 				<div class="rounded-md bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-500">
 					{form.error}
@@ -47,7 +47,7 @@
 					type="text"
 					required
 					autocomplete="name"
-					class="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="Jane Smith"
 				/>
 			</div>
@@ -60,7 +60,7 @@
 					type="email"
 					required
 					autocomplete="email"
-					class="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="you@example.com"
 				/>
 			</div>
@@ -73,7 +73,7 @@
 					type="password"
 					required
 					autocomplete="new-password"
-					class="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="••••••••"
 				/>
 			</div>
@@ -88,7 +88,7 @@
 					type="password"
 					required
 					autocomplete="new-password"
-					class="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="••••••••"
 				/>
 			</div>

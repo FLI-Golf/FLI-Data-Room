@@ -35,8 +35,8 @@
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-8">
-			<div class="max-h-72 overflow-y-auto rounded-md border border-white/10 bg-white/5 p-4 text-sm text-white/70 space-y-3 leading-relaxed">
+		<div class="rounded-xl border border-white/15 bg-white/8 backdrop-blur-sm p-8">
+			<div class="max-h-72 overflow-y-auto rounded-md border border-white/15 bg-white/8 p-4 text-sm text-white/70 space-y-3 leading-relaxed">
 				<h2 class="text-base font-semibold text-white">Confidentiality Agreement</h2>
 				<p>
 					By accessing the FLI Golf investor data room, you ("Recipient") agree to keep all

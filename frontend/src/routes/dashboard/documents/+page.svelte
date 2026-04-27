@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="grid sm:grid-cols-3 gap-4">
-				<div class="rounded-lg border border-white/10 bg-navy-900/60 p-4">
+				<div class="rounded-lg border border-white/15 bg-navy-800/50 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Upload class="h-4 w-4 text-yellow-400 shrink-0" />
 						<div class="text-xs font-semibold text-white">1. Upload in Admin</div>
@@ -31,7 +31,7 @@
 						Go to <a href="/admin/documents" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Documents</a> to upload a PDF or file. Set a title, description, and the required role to view it.
 					</p>
 				</div>
-				<div class="rounded-lg border border-white/10 bg-navy-900/60 p-4">
+				<div class="rounded-lg border border-white/15 bg-navy-800/50 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Shield class="h-4 w-4 text-yellow-400 shrink-0" />
 						<div class="text-xs font-semibold text-white">2. Set Access Level</div>
@@ -40,7 +40,7 @@
 						Each document has a <span class="text-white/70">Required Role</span> — <span class="text-white/70">basic</span> (all signed-in users), <span class="text-white/70">advanced</span> (advanced + admin only), or <span class="text-white/70">admin</span> (you only). Users only see documents their role permits.
 					</p>
 				</div>
-				<div class="rounded-lg border border-white/10 bg-navy-900/60 p-4">
+				<div class="rounded-lg border border-white/15 bg-navy-800/50 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Users class="h-4 w-4 text-yellow-400 shrink-0" />
 						<div class="text-xs font-semibold text-white">3. Grant User Roles</div>
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 
-			<div class="flex items-start gap-2 rounded-lg border border-white/10 bg-navy-900/60 p-3">
+			<div class="flex items-start gap-2 rounded-lg border border-white/15 bg-navy-800/50 p-3">
 				<Lock class="h-3.5 w-3.5 text-white/30 shrink-0 mt-0.5" />
 				<p class="text-xs text-white/40 leading-relaxed">
 					Documents are served directly from PocketBase. Only authenticated users whose role meets the required level can access the file URL. Links cannot be shared externally.
@@ -61,14 +61,14 @@
 	{/if}
 
 	{#if data.documents.length === 0}
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-12 text-center">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-12 text-center">
 			<div class="text-white/30 text-sm">No documents have been uploaded yet.</div>
 			<div class="text-white/20 text-xs mt-1">Check back soon or contact your representative.</div>
 		</div>
 	{:else}
 		<div class="space-y-3">
 			{#each data.documents as doc}
-				<div class="flex items-center justify-between rounded-xl border border-white/10 bg-navy-800/60 px-5 py-4 hover:bg-navy-700/60 transition-colors">
+				<div class="flex items-center justify-between rounded-xl border border-white/15 bg-navy-700/50 px-5 py-4 hover:bg-navy-700/60 transition-colors">
 					<div class="flex items-center gap-4">
 						<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500/20 text-brand-600">
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

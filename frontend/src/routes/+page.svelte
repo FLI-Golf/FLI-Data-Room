@@ -73,7 +73,7 @@
 	</div>
 
 	<!-- Stats bar -->
-	<div class="relative z-10 border-t border-white/10 bg-navy-950/60 backdrop-blur-sm">
+	<div class="relative z-10 border-t border-white/15 bg-navy-950/60 backdrop-blur-sm">
 		<div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
 			{#each [
 				{ value: '$18B+', label: 'Addressable SAM by 2030' },
@@ -103,7 +103,7 @@
 				{ stat: '$2.5B',  label: 'Core Market by 2030',  body: 'Core product market grows from $1.2B in 2025 to $2.5B by 2030 at 15% CAGR. New FGL revenue streams expand the ceiling further.' },
 				{ stat: '18–34', label: 'Young, Digital-Native Demo', body: "Disc golf's dominant demographic is 18–34 and spending-ready — the most valuable audience in sports." }
 			] as item}
-				<div class="rounded-xl border border-white/10 bg-navy-800/60 p-8">
+				<div class="rounded-xl border border-white/15 bg-navy-700/50 p-8">
 					<div class="text-4xl font-black text-brand-600 mb-2">{item.stat}</div>
 					<div class="text-sm font-semibold text-white mb-3 uppercase tracking-wide">{item.label}</div>
 					<p class="text-sm text-white/50 leading-relaxed">{item.body}</p>

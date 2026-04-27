@@ -13,23 +13,30 @@ export const handle: Handle = async ({ event, resolve }) => {
 	try {
 		if (event.locals.pb.authStore.isValid) {
 			await event.locals.pb.collection('users').authRefresh();
+			const model = event.locals.pb.authStore.model;
+			// Only treat as a valid user session if the model has an email
+			// (guards against superuser tokens leaking into user sessions)
+			if (model && model.email) {
+				event.locals.user = structuredClone(model) as App.Locals['user'];
+			} else {
+				event.locals.pb.authStore.clear();
+				event.locals.user = null;
+			}
+		} else {
+			event.locals.user = null;
 		}
 	} catch {
 		// Token expired or invalid — clear it so the user is treated as logged out.
 		event.locals.pb.authStore.clear();
+		event.locals.user = null;
 	}
-
-	event.locals.user = event.locals.pb.authStore.isValid
-		? (event.locals.pb.authStore.model as App.Locals['user'])
-		: null;
 
 	const response = await resolve(event);
 
-	// Persist the (possibly refreshed) auth token back to the browser cookie.
+	// Persist the (possibly refreshed or cleared) auth token back to the browser cookie.
 	response.headers.append(
 		'set-cookie',
 		event.locals.pb.authStore.exportToCookie({ httpOnly: true, secure: true, sameSite: 'Lax' })
 	);
-
 	return response;
 };

@@ -3,6 +3,12 @@
 	import type { PageData, ActionData } from './$types';
 	export let data: PageData;
 	export let form: ActionData;
+
+	function confirmDelete(event: MouseEvent) {
+		if (!confirm('Delete this document?')) {
+			event.preventDefault();
+		}
+	}
 </script>
 
 <svelte:head>
@@ -108,7 +114,7 @@
 						<button
 							type="submit"
 							class="text-xs text-red-500 hover:text-red-300 transition-colors"
-							onclick="return confirm('Delete this document?')"
+							on:click={confirmDelete}
 						>
 							Delete
 						</button>

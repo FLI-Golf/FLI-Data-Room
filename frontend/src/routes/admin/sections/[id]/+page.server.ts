@@ -32,15 +32,20 @@ interface MediaRecord {
 }
 
 export const load: PageServerLoad = async ({ locals, params }) => {
-	const section = await locals.pb.collection('sections').getOne<Section>(params.id);
-	const blocks  = await locals.pb.collection('section_content').getFullList<ContentBlock>({
-		filter: `section = "${params.id}"`,
-		sort:   'sort_order,created',
-		expand: 'media'
-	});
-	const mediaLibrary = await locals.pb.collection('media').getFullList<MediaRecord>({ sort: 'name' });
+	try {
+		const section = await locals.pb.collection('sections').getOne<Section>(params.id);
+		const blocks  = await locals.pb.collection('section_content').getFullList<ContentBlock>({
+			filter: `section = "${params.id}"`,
+			sort:   'sort_order,created',
+			expand: 'media'
+		}).catch(() => [] as ContentBlock[]);
+		const mediaLibrary = await locals.pb.collection('media').getFullList<MediaRecord>({ sort: 'name' })
+			.catch(() => [] as MediaRecord[]);
 
-	return { section, blocks, mediaLibrary };
+		return { section, blocks, mediaLibrary };
+	} catch {
+		redirect(303, '/admin/sections');
+	}
 };
 
 export const actions: Actions = {

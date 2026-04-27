@@ -17,10 +17,14 @@ function toSlug(name: string) {
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const sections = await locals.pb
-		.collection('sections')
-		.getFullList<Section>({ sort: 'sort_order,created' });
-	return { sections };
+	try {
+		const sections = await locals.pb
+			.collection('sections')
+			.getFullList<Section>({ sort: 'sort_order,created' });
+		return { sections };
+	} catch {
+		return { sections: [] as Section[] };
+	}
 };
 
 export const actions: Actions = {

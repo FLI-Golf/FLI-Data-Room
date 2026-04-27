@@ -40,7 +40,7 @@
 	</div>
 
 	<!-- Upload form -->
-	<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<div class="flex items-center gap-2 mb-5">
 			<Upload class="h-4 w-4 text-brand-500" />
 			<h2 class="text-base font-bold text-white">Upload Asset</h2>
@@ -67,7 +67,7 @@
 						name="name"
 						type="text"
 						required
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
 						placeholder="e.g. FLI Shield Logo"
 					/>
 				</div>
@@ -77,7 +77,7 @@
 						id="tag"
 						name="tag"
 						required
-						class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-600"
+						class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-600"
 					>
 						{#each tags as t}
 							<option value={t} class="capitalize">{t}</option>
@@ -92,7 +92,7 @@
 					id="alt"
 					name="alt"
 					type="text"
-					class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
 					placeholder="Describe the image for accessibility"
 				/>
 			</div>
@@ -103,7 +103,7 @@
 					id="notes"
 					name="notes"
 					type="text"
-					class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
 					placeholder="Internal notes"
 				/>
 			</div>
@@ -116,7 +116,7 @@
 					type="file"
 					accept="image/jpeg,image/png,image/svg+xml,image/gif,image/webp"
 					required
-					class="w-full rounded-md border border-white/10 bg-navy-900/60 px-3 py-2 text-sm text-white/70
+					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white/70
 						file:mr-3 file:rounded file:border-0 file:bg-brand-600 file:px-3 file:py-1
 						file:text-xs file:font-semibold file:text-white hover:file:bg-brand-500
 						focus:outline-none"
@@ -149,7 +149,7 @@
 				<button
 					on:click={() => selectedTag = 'all'}
 					class="rounded-full border px-3 py-0.5 text-xs font-medium transition-colors
-						{selectedTag === 'all' ? 'border-white/40 bg-white/10 text-white' : 'border-white/10 text-white/40 hover:text-white/70'}"
+						{selectedTag === 'all' ? 'border-white/40 bg-white/10 text-white' : 'border-white/15 text-white/40 hover:text-white/70'}"
 				>
 					All
 				</button>
@@ -157,7 +157,7 @@
 					<button
 						on:click={() => selectedTag = t}
 						class="rounded-full border px-3 py-0.5 text-xs font-medium capitalize transition-colors
-							{selectedTag === t ? tagColors[t] : 'border-white/10 text-white/40 hover:text-white/70'}"
+							{selectedTag === t ? tagColors[t] : 'border-white/15 text-white/40 hover:text-white/70'}"
 					>
 						{t}
 					</button>
@@ -166,14 +166,14 @@
 		</div>
 
 		{#if filtered.length === 0}
-			<div class="rounded-xl border border-white/10 bg-navy-800/60 p-12 text-center">
+			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-12 text-center">
 				<FileImage class="h-8 w-8 text-white/20 mx-auto mb-3" />
 				<div class="text-sm text-white/30">No media{selectedTag !== 'all' ? ` tagged "${selectedTag}"` : ''} yet.</div>
 			</div>
 		{:else}
 			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
 				{#each filtered as record}
-					<div class="group rounded-xl border border-white/10 bg-navy-800/60 overflow-hidden">
+					<div class="group rounded-xl border border-white/15 bg-navy-700/50 overflow-hidden">
 						<!-- Preview -->
 						<div class="relative aspect-square bg-navy-950/60 flex items-center justify-center p-4">
 							<img
@@ -201,7 +201,7 @@
 						</div>
 
 						<!-- Meta -->
-						<div class="px-3 py-2.5 border-t border-white/10">
+						<div class="px-3 py-2.5 border-t border-white/15">
 							<div class="text-xs font-semibold text-white truncate">{record.name}</div>
 							{#if record.alt}
 								<div class="text-xs text-white/40 truncate mt-0.5">{record.alt}</div>

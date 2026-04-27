@@ -87,7 +87,7 @@
 	<!-- Sections visible to all authenticated + NDA users -->
 	<div class="space-y-6">
 		<!-- The Opportunity -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<h2 class="text-lg font-bold text-white mb-3">The Opportunity</h2>
 			<p class="text-white/70 leading-relaxed">
 				FLI Golf League is creating the world's first stadium-style professional disc golf league —
@@ -109,7 +109,7 @@
 		</div>
 
 		<!-- The Roster -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<h2 class="text-lg font-bold text-white mb-3">Elite Athletes. Massive Reach.</h2>
 			<p class="text-white/70 leading-relaxed mb-5">
 				The world's top disc golf pros — committed to FLI Golf League — bring a combined digital
@@ -131,7 +131,7 @@
 		</div>
 
 		<!-- The Team -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<h2 class="text-lg font-bold text-white mb-4">The Team</h2>
 			<div class="grid sm:grid-cols-2 gap-4">
 				{#each [
@@ -156,7 +156,7 @@
 						bio: '23+ years tribal governance at Tule River Indian Tribe. IGA Board 10+ years. Unmatched tribal gaming relationships and regulatory expertise.'
 					}
 				] as member}
-					<div class="rounded-lg bg-navy-800/60 border border-white/10 p-4">
+					<div class="rounded-lg bg-navy-700/50 border border-white/15 p-4">
 						<div class="font-semibold text-white text-sm">{member.name}</div>
 						<div class="text-xs text-yellow-400 mb-2">{member.title}</div>
 						<p class="text-xs text-white/50 leading-relaxed">{member.bio}</p>
@@ -176,10 +176,10 @@
 			</div>
 
 			<!-- Financial forecast -->
-			<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 				<div class="flex items-center justify-between mb-5">
 					<h2 class="text-lg font-bold text-white">Financial Forecast</h2>
-					<div class="flex items-center rounded-lg border border-white/10 bg-navy-900/60 p-0.5">
+					<div class="flex items-center rounded-lg border border-white/15 bg-navy-800/50 p-0.5">
 						<button
 							on:click={() => tab = 'table'}
 							class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
@@ -203,7 +203,7 @@
 					<div class="overflow-x-auto">
 						<table class="w-full text-sm">
 							<thead>
-								<tr class="border-b border-white/10 text-white/40 text-xs uppercase tracking-wide">
+								<tr class="border-b border-white/15 text-white/40 text-xs uppercase tracking-wide">
 									<th class="text-left py-2 pr-4">Year</th>
 									<th class="text-right py-2 px-4">Revenue</th>
 									<th class="text-right py-2 px-4">Net Profit</th>
@@ -239,7 +239,7 @@
 			</div>
 
 			<!-- Gaming strategy -->
-			<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 				<h2 class="text-lg font-bold text-white mb-3">Gaming & Tribal Strategy</h2>
 				<p class="text-white/70 leading-relaxed mb-4">
 					No disc golf tour has formalized a sportsbook partnership. FGL owns this vertical. Par-3

@@ -206,7 +206,7 @@
 
 	{#if !data.hasAccess}
 		<!-- Locked state for basic users -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-12 text-center space-y-4">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-12 text-center space-y-4">
 			<div class="text-4xl">🔒</div>
 			<h2 class="text-xl font-bold text-white">Advanced Access Required</h2>
 			<p class="text-white/50 max-w-md mx-auto text-sm leading-relaxed">
@@ -225,7 +225,7 @@
 				{ value: '10+',   label: 'Industries',              icon: Trophy },
 				{ value: '$1B+',  label: 'Bananas Valuation Alone', icon: Crown }
 			] as stat}
-				<div class="rounded-xl border border-white/10 bg-navy-800/60 p-5 text-center">
+				<div class="rounded-xl border border-white/15 bg-navy-700/50 p-5 text-center">
 					<svelte:component this={stat.icon} class="h-5 w-5 text-yellow-400 mx-auto mb-2" />
 					<div class="text-2xl font-black text-white">{stat.value}</div>
 					<div class="text-xs text-white/40 mt-1 uppercase tracking-wide">{stat.label}</div>
@@ -234,7 +234,7 @@
 		</div>
 
 		<!-- The opportunity -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6 space-y-4">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6 space-y-4">
 			<h2 class="text-lg font-bold text-white">The Opportunity</h2>
 			<div class="grid sm:grid-cols-3 gap-4">
 				{#each [
@@ -260,13 +260,13 @@
 		</div>
 
 		<!-- Social reach breakdown -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-5">
 				<TrendingUp class="h-5 w-5 text-yellow-400" />
 				<h2 class="text-lg font-bold text-white">Combined Social Media Reach</h2>
 			</div>
 			<div class="grid sm:grid-cols-4 gap-4 mb-6">
-				<div class="rounded-lg bg-navy-900/60 border border-white/10 p-4">
+				<div class="rounded-lg bg-navy-800/50 border border-white/15 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Youtube class="h-5 w-5 text-red-500 shrink-0" />
 						<div class="text-xs font-semibold text-white">YouTube / Twitch</div>
@@ -274,7 +274,7 @@
 					<div class="text-2xl font-black text-white mb-1">~195M</div>
 					<p class="text-xs text-white/40 leading-snug">Dude Perfect 62M + Kai 21M + Tonight Show 33M + Bananas + others</p>
 				</div>
-				<div class="rounded-lg bg-navy-900/60 border border-white/10 p-4">
+				<div class="rounded-lg bg-navy-800/50 border border-white/15 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Music class="h-5 w-5 text-white shrink-0" />
 						<div class="text-xs font-semibold text-white">TikTok</div>
@@ -282,7 +282,7 @@
 					<div class="text-2xl font-black text-white mb-1">~55M</div>
 					<p class="text-xs text-white/40 leading-snug">Bananas 11.3M + Tom Segura 2.3M + Bert 2.5M + Brodie 1.7M + others</p>
 				</div>
-				<div class="rounded-lg bg-navy-900/60 border border-white/10 p-4">
+				<div class="rounded-lg bg-navy-800/50 border border-white/15 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Instagram class="h-5 w-5 text-pink-500 shrink-0" />
 						<div class="text-xs font-semibold text-white">Instagram</div>
@@ -290,7 +290,7 @@
 					<div class="text-2xl font-black text-white mb-1">~80M</div>
 					<p class="text-xs text-white/40 leading-snug">Fallon 29M + Hivju 3M + Bert 4M + Bananas 4M + 31 others</p>
 				</div>
-				<div class="rounded-lg bg-navy-900/60 border border-white/10 p-4">
+				<div class="rounded-lg bg-navy-800/50 border border-white/15 p-4">
 					<div class="flex items-center gap-2 mb-2">
 						<Twitter class="h-5 w-5 text-yellow-400 shrink-0" />
 						<div class="text-xs font-semibold text-white">Twitter / X</div>
@@ -320,7 +320,7 @@
 		</div>
 
 		<!-- Full roster -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<h2 class="text-lg font-bold text-white mb-2">Complete Celebrity Roster</h2>
 			<p class="text-sm text-white/40 mb-5">35 verified connections — all with documented disc golf or entertainment-sports ties</p>
 
@@ -333,7 +333,7 @@
 
 			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
 				{#each roster as person}
-					<div class="rounded-lg border border-white/10 bg-navy-800/60 p-3">
+					<div class="rounded-lg border border-white/15 bg-navy-700/50 p-3">
 						<div class="text-sm font-semibold text-white leading-tight">{person.name}</div>
 						<div class="text-xs text-white/40 mt-0.5 mb-2 leading-snug">{person.detail}</div>
 						<span class="rounded-full border px-2 py-0.5 text-xs {getCategoryColor(person.category)}">{person.category}</span>
@@ -344,7 +344,7 @@
 		</div>
 
 		<!-- Six powerhouse spotlights -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-2"><Award class="h-5 w-5 text-yellow-400" /><h2 class="text-lg font-bold text-white">Six Powerhouse Additions</h2></div>
 			<p class="text-sm text-white/40 mb-6">Each with deep documented ties to disc golf or entertainment-first sports — and massive mainstream reach.</p>
 			<div class="grid sm:grid-cols-2 gap-5">
@@ -367,7 +367,7 @@
 		</div>
 
 		<!-- Activation strategy -->
-		<div class="rounded-xl border border-white/10 bg-navy-800/60 p-6">
+		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-6"><Rocket class="h-5 w-5 text-yellow-400" /><h2 class="text-lg font-bold text-white">How FLI Activates the Celebrity Network</h2></div>
 			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 				{#each activations as a}

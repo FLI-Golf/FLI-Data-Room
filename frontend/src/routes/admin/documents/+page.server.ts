@@ -3,8 +3,13 @@ import type { PageServerLoad, Actions } from './$types';
 import type { Document } from '$lib/types';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const documents = await locals.pb.collection('documents').getFullList<Document>({ sort: '-created' });
-	return { documents };
+	try {
+		const documents = await locals.pb.collection('documents').getFullList<Document>({ sort: '-created' });
+		return { documents };
+	} catch {
+		// Collection may not exist yet in PocketBase
+		return { documents: [] as Document[] };
+	}
 };
 
 export const actions: Actions = {

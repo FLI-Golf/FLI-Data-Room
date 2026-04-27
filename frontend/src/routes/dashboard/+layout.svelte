@@ -12,8 +12,8 @@
 
 <div class="min-h-screen bg-navy-900 text-white">
 	<div class="flex">
-		<aside class="w-60 min-h-screen border-r border-white/10 bg-navy-950 flex flex-col">
-			<div class="px-6 py-5 border-b border-white/10 flex flex-col items-center text-center">
+		<aside class="w-60 min-h-screen border-r border-white/15 bg-navy-950 flex flex-col">
+			<div class="px-6 py-5 border-b border-white/15 flex flex-col items-center text-center">
 				<img
 					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
 					alt="FLI Shield Logo"
@@ -34,7 +34,7 @@
 						class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors
 							{$page.url.pathname === item.href
 								? 'bg-white/10 text-white'
-								: 'text-white/60 hover:bg-white/5 hover:text-white'}"
+								: 'text-white/60 hover:bg-white/8 hover:text-white'}"
 					>
 						{item.label}
 					</a>
@@ -42,14 +42,14 @@
 
 				<!-- Dynamic sections -->
 				{#if data.sections?.length > 0}
-					<div class="pt-3 mt-3 border-t border-white/10 space-y-1">
+					<div class="pt-3 mt-3 border-t border-white/15 space-y-1">
 						{#each data.sections as section}
 							<a
 								href="/dashboard/{section.slug}"
 								class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium transition-colors
 									{$page.url.pathname === `/dashboard/${section.slug}`
 										? 'bg-white/10 text-white'
-										: 'text-white/60 hover:bg-white/5 hover:text-white'}"
+										: 'text-white/60 hover:bg-white/8 hover:text-white'}"
 							>
 								<span>{section.name}</span>
 								{#if section.role === 'advanced'}
@@ -62,20 +62,20 @@
 
 				<!-- Admin-only -->
 				{#if data.user?.role === 'admin'}
-					<div class="pt-3 mt-3 border-t border-white/10 space-y-1">
+					<div class="pt-3 mt-3 border-t border-white/15 space-y-1">
 						<a href="/dashboard/documents"
-							class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/5 hover:text-white transition-colors">
+							class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 							Documents
 						</a>
 						<a href="/admin"
-							class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/5 hover:text-white transition-colors">
+							class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 							Admin
 						</a>
 					</div>
 				{/if}
 			</nav>
 
-			<div class="px-3 py-4 border-t border-white/10">
+			<div class="px-3 py-4 border-t border-white/15">
 				<div class="px-3 py-2 mb-2">
 					<div class="text-xs font-medium text-white truncate">{data.user?.name}</div>
 					<div class="text-xs text-white/40 truncate">{data.user?.email}</div>
@@ -86,7 +86,7 @@
 				<form method="POST" action="/logout">
 					<button
 						type="submit"
-						class="w-full rounded-md px-3 py-2 text-left text-sm text-white/40 hover:bg-white/5 hover:text-white transition-colors"
+						class="w-full rounded-md px-3 py-2 text-left text-sm text-white/40 hover:bg-white/8 hover:text-white transition-colors"
 					>
 						Sign Out
 					</button>

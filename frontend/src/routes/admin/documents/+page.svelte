@@ -22,7 +22,7 @@
 	</div>
 
 	<!-- Upload form -->
-	<div class="rounded-xl border border-white/10 bg-white/5 p-6">
+	<div class="rounded-xl border border-white/15 bg-white/8 p-6">
 		<h2 class="text-base font-bold text-white mb-4">Upload Document</h2>
 
 		{#if form?.error}
@@ -40,7 +40,7 @@
 						name="title"
 						type="text"
 						required
-						class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-500"
+						class="w-full rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-500"
 						placeholder="e.g. Financial Model 2026"
 					/>
 				</div>
@@ -50,7 +50,7 @@
 						id="requiredRole"
 						name="requiredRole"
 						required
-						class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
+						class="w-full rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
 					>
 						<option value="basic">Basic</option>
 						<option value="advanced">Advanced</option>
@@ -65,7 +65,7 @@
 					id="description"
 					name="description"
 					type="text"
-					class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-500"
+					class="w-full rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-500"
 					placeholder="Brief description of the document"
 				/>
 			</div>
@@ -78,7 +78,7 @@
 					type="file"
 					accept=".pdf"
 					required
-					class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white/70 file:mr-3 file:rounded file:border-0 file:bg-brand-600 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-brand-500 focus:outline-none"
+					class="w-full rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm text-white/70 file:mr-3 file:rounded file:border-0 file:bg-brand-600 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-brand-500 focus:outline-none"
 				/>
 			</div>
 
@@ -93,13 +93,13 @@
 
 	<!-- Document list -->
 	{#if data.documents.length === 0}
-		<div class="rounded-xl border border-white/10 bg-white/5 p-10 text-center text-sm text-white/30">
+		<div class="rounded-xl border border-white/15 bg-white/8 p-10 text-center text-sm text-white/30">
 			No documents uploaded yet.
 		</div>
 	{:else}
 		<div class="space-y-3">
 			{#each data.documents as doc}
-				<div class="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+				<div class="flex items-center justify-between rounded-xl border border-white/15 bg-white/8 px-5 py-4">
 					<div>
 						<div class="text-sm font-semibold text-white">{doc.title}</div>
 						{#if doc.description}

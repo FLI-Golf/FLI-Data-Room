@@ -13,7 +13,7 @@
 	</div>
 
 	<!-- Core thesis statement -->
-	<div class="rounded-xl border border-brand-600/30 bg-brand-600/10 p-8">
+	<div class="rounded-xl border border-brand-500/60 bg-brand-600/10 p-8">
 		<p class="text-xl font-bold text-white leading-relaxed mb-4">
 			FLI is asking: can a stadium-format league capture single-digit basis points across multi-billion-dollar adjacent markets?
 		</p>
@@ -23,9 +23,9 @@
 	<!-- Key metrics -->
 	<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 		{#each [
-			{ value: '$43.9B', label: 'Tribal Gaming GGR', sub: 'Record FY2024', icon: DollarSign, color: 'text-yellow-400', border: 'border-yellow-500/20', bg: 'bg-yellow-500/8' },
-			{ value: '$180M',  label: 'SOM at 1% Capture', sub: 'Across 9 revenue pools', icon: Target, color: 'text-brand-500', border: 'border-brand-600/25', bg: 'bg-brand-600/10' },
-			{ value: '86%',    label: 'Participation Growth', sub: 'Since 2020', icon: TrendingUp, color: 'text-green-400', border: 'border-green-500/20', bg: 'bg-green-500/8' }
+			{ value: '$43.9B', label: 'Tribal Gaming GGR', sub: 'Record FY2024', icon: DollarSign, color: 'text-yellow-400', border: 'border-yellow-500/60', bg: 'bg-yellow-500/8' },
+			{ value: '$180M',  label: 'SOM at 1% Capture', sub: 'Across 9 revenue pools', icon: Target, color: 'text-brand-500', border: 'border-brand-500/60', bg: 'bg-brand-600/10' },
+			{ value: '86%',    label: 'Participation Growth', sub: 'Since 2020', icon: TrendingUp, color: 'text-green-400', border: 'border-green-500/60', bg: 'bg-green-500/8' }
 		] as stat}
 			<div class="rounded-xl border {stat.border} {stat.bg} p-6 text-center">
 				<div class="flex justify-center mb-2">
@@ -97,7 +97,7 @@
 	</div>
 
 	<!-- CTA -->
-	<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-6 flex items-center justify-between gap-4">
+	<div class="rounded-xl border border-yellow-500/60 bg-yellow-500/5 p-6 flex items-center justify-between gap-4">
 		<div>
 			<div class="text-sm font-bold text-white mb-1">Ready to go deeper?</div>
 			<div class="text-sm text-white/50">Review the full pitch deck, financial model, and supporting documents.</div>

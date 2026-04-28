@@ -107,9 +107,9 @@
 			{ value: '20M+', label: 'Global Players', red: false },
 			{ value: '86%', label: 'Growth Since 2020', red: false }
 		] as stat}
-			<div class="rounded-xl border {stat.red ? 'border-brand-700/40 bg-brand-600/15' : 'border-white/15 bg-navy-700/50'} p-5 text-center">
+			<div class="rounded-xl border {stat.red ? 'border-brand-500/50 bg-brand-600/25' : 'border-white/15 bg-navy-700/50'} p-5 text-center">
 				<div class="text-2xl font-black {stat.red ? 'text-brand-500' : 'text-white'}">{stat.value}</div>
-				<div class="text-xs text-white/40 mt-1 uppercase tracking-wide">{stat.label}</div>
+				<div class="text-xs font-bold text-white mt-1 uppercase tracking-wide">{stat.label}</div>
 			</div>
 		{/each}
 	</div>
@@ -126,7 +126,7 @@
 			] as item}
 				<div class="rounded-lg bg-navy-900/80 border border-white/15 p-4 text-center">
 					<div class="text-2xl font-black text-brand-600">{item.pct}</div>
-					<div class="text-xs text-white/50 mt-1 leading-snug">{item.label}</div>
+					<div class="text-xs font-bold text-white mt-1 leading-snug">{item.label}</div>
 				</div>
 			{/each}
 		</div>

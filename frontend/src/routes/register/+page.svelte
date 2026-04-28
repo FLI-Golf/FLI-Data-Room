@@ -47,7 +47,7 @@
 					type="text"
 					required
 					autocomplete="name"
-					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="Jane Smith"
 				/>
 			</div>
@@ -60,7 +60,7 @@
 					type="email"
 					required
 					autocomplete="email"
-					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="you@example.com"
 				/>
 			</div>
@@ -73,7 +73,7 @@
 					type="password"
 					required
 					autocomplete="new-password"
-					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="••••••••"
 				/>
 			</div>
@@ -88,7 +88,7 @@
 					type="password"
 					required
 					autocomplete="new-password"
-					class="w-full rounded-md border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
+					class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50"
 					placeholder="••••••••"
 				/>
 			</div>

@@ -17,16 +17,15 @@
 		misc:       'bg-white/10 text-white/50 border-white/20'
 	};
 
-	const pb_url = import.meta.env.PUBLIC_POCKETBASE_URL;
-
 	function fileUrl(record: { collectionId: string; id: string; file: string }) {
-		return `${pb_url}/api/files/${record.collectionId}/${record.id}/${record.file}`;
+		return `${data.pbUrl}/api/files/${record.collectionId}/${record.id}/${record.file}`;
 	}
 
 	let selectedTag = 'all';
+	$: sorted = [...data.media].sort((a, b) => (b.created ?? '').localeCompare(a.created ?? ''));
 	$: filtered = selectedTag === 'all'
-		? data.media
-		: data.media.filter((m) => m.tag === selectedTag);
+		? sorted
+		: sorted.filter((m) => m.tag === selectedTag);
 </script>
 
 <svelte:head>

@@ -32,14 +32,14 @@ export const load: PageServerLoad = async () => {
 	try {
 		const token = await getSuperuserToken();
 		const res = await fetch(
-			`${PUBLIC_POCKETBASE_URL}/api/collections/media/records?sort=${encodeURIComponent('-created')}&perPage=500`,
+			`${PUBLIC_POCKETBASE_URL}/api/collections/media/records?perPage=500&fields=id,name,file,tag,alt,notes,created,collectionId`,
 			{ headers: { Authorization: token } }
 		);
-		if (!res.ok) return { media: [] as MediaRecord[] };
+		if (!res.ok) return { media: [] as MediaRecord[], pbUrl: PUBLIC_POCKETBASE_URL };
 		const json = await res.json();
-		return { media: (json.items ?? []) as MediaRecord[] };
+		return { media: (json.items ?? []) as MediaRecord[], pbUrl: PUBLIC_POCKETBASE_URL };
 	} catch {
-		return { media: [] as MediaRecord[] };
+		return { media: [] as MediaRecord[], pbUrl: PUBLIC_POCKETBASE_URL };
 	}
 };
 

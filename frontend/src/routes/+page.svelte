@@ -35,39 +35,51 @@
 	</nav>
 
 	<!-- Hero content -->
-	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-32">
-		<div class="flex flex-col items-center text-center">
-			<!-- Large shield logo -->
-			<img
-				src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
-				alt="FLI Shield Logo"
-				class="h-40 w-auto mb-8"
-			/>
-			<div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/40 bg-yellow-500/10 px-4 py-1.5 text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-8">
-				Raising $7.5M · Q2 2026 · Seed Round
+	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-12">
+		<div class="flex flex-col lg:flex-row items-center gap-10">
+			<!-- Left: text -->
+			<div class="flex-1 text-center lg:text-left">
+				<div class="flex items-center justify-center lg:justify-start gap-5 mb-6">
+					<img
+						src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+						alt="FLI Shield Logo"
+						class="h-28 w-auto"
+					/>
+					<div class="inline-flex items-center rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-400 uppercase tracking-widest">
+						$7.5M Seed · Q2 2026
+					</div>
+				</div>
+				<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-4">
+					Stadium-Style<br />
+					<span class="text-brand-500">Professional</span><br />
+					Disc Golf
+				</h1>
+				<p class="text-base text-white/60 max-w-lg mb-6 leading-relaxed">
+					FLI Golf League is creating the world's first stadium-engineered professional disc golf
+					league — built for media, betting, and franchise scale from Day 1.
+				</p>
+				<div class="flex flex-wrap justify-center lg:justify-start gap-3">
+					{#if data.user}
+						<a href="/dashboard" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
+							Enter Data Room →
+						</a>
+					{:else}
+						<a href="/register" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
+							Request Investor Access →
+						</a>
+						<a href="/login" class="rounded-md border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition-colors">
+							Sign In
+						</a>
+					{/if}
+				</div>
 			</div>
-			<h1 class="text-5xl sm:text-7xl font-black tracking-tight leading-none mb-6">
-				Stadium-Style<br />
-				<span class="text-brand-500">Professional</span><br />
-				Disc Golf
-			</h1>
-			<p class="text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
-				FLI Golf League is creating the world's first stadium-engineered professional disc golf
-				league — built for media, betting, and franchise scale from Day 1.
-			</p>
-			<div class="flex flex-wrap justify-center gap-4">
-				{#if data.user}
-					<a href="/dashboard" class="rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-						Enter Data Room →
-					</a>
-				{:else}
-					<a href="/register" class="rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-						Request Investor Access →
-					</a>
-					<a href="/login" class="rounded-md border border-white/20 px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition-colors">
-						Sign In
-					</a>
-				{/if}
+			<!-- Right: image -->
+			<div class="flex-1 flex justify-center lg:justify-end">
+				<img
+					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/e5oi8tsz3hbiybc/p_1_npi4rqaaon.png"
+					alt="FLI Golf League"
+					class="w-full max-w-lg rounded-2xl shadow-2xl"
+				/>
 			</div>
 		</div>
 	</div>

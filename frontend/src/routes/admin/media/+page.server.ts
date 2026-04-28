@@ -86,6 +86,33 @@ export const actions: Actions = {
 		}
 	},
 
+	update: async ({ request }) => {
+		const data = await request.formData();
+		const id = data.get('id')?.toString();
+		const name = data.get('name')?.toString();
+		const tag = data.get('tag')?.toString();
+		const alt = data.get('alt')?.toString() ?? '';
+		const notes = data.get('notes')?.toString() ?? '';
+
+		if (!id || !name || !tag) return fail(400, { error: 'Missing required fields.' });
+
+		try {
+			const token = await getSuperuserToken();
+			const res = await fetch(`${PUBLIC_POCKETBASE_URL}/api/collections/media/records/${id}`, {
+				method: 'PATCH',
+				headers: { Authorization: token, 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, tag, alt, notes })
+			});
+			if (!res.ok) {
+				const err = await res.json().catch(() => ({}));
+				return fail(500, { error: `Update failed: ${JSON.stringify(err)}` });
+			}
+		} catch (err: unknown) {
+			const msg = err instanceof Error ? err.message : JSON.stringify(err);
+			return fail(500, { error: `Update failed: ${msg}` });
+		}
+	},
+
 	delete: async ({ request }) => {
 		const data = await request.formData();
 		const id = data.get('id')?.toString();

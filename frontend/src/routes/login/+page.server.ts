@@ -23,7 +23,11 @@ export const actions: Actions = {
 
 		const user = locals.pb.authStore.model;
 
-		// Route based on NDA status
+		// Route based on role and NDA status
+		if (user?.role === 'admin') {
+			redirect(303, '/admin');
+		}
+
 		if (!user?.ndaAccepted) {
 			redirect(303, '/nda');
 		}

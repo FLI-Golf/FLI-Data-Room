@@ -79,6 +79,11 @@
 		return found ? colorMap[found.color] : colorMap['brand'];
 	}
 
+	let selectedCategory = 'all';
+	$: filteredRoster = selectedCategory === 'all'
+		? roster
+		: roster.filter((p) => p.category === selectedCategory);
+
 	const activations = [
 		{
 			num: '01', icon: Trophy,
@@ -218,7 +223,7 @@
 		</div>
 	{:else}
 		<!-- Reach summary -->
-		<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+		<div id="stats" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
 			{#each [
 				{ value: '500M+', label: 'Combined Reach',          icon: Globe },
 				{ value: '35',    label: 'Verified Celebrities',    icon: Star },
@@ -234,7 +239,7 @@
 		</div>
 
 		<!-- The opportunity -->
-		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6 space-y-4">
+		<div id="opportunity" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 space-y-4">
 			<h2 class="text-lg font-bold text-white">The Opportunity</h2>
 			<div class="grid sm:grid-cols-3 gap-4">
 				{#each [
@@ -260,7 +265,7 @@
 		</div>
 
 		<!-- Social reach breakdown -->
-		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
+		<div id="reach" class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-5">
 				<TrendingUp class="h-5 w-5 text-yellow-400" />
 				<h2 class="text-lg font-bold text-white">Combined Social Media Reach</h2>
@@ -320,19 +325,38 @@
 		</div>
 
 		<!-- Full roster -->
-		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
+		<div id="roster" class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<h2 class="text-lg font-bold text-white mb-2">Complete Celebrity Roster</h2>
 			<p class="text-sm text-white/40 mb-5">35 verified connections — all with documented disc golf or entertainment-sports ties</p>
 
-			<!-- Category legend -->
+			<!-- Category filter pills -->
 			<div class="flex flex-wrap gap-2 mb-5">
+				<button
+					type="button"
+					on:click={() => selectedCategory = 'all'}
+					class="rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors
+						{selectedCategory === 'all'
+							? 'bg-white/20 border-white/40 text-white'
+							: 'border-white/20 text-white/40 hover:text-white hover:border-white/40'}"
+				>
+					All ({roster.length})
+				</button>
 				{#each categories as cat}
-					<span class="rounded-full border px-2.5 py-0.5 text-xs font-medium {colorMap[cat.color]}">{cat.label}</span>
+					<button
+						type="button"
+						on:click={() => selectedCategory = selectedCategory === cat.label ? 'all' : cat.label}
+						class="rounded-full border px-2.5 py-0.5 text-xs font-medium transition-all
+							{selectedCategory === cat.label
+								? colorMap[cat.color] + ' scale-105'
+								: 'border-white/15 text-white/40 hover:text-white hover:border-white/30'}"
+					>
+						{cat.label} ({roster.filter(p => p.category === cat.label).length})
+					</button>
 				{/each}
 			</div>
 
 			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-				{#each roster as person}
+				{#each filteredRoster as person}
 					<div class="rounded-lg border border-white/15 bg-navy-700/50 p-3">
 						<div class="text-sm font-semibold text-white leading-tight">{person.name}</div>
 						<div class="text-xs text-white/40 mt-0.5 mb-2 leading-snug">{person.detail}</div>
@@ -344,7 +368,7 @@
 		</div>
 
 		<!-- Six powerhouse spotlights -->
-		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
+		<div id="powerhouse" class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-2"><Award class="h-5 w-5 text-yellow-400" /><h2 class="text-lg font-bold text-white">Six Powerhouse Additions</h2></div>
 			<p class="text-sm text-white/40 mb-6">Each with deep documented ties to disc golf or entertainment-first sports — and massive mainstream reach.</p>
 			<div class="grid sm:grid-cols-2 gap-5">
@@ -367,7 +391,7 @@
 		</div>
 
 		<!-- Activation strategy -->
-		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
+		<div id="activation" class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-6"><Rocket class="h-5 w-5 text-yellow-400" /><h2 class="text-lg font-bold text-white">How FLI Activates the Celebrity Network</h2></div>
 			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 				{#each activations as a}

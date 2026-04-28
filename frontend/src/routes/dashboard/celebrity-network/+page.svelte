@@ -63,14 +63,14 @@
 	];
 
 	const colorMap: Record<string, string> = {
-		purple: 'border-purple-500/30 bg-purple-500/10 text-purple-300',
-		yellow: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-300',
+		purple: 'border-purple-500/60 bg-purple-500/10 text-purple-300',
+		yellow: 'border-yellow-500/60 bg-yellow-500/10 text-yellow-300',
 		blue: 'border-blue-500/30 bg-blue-500/10 text-blue-300',
-		green: 'border-green-500/30 bg-green-500/10 text-green-300',
-		red: 'border-red-500/30 bg-red-500/10 text-red-300',
-		pink: 'border-pink-500/30 bg-pink-500/10 text-pink-300',
-		cyan: 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300',
-		orange: 'border-orange-500/30 bg-orange-500/10 text-orange-300',
+		green: 'border-green-500/60 bg-green-500/10 text-green-300',
+		red: 'border-red-500/60 bg-red-500/10 text-red-300',
+		pink: 'border-pink-500/60 bg-pink-500/10 text-pink-300',
+		cyan: 'border-cyan-500/60 bg-cyan-500/10 text-cyan-300',
+		orange: 'border-orange-500/60 bg-orange-500/10 text-orange-300',
 		brand: 'border-brand-500/30 bg-brand-500/10 text-brand-300'
 	};
 
@@ -196,7 +196,7 @@
 			class="h-20 w-auto shrink-0"
 		/>
 		<div>
-			<div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-3">
+			<div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/60 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-3">
 				Advanced Access · Confidential
 			</div>
 			<h1 class="text-3xl font-black text-white">Celebrity Network</h1>
@@ -299,7 +299,7 @@
 					<p class="text-xs text-white/40 leading-snug">Fallon 43M + Bill Nye 6M + Bubba 2.8M + Bert 900K + others</p>
 				</div>
 			</div>
-			<div class="rounded-lg bg-yellow-500/5 border border-yellow-500/20 p-4 space-y-2">
+			<div class="rounded-lg bg-yellow-500/5 border border-yellow-500/60 p-4 space-y-2">
 				<div class="flex items-center gap-2 mb-3">
 					<Zap class="h-4 w-4 text-yellow-400" />
 					<div class="text-xs font-semibold text-yellow-400 uppercase tracking-wide">Context</div>
@@ -349,7 +349,7 @@
 			<p class="text-sm text-white/40 mb-6">Each with deep documented ties to disc golf or entertainment-first sports — and massive mainstream reach.</p>
 			<div class="grid sm:grid-cols-2 gap-5">
 				{#each spotlights as s}
-					<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5">
+					<div class="rounded-xl border border-yellow-500/60 bg-yellow-500/5 p-5">
 						<div class="font-bold text-white text-base">{s.name}</div>
 						<div class="text-xs text-yellow-400 mb-1">{s.sub}</div>
 						<div class="text-xs text-white/40 mb-3">{s.reach}</div>
@@ -371,7 +371,7 @@
 			<div class="flex items-center gap-2 mb-6"><Rocket class="h-5 w-5 text-yellow-400" /><h2 class="text-lg font-bold text-white">How FLI Activates the Celebrity Network</h2></div>
 			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 				{#each activations as a}
-					<div class="rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-5">
+					<div class="rounded-lg border border-yellow-500/60 bg-yellow-500/5 p-5">
 						<div class="flex items-center gap-3 mb-3">
 							<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-500/15 shrink-0">
 								<svelte:component this={a.icon} class="h-4 w-4 text-yellow-400" />

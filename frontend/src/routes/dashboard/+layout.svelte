@@ -72,7 +72,7 @@
 							Documents
 						</a>
 						<a href="/admin"
-							class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+							class="flex items-center justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-navy-950 hover:bg-yellow-400 transition-colors">
 							Admin
 						</a>
 					</div>

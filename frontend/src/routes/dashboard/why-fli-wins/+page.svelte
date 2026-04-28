@@ -5,7 +5,7 @@
 		{
 			icon: Ticket,
 			color: 'text-brand-500',
-			border: 'border-brand-600/25',
+			border: 'border-brand-500/60',
 			bg: 'bg-brand-600/8',
 			title: 'Gate Economics',
 			body: 'Converts free-to-play outdoor rounds into premium ticketed spectator events. 78% of stadium-goers buy F&B at $32/visit — 90%+ beverage margins.'
@@ -13,7 +13,7 @@
 		{
 			icon: Tv,
 			color: 'text-fli-blue-400',
-			border: 'border-fli-blue-700/25',
+			border: 'border-fli-blue-500/60',
 			bg: 'bg-fli-blue-800/10',
 			title: 'Broadcast-Ready Format',
 			body: 'Tight venues enable PGA-style multi-camera coverage. The product ESPN, Apple, and Amazon will pay rights for. Global media rights hit $78B by 2030.'
@@ -21,7 +21,7 @@
 		{
 			icon: Dices,
 			color: 'text-green-400',
-			border: 'border-green-500/20',
+			border: 'border-green-500/60',
 			bg: 'bg-green-500/8',
 			title: 'Fantasy & Betting',
 			body: 'Confined play space + shot-clock formats create live in-play wagering markets — following TGL, LIV team formats, and MLP\'s fast-format playbook.'
@@ -29,7 +29,7 @@
 		{
 			icon: Building2,
 			color: 'text-yellow-400',
-			border: 'border-yellow-500/20',
+			border: 'border-yellow-500/60',
 			bg: 'bg-yellow-500/8',
 			title: 'Tribal Land Advantage',
 			body: '12–30 acre footprint aligns with tribal gaming properties. $43.9B GGR in 2024. Regulated, cash-rich venue partners seeking youth-skewing properties.'

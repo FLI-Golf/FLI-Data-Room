@@ -28,12 +28,16 @@ interface MediaRecord {
 	collectionId: string;
 }
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async () => {
 	try {
-		const media = await locals.pb
-			.collection('media')
-			.getFullList<MediaRecord>({ sort: '-created' });
-		return { media };
+		const token = await getSuperuserToken();
+		const res = await fetch(
+			`${PUBLIC_POCKETBASE_URL}/api/collections/media/records?sort=${encodeURIComponent('-created')}&perPage=500`,
+			{ headers: { Authorization: token } }
+		);
+		if (!res.ok) return { media: [] as MediaRecord[] };
+		const json = await res.json();
+		return { media: (json.items ?? []) as MediaRecord[] };
 	} catch {
 		return { media: [] as MediaRecord[] };
 	}

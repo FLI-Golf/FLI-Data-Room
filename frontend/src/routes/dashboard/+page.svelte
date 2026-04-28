@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
-	import { BarChart2, Table2 } from 'lucide-svelte';
+	import { BarChart2, Table2, Presentation, Disc, TrendingUp, Trophy, DollarSign, Star, FileText } from 'lucide-svelte';
 
 	export let data: PageData;
 
@@ -194,32 +194,73 @@
 	<!-- Quick links -->
 	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		<a href="/dashboard/pitch-deck" class="rounded-xl border border-brand-600/30 bg-brand-600/15 p-6 hover:bg-brand-600/20 transition-colors group">
-			<div class="text-brand-500 font-semibold mb-1 group-hover:text-brand-300">Pitch Deck →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-brand-600/30 flex items-center justify-center shrink-0">
+					<Presentation class="h-4.5 w-4.5 text-brand-400" />
+				</div>
+				<div class="text-brand-400 font-bold group-hover:text-brand-300 transition-colors">Pitch Deck</div>
+			</div>
 			<div class="text-sm text-white/50">Full investor presentation</div>
 		</a>
+
 		<a href="/dashboard/the-sport" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
-			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">The Sport →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+					<Disc class="h-4.5 w-4.5 text-green-400" />
+				</div>
+				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">The Sport</div>
+			</div>
 			<div class="text-sm text-white/50">17K courses · 86% growth · 99 countries</div>
 		</a>
+
 		<a href="/dashboard/market-opportunity" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
-			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Market Opportunity →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+					<TrendingUp class="h-4.5 w-4.5 text-fli-blue-300" />
+				</div>
+				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Market Opportunity</div>
+			</div>
 			<div class="text-sm text-white/50">9 revenue pools · $18B SAM</div>
 		</a>
+
 		<a href="/dashboard/why-fli-wins" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
-			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Why FLI Wins →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+					<Trophy class="h-4.5 w-4.5 text-yellow-400" />
+				</div>
+				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Why FLI Wins</div>
+			</div>
 			<div class="text-sm text-white/50">Stadium format · living analogs</div>
 		</a>
+
 		<a href="/dashboard/investment-thesis" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
-			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Investment Thesis →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+					<DollarSign class="h-4.5 w-4.5 text-brand-400" />
+				</div>
+				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Investment Thesis</div>
+			</div>
 			<div class="text-sm text-white/50">$7.5M seed · Q2 2026</div>
 		</a>
+
 		<a href="/dashboard/celebrity-network" class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-800/20 p-6 hover:bg-yellow-500/10 transition-colors group">
-			<div class="text-white font-semibold mb-1 group-hover:text-yellow-400">Celebrity Network →</div>
+			<div class="flex items-center gap-3 mb-3">
+				<div class="h-9 w-9 rounded-lg bg-fli-blue-700/30 flex items-center justify-center shrink-0">
+					<Star class="h-4.5 w-4.5 text-yellow-400" />
+				</div>
+				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Celebrity Network</div>
+			</div>
 			<div class="text-sm text-white/50">35 celebrities · 500M+ reach</div>
 		</a>
+
 		{#if data.user?.role === 'admin'}
 			<a href="/dashboard/documents" class="rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors group">
-				<div class="text-white font-semibold mb-1">Supporting Documents →</div>
+				<div class="flex items-center gap-3 mb-3">
+					<div class="h-9 w-9 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+						<FileText class="h-4.5 w-4.5 text-white/60" />
+					</div>
+					<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Supporting Documents</div>
+				</div>
 				<div class="text-sm text-white/50">Financials, legal, and supplemental materials</div>
 			</a>
 		{/if}

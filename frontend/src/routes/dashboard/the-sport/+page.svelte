@@ -1,5 +1,55 @@
 <script lang="ts">
-	import { Globe, TrendingUp, Tv, DollarSign, MapPin, Users } from 'lucide-svelte';
+	import { Globe, TrendingUp, Tv, DollarSign, MapPin, Users, BarChart2, Table2 } from 'lucide-svelte';
+	import { onMount } from 'svelte';
+
+	const courseData = [
+		{ year: '2015', count: 7300 },
+		{ year: '2018', count: 9200 },
+		{ year: '2020', count: 11000 },
+		{ year: '2022', count: 14000 },
+		{ year: '2024', count: 17000 },
+		{ year: '2026+', count: 20000 },
+	];
+
+	let tab: 'table' | 'chart' = 'chart';
+	let canvas: HTMLCanvasElement;
+	let chart: import('chart.js').Chart | null = null;
+
+	async function initChart() {
+		if (!canvas) return;
+		const { Chart, BarElement, LinearScale, CategoryScale, Tooltip, Legend, BarController } = await import('chart.js');
+		Chart.register(BarElement, LinearScale, CategoryScale, Tooltip, Legend, BarController);
+		if (chart) chart.destroy();
+		chart = new Chart(canvas, {
+			type: 'bar',
+			data: {
+				labels: courseData.map(r => r.year),
+				datasets: [{
+					label: 'Courses Worldwide',
+					data: courseData.map(r => r.count),
+					backgroundColor: courseData.map((_, i) =>
+						i === courseData.length - 1 ? 'rgba(234,179,8,0.7)' : 'rgba(192,57,43,0.7)'
+					),
+					borderColor: courseData.map((_, i) =>
+						i === courseData.length - 1 ? 'rgba(234,179,8,1)' : 'rgba(192,57,43,1)'
+					),
+					borderWidth: 2,
+					borderRadius: 4,
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: { legend: { display: false } },
+				scales: {
+					x: { ticks: { color: 'rgba(255,255,255,0.6)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+					y: { ticks: { color: 'rgba(255,255,255,0.6)', callback: (v) => Number(v).toLocaleString() }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+				}
+			}
+		});
+	}
+
+	$: if (tab === 'chart') setTimeout(initChart, 50);
+	onMount(() => () => chart?.destroy());
 </script>
 
 <svelte:head>
@@ -64,29 +114,58 @@
 		</div>
 	</div>
 
-	<!-- Growth chart visual -->
-	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
-		<h2 class="text-lg font-bold text-white mb-6">Course Growth Trajectory</h2>
-		<div class="flex items-end gap-4 h-32">
-			{#each [
-				{ year: '2015', count: 7300,  pct: 40 },
-				{ year: '2018', count: 9200,  pct: 52 },
-				{ year: '2020', count: 11000, pct: 62 },
-				{ year: '2022', count: 14000, pct: 79 },
-				{ year: '2024', count: 17000, pct: 96 },
-				{ year: '2026+', count: 20000, pct: 100 }
-			] as bar}
-				<div class="flex-1 flex flex-col items-center gap-1">
-					<div class="text-xs text-white/50">{bar.count.toLocaleString()}</div>
-					<div
-						class="w-full rounded-t-md bg-gradient-to-t from-brand-700 to-brand-500 transition-all"
-						style="height: {bar.pct}%"
-					></div>
-					<div class="text-xs text-white/40">{bar.year}</div>
-				</div>
-			{/each}
+	<!-- Growth chart -->
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6 space-y-4">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-bold text-white">Course Growth Trajectory</h2>
+			<div class="flex rounded-lg border border-white/15 overflow-hidden text-xs">
+				<button
+					type="button"
+					on:click={() => { tab = 'chart'; }}
+					class="flex items-center gap-1.5 px-3 py-1.5 transition-colors {tab === 'chart' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/70'}"
+				>
+					<BarChart2 class="h-3.5 w-3.5" /> Chart
+				</button>
+				<button
+					type="button"
+					on:click={() => { tab = 'table'; }}
+					class="flex items-center gap-1.5 px-3 py-1.5 transition-colors {tab === 'table' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/70'}"
+				>
+					<Table2 class="h-3.5 w-3.5" /> Table
+				</button>
+			</div>
 		</div>
-		<p class="text-xs text-white/30 mt-4">Worldwide disc golf courses. Sources: PDGA, UDisc.</p>
+
+		{#if tab === 'chart'}
+			<div class="relative">
+				<canvas bind:this={canvas} class="w-full" style="max-height: 300px;"></canvas>
+			</div>
+		{:else}
+			<div class="overflow-x-auto">
+				<table class="w-full text-sm">
+					<thead>
+						<tr class="border-b border-white/15 text-white/40 text-xs uppercase tracking-wide">
+							<th class="text-left py-2.5 pr-4">Year</th>
+							<th class="text-right py-2.5 px-4">Courses Worldwide</th>
+							<th class="text-right py-2.5 pl-4">Growth</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-white/5">
+						{#each courseData as row, i}
+							<tr class="hover:bg-white/3">
+								<td class="py-2.5 pr-4 font-semibold text-white">{row.year}</td>
+								<td class="py-2.5 px-4 text-right text-white">{row.count.toLocaleString()}</td>
+								<td class="py-2.5 pl-4 text-right text-green-400 text-xs">
+									{i === 0 ? '—' : '+' + (row.count - courseData[i-1].count).toLocaleString()}
+								</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{/if}
+
+		<p class="text-xs text-white/60 border-t border-white/10 pt-3">Worldwide disc golf courses. Sources: PDGA, UDisc.</p>
 	</div>
 
 	<!-- Bottom context -->

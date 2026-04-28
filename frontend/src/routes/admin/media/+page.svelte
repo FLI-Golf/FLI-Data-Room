@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Upload, Trash2, Image, Tag, FileImage } from 'lucide-svelte';
+	import { Upload, Trash2, Image, Tag, FileImage, Pencil, X } from 'lucide-svelte';
 	import type { PageData, ActionData } from './$types';
 
 	export let data: PageData;
@@ -26,6 +26,11 @@
 	$: filtered = selectedTag === 'all'
 		? sorted
 		: sorted.filter((m) => m.tag === selectedTag);
+
+	// Edit modal state
+	let editRecord: typeof data.media[0] | null = null;
+	function openEdit(record: typeof data.media[0]) { editRecord = { ...record }; }
+	function closeEdit() { editRecord = null; }
 </script>
 
 <svelte:head>
@@ -180,23 +185,28 @@
 								alt={record.alt || record.name}
 								class="max-h-full max-w-full object-contain"
 							/>
-							<!-- Delete overlay -->
-							<form
-								method="POST"
-								action="?/delete"
-								use:enhance
-								class="absolute inset-0 flex items-center justify-center bg-navy-950/80 opacity-0 group-hover:opacity-100 transition-opacity"
-							>
-								<input type="hidden" name="id" value={record.id} />
+							<!-- Hover overlay: Edit + Delete -->
+							<div class="absolute inset-0 flex items-center justify-center gap-2 bg-navy-950/80 opacity-0 group-hover:opacity-100 transition-opacity">
 								<button
-									type="submit"
-									class="flex items-center gap-1.5 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-500 transition-colors"
-									on:click|preventDefault={(e) => { if (confirm(`Delete ${record.name}?`)) (e.currentTarget.closest('form') as HTMLFormElement).submit(); }}
+									type="button"
+									on:click={() => openEdit(record)}
+									class="flex items-center gap-1.5 rounded-md bg-fli-blue-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-fli-blue-600 transition-colors"
 								>
-									<Trash2 class="h-3.5 w-3.5" />
-									Delete
+									<Pencil class="h-3.5 w-3.5" />
+									Edit
 								</button>
-							</form>
+								<form method="POST" action="?/delete" use:enhance>
+									<input type="hidden" name="id" value={record.id} />
+									<button
+										type="submit"
+										class="flex items-center gap-1.5 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-500 transition-colors"
+										on:click|preventDefault={(e) => { if (confirm(`Delete ${record.name}?`)) (e.currentTarget.closest('form') as HTMLFormElement).submit(); }}
+									>
+										<Trash2 class="h-3.5 w-3.5" />
+										Delete
+									</button>
+								</form>
+							</div>
 						</div>
 
 						<!-- Meta -->
@@ -226,3 +236,74 @@
 		{/if}
 	</div>
 </div>
+
+<!-- Edit modal -->
+{#if editRecord}
+	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+		<div class="w-full max-w-md rounded-xl border border-white/15 bg-navy-800 p-6 shadow-2xl">
+			<div class="flex items-center justify-between mb-5">
+				<h2 class="text-base font-bold text-white">Edit Media</h2>
+				<button type="button" on:click={closeEdit} class="text-white/40 hover:text-white transition-colors">
+					<X class="h-5 w-5" />
+				</button>
+			</div>
+			<form
+				method="POST"
+				action="?/update"
+				use:enhance={() => ({ onResult: () => { closeEdit(); } })}
+				class="space-y-4"
+			>
+				<input type="hidden" name="id" value={editRecord.id} />
+				<div class="space-y-1">
+					<label class="block text-xs font-medium text-white/60">Name</label>
+					<input
+						name="name"
+						type="text"
+						required
+						bind:value={editRecord.name}
+						class="w-full rounded-md border border-white/15 bg-navy-900/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+					/>
+				</div>
+				<div class="space-y-1">
+					<label class="block text-xs font-medium text-white/60">Tag</label>
+					<select
+						name="tag"
+						bind:value={editRecord.tag}
+						class="w-full rounded-md border border-white/15 bg-navy-900/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-600"
+					>
+						{#each tags as t}
+							<option value={t} class="capitalize">{t}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="space-y-1">
+					<label class="block text-xs font-medium text-white/60">Alt Text <span class="text-white/30">(optional)</span></label>
+					<input
+						name="alt"
+						type="text"
+						bind:value={editRecord.alt}
+						class="w-full rounded-md border border-white/15 bg-navy-900/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+					/>
+				</div>
+				<div class="space-y-1">
+					<label class="block text-xs font-medium text-white/60">Notes <span class="text-white/30">(optional)</span></label>
+					<input
+						name="notes"
+						type="text"
+						bind:value={editRecord.notes}
+						class="w-full rounded-md border border-white/15 bg-navy-900/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-brand-600"
+					/>
+				</div>
+				<div class="flex justify-end gap-3 pt-2">
+					<button type="button" on:click={closeEdit} class="rounded-md border border-white/15 px-4 py-2 text-sm text-white/60 hover:text-white transition-colors">
+						Cancel
+					</button>
+					<button type="submit" class="flex items-center gap-2 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
+						<Pencil class="h-3.5 w-3.5" />
+						Save Changes
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+{/if}

@@ -33,6 +33,7 @@ export const actions: Actions = {
 		const name        = data.get('name')?.toString().trim();
 		const description = data.get('description')?.toString().trim() ?? '';
 		const role        = data.get('role')?.toString() ?? 'basic';
+		const icon        = data.get('icon')?.toString().trim() ?? '';
 
 		if (!name) return fail(400, { error: 'Name is required.' });
 
@@ -40,7 +41,7 @@ export const actions: Actions = {
 
 		try {
 			const section = await locals.pb.collection('sections').create({
-				name, slug, description, role, published: false, sort_order: 99
+				name, slug, description, role, icon, published: false, sort_order: 99
 			});
 			redirect(303, `/admin/sections/${section.id}`);
 		} catch {

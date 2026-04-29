@@ -32,6 +32,9 @@
 				<a href="/admin/sections" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 					Sections
 				</a>
+				<a href="/admin/access" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+					Page Access
+				</a>
 				<div class="pt-4 mt-4 border-t border-white/15">
 					<a href="/dashboard" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 						← Data Room

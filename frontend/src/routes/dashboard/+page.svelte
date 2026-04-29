@@ -5,6 +5,53 @@
 
 	export let data: PageData;
 
+	const stats = [
+		{
+			value: '$7.5M',
+			label: 'Seed Round',
+			red: true,
+			tooltip: [
+				'Q2 2026 seed round presented by Young America Capital, LLC',
+				'SEC-registered broker dealer · FINRA, SIPC member',
+				'Funds event production (35%), league ops (25%), media (20%), marketing & reserve (20%)',
+				'Targets first-mover advantage before any competing stadium disc golf property exists',
+			]
+		},
+		{
+			value: '$18B+',
+			label: 'SAM by 2030',
+			red: false,
+			tooltip: [
+				'Serviceable Addressable Market across 9 FLI-addressable revenue pools',
+				'Sports Betting $187B · Sponsorship $150B · Sports Tourism $1.3T',
+				'Media Rights $78B · Fantasy Sports $65B · Tribal Gaming $44B',
+				'1% capture of SAM pools = ~$180M annual run-rate revenue',
+			]
+		},
+		{
+			value: '20M+',
+			label: 'Global Players',
+			red: false,
+			tooltip: [
+				'Estimated active disc golfers worldwide as of 2024',
+				'86% participation growth since 2020 — fastest-growing outdoor sport',
+				'Over 17,000 courses across 99 countries',
+				'Core U.S. player base supplemented by strong European and Asian markets',
+			]
+		},
+		{
+			value: '86%',
+			label: 'Growth Since 2020',
+			red: false,
+			tooltip: [
+				'PDGA-tracked participation growth from 2020 to 2024',
+				'Driven by pandemic-era outdoor activity surge that retained players post-COVID',
+				'Youth demographic skews 18–34 — aligns with sports betting and streaming audiences',
+				'Zero stadium infrastructure currently exists — FLI enters with no incumbent to displace',
+			]
+		},
+	];
+
 	const forecast = [
 		{ year: '2026', revenue: 2.8,   profit: -1.8,  margin: null },
 		{ year: '2027', revenue: 21.4,  profit: 1.1,   margin: 5.1 },
@@ -101,36 +148,57 @@
 
 	<!-- Raise summary -->
 	<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-		{#each [
-			{ value: '$7.5M', label: 'Seed Round', red: true },
-			{ value: '$18B+', label: 'SAM by 2030', red: false },
-			{ value: '20M+', label: 'Global Players', red: false },
-			{ value: '86%', label: 'Growth Since 2020', red: false }
-		] as stat}
-			<div class="rounded-xl border {stat.red ? 'border-brand-500/50 bg-brand-600/25' : 'border-white/15 bg-navy-700/50'} p-5 text-center">
+		{#each stats as stat}
+			<div class="group relative rounded-xl border {stat.red ? 'border-brand-500/50 bg-brand-600/25' : 'border-white/15 bg-navy-700/50'} p-5 text-center cursor-default">
 				<div class="text-2xl font-black {stat.red ? 'text-brand-500' : 'text-white'}">{stat.value}</div>
 				<div class="text-xs font-bold text-white mt-1 uppercase tracking-wide">{stat.label}</div>
+
+				<!-- Tooltip -->
+				<div class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50
+					w-64 rounded-xl border border-white/15 bg-navy-950/95 backdrop-blur-sm p-3 shadow-xl
+					opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+					<!-- Arrow -->
+					<div class="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white/15"></div>
+					<div class="text-xs font-bold text-white mb-2">{stat.label}</div>
+					<ul class="space-y-1.5">
+						{#each stat.tooltip as point}
+							<li class="flex items-start gap-1.5 text-left">
+								<span class="mt-1 h-1 w-1 rounded-full bg-brand-400 shrink-0"></span>
+								<span class="text-xs text-white/65 leading-snug">{point}</span>
+							</li>
+						{/each}
+					</ul>
+				</div>
 			</div>
 		{/each}
 	</div>
 
-	<!-- Use of proceeds -->
-	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
-		<h2 class="text-lg font-bold text-white mb-4">Use of Proceeds</h2>
-		<div class="grid sm:grid-cols-4 gap-4">
+	<!-- Use of Proceeds summary card -->
+	<a href="/dashboard/proceeds" class="group block rounded-xl border border-white/15 bg-navy-700/50 p-6 hover:bg-navy-700/60 transition-colors">
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-lg font-bold text-white">Use of Proceeds</h2>
+			<span class="text-xs text-white/30 group-hover:text-white/60 transition-colors">View full breakdown →</span>
+		</div>
+		<div class="flex h-3 rounded-full overflow-hidden gap-0.5 mb-3">
+			<div class="h-full bg-brand-500" style="width:35%"></div>
+			<div class="h-full bg-fli-blue-500" style="width:25%"></div>
+			<div class="h-full bg-yellow-500" style="width:20%"></div>
+			<div class="h-full bg-green-500" style="width:20%"></div>
+		</div>
+		<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
 			{#each [
-				{ pct: '35%', label: 'Event Production & Technology' },
-				{ pct: '25%', label: 'League Operations & Team Development' },
-				{ pct: '20%', label: 'Media & Content Buildout' },
-				{ pct: '20%', label: 'Marketing, Working Capital & Reserve' }
+				{ pct: '35%', label: 'Event Production & Technology',       color: 'text-brand-400' },
+				{ pct: '25%', label: 'League Operations & Team Development', color: 'text-fli-blue-300' },
+				{ pct: '20%', label: 'Media & Content Buildout',             color: 'text-yellow-400' },
+				{ pct: '20%', label: 'Marketing, Working Capital & Reserve', color: 'text-green-400' },
 			] as item}
-				<div class="rounded-lg bg-navy-900/80 border border-white/15 p-4 text-center">
-					<div class="text-2xl font-black text-brand-600">{item.pct}</div>
-					<div class="text-xs font-bold text-white mt-1 leading-snug">{item.label}</div>
+				<div class="rounded-lg bg-navy-900/80 border border-white/10 p-3 text-center">
+					<div class="text-xl font-black {item.color}">{item.pct}</div>
+					<div class="text-xs text-white/50 mt-1 leading-snug">{item.label}</div>
 				</div>
 			{/each}
 		</div>
-	</div>
+	</a>
 
 	<!-- Financial forecast -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">

@@ -3,7 +3,7 @@
 	import type { LayoutData } from './$types';
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy,
-		TrendingUp, Star, Settings, Users, Image, Hash, Scale
+		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck
 	} from 'lucide-svelte';
 	export let data: LayoutData;
 
@@ -25,8 +25,29 @@
 		{ href: '/dashboard/the-sport',              label: 'The Sport',           icon: Disc,        children: [] },
 		{ href: '/dashboard/market-opportunity',     label: 'Market Opportunity',  icon: Globe,       children: [] },
 		{ href: '/dashboard/why-fli-wins',           label: 'Why FLI Wins',        icon: Trophy,      children: [] },
+		{ href: '/dashboard/investment',             label: 'Investment',          icon: DollarSign,  children: [
+			{ id: 'opportunity',    label: 'Investment Opportunity' },
+			{ id: 'vision',         label: 'The Vision' },
+			{ id: 'business-model', label: 'Business Model' },
+			{ id: 'market',         label: 'Market Analysis' },
+			{ id: 'growth',         label: 'Growth Plan' },
+			{ id: 'exit',           label: 'Exit Strategies' },
+			{ id: 'team',           label: 'Team & Advisors' },
+			{ id: 'risk',           label: 'Risk Factors' },
+			{ id: 'conclusion',     label: 'Conclusion' },
+			{ id: 'comparisons',    label: 'Global Comparisons' },
+			{ id: 'next-steps',     label: 'Next Steps' },
+		]},
 		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis',   icon: TrendingUp,  children: [] },
 		{ href: '/dashboard/design',                 label: 'Design',              icon: Image,       children: [] },
+		{ href: '/dashboard/talent',                 label: 'Talent Overview',     icon: UserCheck,   children: [
+			{ id: 'championship-equity',  label: 'Championship Equity' },
+			{ id: 'countries',            label: 'Countries' },
+			{ id: 'competitive-structure',label: 'Competitive Structure' },
+			{ id: 'broadcast',            label: 'Broadcast Strength' },
+			{ id: 'roster',               label: 'Committed Pros' },
+			{ id: 'investor-takeaway',    label: 'Investor Takeaway' },
+		]},
 		{ href: '/dashboard/celebrity-network',      label: 'Celebrity Network',   icon: Star,        children: [
 			{ id: 'opportunity', label: 'The Opportunity' },
 			{ id: 'reach',       label: 'Social Media Reach' },

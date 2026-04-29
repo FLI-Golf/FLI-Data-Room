@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import 'flag-icons/css/flag-icons.min.css';
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 	import { ArrowUp } from 'lucide-svelte';

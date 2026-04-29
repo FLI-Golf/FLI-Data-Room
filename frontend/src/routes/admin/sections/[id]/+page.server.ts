@@ -55,12 +55,13 @@ export const actions: Actions = {
 		const description = data.get('description')?.toString().trim() ?? '';
 		const role        = data.get('role')?.toString() ?? 'basic';
 		const published   = data.get('published') === 'on';
+		const icon        = data.get('icon')?.toString().trim() ?? '';
 
 		if (!name) return fail(400, { error: 'Name is required.' });
 
 		const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 		try {
-			await locals.pb.collection('sections').update(params.id, { name, slug, description, role, published });
+			await locals.pb.collection('sections').update(params.id, { name, slug, description, role, published, icon });
 		} catch {
 			return fail(500, { error: 'Update failed.' });
 		}

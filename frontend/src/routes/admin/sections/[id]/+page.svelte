@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { ArrowLeft, Plus, Trash2, ChevronUp, ChevronDown, Type, Image, Eye, EyeOff } from 'lucide-svelte';
+	import IconPicker from '$lib/components/IconPicker.svelte';
 	import type { PageData, ActionData } from './$types';
 
 	export let data: PageData;
@@ -14,6 +15,7 @@
 
 	let addingText  = false;
 	let addingMedia = false;
+	let sectionIcon = data.section.icon ?? '';
 </script>
 
 <svelte:head>
@@ -56,6 +58,10 @@
 				<input id="description" name="description" type="text" value={data.section.description ?? ''}
 					class="w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-yellow-500/50"
 					placeholder="Short description shown in the sidebar" />
+			</div>
+			<div class="space-y-1">
+				<label class="block text-xs font-medium text-white/60">Sidebar Icon <span class="text-white/30">(optional)</span></label>
+				<IconPicker name="icon" bind:value={sectionIcon} />
 			</div>
 			<div class="flex items-center justify-between">
 				<label class="flex items-center gap-2 cursor-pointer">

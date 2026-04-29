@@ -3,8 +3,9 @@
 	import type { LayoutData } from './$types';
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy,
-		TrendingUp, Star, Settings, Users, Image, Hash, Scale
+		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart, Lock
 	} from 'lucide-svelte';
+	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
 
 	const nav = [
@@ -25,8 +26,30 @@
 		{ href: '/dashboard/the-sport',              label: 'The Sport',           icon: Disc,        children: [] },
 		{ href: '/dashboard/market-opportunity',     label: 'Market Opportunity',  icon: Globe,       children: [] },
 		{ href: '/dashboard/why-fli-wins',           label: 'Why FLI Wins',        icon: Trophy,      children: [] },
-		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis',   icon: TrendingUp,  children: [] },
+		{ href: '/dashboard/investment',             label: 'Investment',          icon: DollarSign,  role: 'advanced', children: [
+			{ id: 'opportunity',    label: 'Investment Opportunity' },
+			{ id: 'vision',         label: 'The Vision' },
+			{ id: 'business-model', label: 'Business Model' },
+			{ id: 'market',         label: 'Market Analysis' },
+			{ id: 'growth',         label: 'Growth Plan' },
+			{ id: 'exit',           label: 'Exit Strategies' },
+			{ id: 'team',           label: 'Team & Advisors' },
+			{ id: 'risk',           label: 'Risk Factors' },
+			{ id: 'conclusion',     label: 'Conclusion' },
+			{ id: 'comparisons',    label: 'Global Comparisons' },
+			{ id: 'next-steps',     label: 'Next Steps' },
+		]},
+		{ href: '/dashboard/proceeds',               label: 'Use of Proceeds',     icon: PieChart,    role: 'advanced', children: [] },
+		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis',   icon: TrendingUp,  role: 'advanced', children: [] },
 		{ href: '/dashboard/design',                 label: 'Design',              icon: Image,       children: [] },
+		{ href: '/dashboard/talent',                 label: 'Talent Overview',     icon: UserCheck,   role: 'advanced', children: [
+			{ id: 'championship-equity',  label: 'Championship Equity' },
+			{ id: 'countries',            label: 'Countries' },
+			{ id: 'competitive-structure',label: 'Competitive Structure' },
+			{ id: 'broadcast',            label: 'Broadcast Strength' },
+			{ id: 'roster',               label: 'Committed Pros' },
+			{ id: 'investor-takeaway',    label: 'Investor Takeaway' },
+		]},
 		{ href: '/dashboard/celebrity-network',      label: 'Celebrity Network',   icon: Star,        children: [
 			{ id: 'opportunity', label: 'The Opportunity' },
 			{ id: 'reach',       label: 'Social Media Reach' },
@@ -87,20 +110,25 @@
 				<div class="space-y-0.5">
 					{#each nav as item}
 						{@const active = activePath === item.href}
+						{@const locked = item.role === 'advanced' && data.user?.role === 'basic'}
 						<a
-							href={item.href}
+							href={locked ? undefined : item.href}
+							aria-disabled={locked}
 							class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors relative
-								{active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
+								{locked ? 'cursor-not-allowed opacity-40' : active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
 						>
-							{#if active}
+							{#if active && !locked}
 								<span class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-brand-500 rounded-r"></span>
 							{/if}
-							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
+							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active && !locked ? 'text-brand-400' : 'text-white/25'}" />
 							{item.label}
+							{#if locked}
+								<Lock class="h-3 w-3 text-white/30 ml-auto shrink-0" />
+							{/if}
 						</a>
 
 						<!-- Sub-nav: only show when this page is active and has children -->
-						{#if active && item.children.length > 0}
+						{#if active && !locked && item.children.length > 0}
 							<div class="ml-4 pl-3 border-l border-white/10 space-y-0.5 mb-1">
 								{#each item.children as child}
 									{@const subActive = activeSection === child.id}
@@ -134,7 +162,11 @@
 										<span class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-brand-500 rounded-r"></span>
 									{/if}
 									<span class="flex items-center gap-2.5">
-										<FileText class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
+										{#if section.icon && LucideIcons[section.icon]}
+											<svelte:component this={LucideIcons[section.icon]} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
+										{:else}
+											<FileText class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
+										{/if}
 										{section.name}
 									</span>
 									{#if section.role === 'advanced'}

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
-	import { BarChart2, Table2, Presentation, Disc, TrendingUp, Trophy, DollarSign, Star, FileText } from 'lucide-svelte';
+	import { BarChart2, Table2, Presentation, Disc, TrendingUp, Trophy, DollarSign, Star, FileText, Briefcase, Handshake, UserSquare2, MapPin, Receipt, PieChart, PlayCircle } from 'lucide-svelte';
 
 	export let data: PageData;
 
@@ -333,4 +333,103 @@
 			</a>
 		{/if}
 	</div>
+
+	{#if data.user?.role === 'advanced' || data.user?.role === 'admin'}
+		<!-- Advanced investor section -->
+		<div>
+			<div class="text-xs font-semibold text-white/25 uppercase tracking-widest mb-3">Advanced Investor Materials</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+				<a href="/dashboard/management" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<Briefcase class="h-4 w-4 text-white/50" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Management & Team</div>
+					</div>
+					<div class="text-xs text-white/40">Detailed resumes · advisors · directors</div>
+				</a>
+
+				<a href="/dashboard/industry-reports" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<BarChart2 class="h-4 w-4 text-fli-blue-300" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Industry Reports</div>
+					</div>
+					<div class="text-xs text-white/40">Market research · growth analysis</div>
+				</a>
+
+				<a href="/dashboard/sponsorships" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<Handshake class="h-4 w-4 text-green-400" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Sponsorships</div>
+					</div>
+					<div class="text-xs text-white/40">LOIs · confirmed sponsor commitments</div>
+				</a>
+
+				<a href="/dashboard/player-commitments" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<UserSquare2 class="h-4 w-4 text-yellow-400" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Player Commitments</div>
+					</div>
+					<div class="text-xs text-white/40">24-player roster · LOIs · bios</div>
+				</a>
+
+				<a href="/dashboard/inaugural-venue" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<MapPin class="h-4 w-4 text-brand-400" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Inaugural Venue</div>
+					</div>
+					<div class="text-xs text-white/40">Top 2 venue candidates · site analysis</div>
+				</a>
+
+				<a href="/dashboard/financial-projections" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<Table2 class="h-4 w-4 text-fli-blue-300" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Financial Projections</div>
+					</div>
+					<div class="text-xs text-white/40">Full P&L · revenue mix · assumptions</div>
+				</a>
+
+				<a href="/dashboard/financial-statements" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<Receipt class="h-4 w-4 text-white/50" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Financial Statements</div>
+					</div>
+					<div class="text-xs text-white/40">Income statement · balance sheet · FY2025 + Q1 2026</div>
+				</a>
+
+				<a href="/dashboard/cap-table" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
+					<div class="flex items-center gap-3 mb-2">
+						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+							<PieChart class="h-4 w-4 text-brand-400" />
+						</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Cap Table</div>
+					</div>
+					<div class="text-xs text-white/40">Ownership · investors · loans</div>
+				</a>
+			</div>
+		</div>
+	{/if}
+
+	<!-- How to Play — visible to all -->
+	<a href="/dashboard/how-to-play" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group flex items-center gap-4">
+		<div class="h-10 w-10 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
+			<PlayCircle class="h-5 w-5 text-green-400" />
+		</div>
+		<div>
+			<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">How to Play Disc Golf</div>
+			<div class="text-xs text-white/40 mt-0.5">Rules primer · scoring · the FLI stadium format explained</div>
+		</div>
+	</a>
 </div>

@@ -3,7 +3,8 @@
 	import type { LayoutData } from './$types';
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy,
-		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart, Lock
+		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart, Lock,
+		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle
 	} from 'lucide-svelte';
 	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
@@ -58,6 +59,19 @@
 			{ id: 'activation',  label: 'Network Activation' },
 		]},
 		{ href: '/dashboard/legal',                  label: 'Legal / Disclaimers', icon: Scale,        children: [] },
+		{ href: '/dashboard/management',             label: 'Management & Team',   icon: Briefcase,   role: 'advanced', children: [
+			{ id: 'leadership',  label: 'Leadership' },
+			{ id: 'advisors',    label: 'Advisors' },
+			{ id: 'directors',   label: 'Directors' },
+		]},
+		{ href: '/dashboard/industry-reports',       label: 'Industry Reports',    icon: BarChart2,   role: 'advanced', children: [] },
+		{ href: '/dashboard/sponsorships',           label: 'Sponsorships',        icon: Handshake,   role: 'advanced', children: [] },
+		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, role: 'advanced', children: [] },
+		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      role: 'advanced', children: [] },
+		{ href: '/dashboard/financial-projections',  label: 'Financial Projections', icon: Table2,    role: 'advanced', children: [] },
+		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    role: 'advanced', children: [] },
+		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, role: 'advanced', children: [] },
+		{ href: '/dashboard/how-to-play',            label: 'How to Play',         icon: PlayCircle,  children: [] },
 	];
 
 	$: activePath = $page.url.pathname;

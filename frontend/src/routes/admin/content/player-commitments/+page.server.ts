@@ -8,23 +8,29 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	save: async ({ locals, request }) => {
+	// Save a single player edit inline
+	updatePlayer: async ({ locals, request }) => {
 		const fd = await request.formData();
+		const division   = fd.get('division')?.toString()          ?? '';
+		const ranking    = fd.get('ranking')?.toString()           ?? '';
+		const name       = fd.get('name')?.toString().trim()       ?? '';
+		const country    = fd.get('country')?.toString().trim()    ?? '';
+		const sponsor    = fd.get('sponsor')?.toString().trim()    ?? '';
+		const pdgaRating = fd.get('pdgaRating')?.toString().trim() ?? '';
+		const loiStatus  = fd.get('loiStatus')?.toString()         ?? 'pending';
+		const photoUrl   = fd.get('photoUrl')?.toString().trim()   ?? '';
+		const docId      = fd.get('docId')?.toString().trim()      ?? '';
+		const bioDocId   = fd.get('bioDocId')?.toString().trim()   ?? '';
 
-		const players = [];
-		for (let i = 0; i < 20; i++) {
-			players.push({
-				division:   fd.get(`player_${i}_division`)?.toString().trim()   ?? '',
-				ranking:    fd.get(`player_${i}_ranking`)?.toString().trim()    ?? '',
-				name:       fd.get(`player_${i}_name`)?.toString().trim()       ?? '',
-				country:    fd.get(`player_${i}_country`)?.toString().trim()    ?? '',
-				sponsor:    fd.get(`player_${i}_sponsor`)?.toString().trim()    ?? '',
-				pdgaRating: fd.get(`player_${i}_pdgaRating`)?.toString().trim() ?? '',
-				loiStatus:  fd.get(`player_${i}_loiStatus`)?.toString()         ?? 'pending',
-				photoUrl:   fd.get(`player_${i}_photoUrl`)?.toString().trim()   ?? '',
-				docId:      fd.get(`player_${i}_docId`)?.toString().trim()      ?? '',
-				bioDocId:   fd.get(`player_${i}_bioDocId`)?.toString().trim()   ?? '',
-			});
+		const existing = await getContentData(locals.pb, 'player-commitments');
+		const players: Record<string, string>[] = (existing?.players as Record<string, string>[]) ?? [];
+
+		const updated = { division, ranking, name, country, sponsor, pdgaRating, loiStatus, photoUrl, docId, bioDocId };
+		const idx = players.findIndex(p => p.division === division && p.ranking === ranking);
+		if (idx >= 0) {
+			players[idx] = updated;
+		} else {
+			players.push(updated);
 		}
 
 		try {
@@ -33,6 +39,6 @@ export const actions: Actions = {
 			return fail(500, { error: 'Save failed.' });
 		}
 
-		return { success: true };
+		return { success: true, updated };
 	}
 };

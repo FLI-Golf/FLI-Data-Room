@@ -36,7 +36,7 @@
 								<select
 									name="role"
 									value={user.role}
-									class="rounded-md border border-white/15 bg-white/10 px-2 py-1 text-xs text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
+									class="rounded-md border border-white/15 bg-navy-900 px-2 py-1 text-xs text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
 								>
 									<option value="basic">Basic</option>
 									<option value="advanced">Advanced</option>

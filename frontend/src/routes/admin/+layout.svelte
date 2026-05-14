@@ -35,6 +35,9 @@
 				<a href="/admin/access" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 					Page Access
 				</a>
+				<a href="/admin/content" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-semibold text-yellow-400 hover:bg-yellow-500/10 hover:text-yellow-300 transition-colors">
+					Content Editor
+				</a>
 				<div class="pt-4 mt-4 border-t border-white/15">
 					<a href="/dashboard" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 						← Data Room

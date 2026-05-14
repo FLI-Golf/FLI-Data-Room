@@ -38,13 +38,19 @@ export async function upsertContentData(
 	slug: string,
 	payload: Record<string, unknown>
 ): Promise<void> {
+	let existing: ContentRecord | null = null;
 	try {
-		const existing = await pb
+		existing = await pb
 			.collection('content_data')
 			.getFirstListItem<ContentRecord>(`slug="${slug}"`);
-		await pb.collection('content_data').update(existing.id, { payload });
 	} catch {
-		// Record doesn't exist yet — create it
+		// Record doesn't exist yet — will create below
+	}
+
+	if (existing) {
+		await pb.collection('content_data').update(existing.id, { payload });
+	} else {
+		console.log('[upsertContentData] creating new record for slug:', slug);
 		await pb.collection('content_data').create({ slug, payload });
 	}
 }

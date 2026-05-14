@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+
 	import { CheckCircle2, Pencil, X } from 'lucide-svelte';
 	import type { PageData, ActionData } from './$types';
 
@@ -35,8 +35,8 @@
 		{ division: 'FPO', ranking: '#13', name: 'Henna Blomroos',  country: 'Finland', sponsor: 'Innova',         pdgaRating: '975',  loiStatus: 'signed', photoUrl: '', docId: '', bioDocId: '' },
 	];
 
-	const saved = (data.saved?.players as Player[]) ?? [];
-	let players: Player[] = DEFAULTS.map(d => {
+	$: players = DEFAULTS.map(d => {
+		const saved = (data.saved?.players as Player[]) ?? [];
 		const s = saved.find(p => p.division === d.division && p.ranking === d.ranking);
 		return s ? { ...d, ...s } : { ...d };
 	});
@@ -56,14 +56,7 @@
 	}
 	function closeEdit() { editingKey = null; }
 
-	// Close panel and refresh player list after successful save
-	$: if (form?.success && form?.updated) {
-		const u = form.updated as Player;
-		players = players.map(p =>
-			p.division === u.division && p.ranking === u.ranking ? { ...p, ...u } : p
-		);
-		editingKey = null;
-	}
+
 
 	const ic = 'w-full rounded-md border border-white/15 bg-navy-900/60 px-3 py-2 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/50';
 </script>
@@ -144,7 +137,7 @@
 
 				<!-- Inline edit form -->
 				{#if isEditing}
-					<form method="POST" action="?/updatePlayer" use:enhance class="border-t border-yellow-500/20 bg-navy-900/40 p-4 space-y-3">
+					<form method="POST" action="?/updatePlayer" class="border-t border-yellow-500/20 bg-navy-900/40 p-4 space-y-3">
 						<input type="hidden" name="division" value={player.division} />
 						<input type="hidden" name="ranking"  value={player.ranking} />
 						<div class="grid grid-cols-2 gap-3">
@@ -242,7 +235,7 @@
 
 				<!-- Inline edit form -->
 				{#if isEditing}
-					<form method="POST" action="?/updatePlayer" use:enhance class="border-t border-yellow-500/20 bg-navy-900/40 p-4 space-y-3">
+					<form method="POST" action="?/updatePlayer" class="border-t border-yellow-500/20 bg-navy-900/40 p-4 space-y-3">
 						<input type="hidden" name="division" value={player.division} />
 						<input type="hidden" name="ranking"  value={player.ranking} />
 						<div class="grid grid-cols-2 gap-3">

@@ -9,15 +9,30 @@
 	type Person  = { name: string; title: string; bio: string; email: string; linkedin: string; photoUrl: string; docId: string };
 	type Advisor = { name: string; title: string; bio: string; photoUrl: string };
 
-	let leadership: Person[] = (data.saved?.leadership as Person[]) ?? [
-		{ name: '', title: 'Chief Executive Officer & Founder', bio: '', email: '', linkedin: '', photoUrl: '', docId: '' },
+	const PH = 'https://few-likely.pockethost.io/api/files/pbc_2274991674';
+
+	const DEFAULT_LEADERSHIP: Person[] = [
+		{ name: 'Andrew Panza',              title: 'Chief Executive Officer',              email: 'andrew@fligolf.com',                       linkedin: '', photoUrl: `${PH}/2w2p15w6l082ar0/a20hkdek87h2e13`,  docId: '', bio: '' },
+		{ name: 'Corey La Russo',            title: 'Chief Marketing Officer',              email: 'corey@fligolf.com',                        linkedin: '', photoUrl: `${PH}/s1346gy1nksd26k/6cqirj5hls1y1b3`,  docId: '', bio: '' },
+		{ name: 'Dustin Dinsmore',           title: 'Chief Technical Officer',              email: 'dustin@fligolf.com',                       linkedin: '', photoUrl: `${PH}/d02fbv46o1iu34s/408z8ldfw882r2d`,  docId: '', bio: '' },
+		{ name: 'Mark Colman',               title: 'Network / Channel Director',           email: 'mark@fligolf.com',                         linkedin: '', photoUrl: `${PH}/n40892dz6qaz7p5/7ju4lre6232v70u`,  docId: '', bio: '' },
+		{ name: 'Jim Neely',                 title: 'Production Director',                  email: 'jimn@puremobileproductions.com',            linkedin: '', photoUrl: `${PH}/ly034l10o9s90yw/5ed92w4vv81159j`,  docId: '', bio: '' },
+		{ name: 'Ina Masten',                title: 'Director of Finance',                  email: 'inam@mastensolutions.com',                 linkedin: '', photoUrl: `${PH}/2cs0k14sobpv6ra/12om05d3ql9r2gb`,  docId: '', bio: '' },
+		{ name: 'Gary Santos',               title: 'Director of Tribal & Gaming Relations', email: 'garygsantos1978@gmail.com',               linkedin: '', photoUrl: `${PH}/v4y92n8e857jgz3/8w8md5nn8c0bp41`,  docId: '', bio: '' },
+		{ name: 'Stephen A. Crystal, ESQ.',  title: 'Gaming & Legal Advisor',               email: 'Stephen.Crystal@sccgmanagement.com',       linkedin: '', photoUrl: `${PH}/15r1u1462ts14iu/9n843a330dbid2p`,  docId: '', bio: '' },
 	];
-	let advisors: Advisor[] = (data.saved?.advisors as Advisor[]) ?? [
-		{ name: '', title: '', bio: '', photoUrl: '' },
-	];
-	let directors: Advisor[] = (data.saved?.directors as Advisor[]) ?? [
-		{ name: '', title: '', bio: '', photoUrl: '' },
-	];
+
+	// Merge saved overrides on top of defaults (matched by name)
+	function mergeLeadership(saved: Person[]): Person[] {
+		return DEFAULT_LEADERSHIP.map(d => {
+			const s = saved.find(p => p.name === d.name);
+			return s ? { ...d, ...s } : { ...d };
+		});
+	}
+
+	let leadership: Person[] = mergeLeadership((data.saved?.leadership as Person[]) ?? []);
+	let advisors: Advisor[]  = (data.saved?.advisors  as Advisor[]) ?? [{ name: '', title: '', bio: '', photoUrl: '' }];
+	let directors: Advisor[] = (data.saved?.directors as Advisor[]) ?? [{ name: '', title: '', bio: '', photoUrl: '' }];
 
 	let step = 0;
 	const steps = ['Leadership', 'Advisors', 'Directors', 'Review'];

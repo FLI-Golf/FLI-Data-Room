@@ -64,17 +64,15 @@
 	$: rawAdvisors   = (data.content?.advisors   as Person[]) ?? [];
 	$: rawDirectors  = (data.content?.directors  as Person[]) ?? [];
 
-	$: leadership = rawLeadership.length > 0
-		? rawLeadership.map(p => ({ ...p, placeholder: false }))
-		: PLACEHOLDER_LEADERSHIP;
-	$: advisors = rawAdvisors.length > 0
-		? rawAdvisors.map(p => ({ ...p, placeholder: false }))
-		: PLACEHOLDER_ADVISORS;
-	$: directors = rawDirectors.length > 0
-		? rawDirectors.map(p => ({ ...p, placeholder: false }))
-		: PLACEHOLDER_DIRECTORS;
+	// Merge saved overrides (photoUrl, bio, etc.) on top of hardcoded defaults, matched by name
+	$: leadership = PLACEHOLDER_LEADERSHIP.map(d => {
+		const saved = rawLeadership.find(p => p.name === d.name);
+		return { ...d, ...(saved ? { photoUrl: saved.photoUrl || d.photoUrl, bio: saved.bio || d.bio, email: saved.email || d.email, linkedin: saved.linkedin || d.linkedin, docId: saved.docId || d.docId } : {}), placeholder: false };
+	});
+	$: advisors  = rawAdvisors.length  ? rawAdvisors.map(p  => ({ ...p, placeholder: false })) : PLACEHOLDER_ADVISORS;
+	$: directors = rawDirectors.length ? rawDirectors.map(p => ({ ...p, placeholder: false })) : PLACEHOLDER_DIRECTORS;
 
-	$: hasData = true; // Real data is hardcoded above
+	$: hasData = true;
 </script>
 
 <svelte:head>

@@ -77,6 +77,35 @@
 
 	<form method="POST" action="?/save" use:enhance class="space-y-6">
 
+		<!-- Always submit non-active groups as hidden fields -->
+		{#if step !== 0}
+			{#each leadership as person, i}
+				<input type="hidden" name="leadership_{i}_name"     value={person.name} />
+				<input type="hidden" name="leadership_{i}_title"    value={person.title} />
+				<input type="hidden" name="leadership_{i}_bio"      value={person.bio} />
+				<input type="hidden" name="leadership_{i}_email"    value={person.email} />
+				<input type="hidden" name="leadership_{i}_linkedin" value={person.linkedin} />
+				<input type="hidden" name="leadership_{i}_photoUrl" value={person.photoUrl} />
+				<input type="hidden" name="leadership_{i}_docId"    value={person.docId} />
+			{/each}
+		{/if}
+		{#if step !== 1}
+			{#each advisors as advisor, i}
+				<input type="hidden" name="advisor_{i}_name"     value={advisor.name} />
+				<input type="hidden" name="advisor_{i}_title"    value={advisor.title} />
+				<input type="hidden" name="advisor_{i}_bio"      value={advisor.bio} />
+				<input type="hidden" name="advisor_{i}_photoUrl" value={advisor.photoUrl} />
+			{/each}
+		{/if}
+		{#if step !== 2}
+			{#each directors as director, i}
+				<input type="hidden" name="director_{i}_name"     value={director.name} />
+				<input type="hidden" name="director_{i}_title"    value={director.title} />
+				<input type="hidden" name="director_{i}_bio"      value={director.bio} />
+				<input type="hidden" name="director_{i}_photoUrl" value={director.photoUrl} />
+			{/each}
+		{/if}
+
 		<!-- Step 1: Leadership -->
 		{#if step === 0}
 			<div class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-900/15 p-4 flex items-start gap-3">
@@ -288,8 +317,29 @@
 				<Plus class="h-4 w-4" /> Add Director
 			</button>
 
-		<!-- Step 4: Review -->
+		<!-- Step 4: Review — hidden inputs carry all data for submission -->
 		{:else}
+			{#each leadership as person, i}
+				<input type="hidden" name="leadership_{i}_name"     value={person.name} />
+				<input type="hidden" name="leadership_{i}_title"    value={person.title} />
+				<input type="hidden" name="leadership_{i}_bio"      value={person.bio} />
+				<input type="hidden" name="leadership_{i}_email"    value={person.email} />
+				<input type="hidden" name="leadership_{i}_linkedin" value={person.linkedin} />
+				<input type="hidden" name="leadership_{i}_photoUrl" value={person.photoUrl} />
+				<input type="hidden" name="leadership_{i}_docId"    value={person.docId} />
+			{/each}
+			{#each advisors as advisor, i}
+				<input type="hidden" name="advisor_{i}_name"     value={advisor.name} />
+				<input type="hidden" name="advisor_{i}_title"    value={advisor.title} />
+				<input type="hidden" name="advisor_{i}_bio"      value={advisor.bio} />
+				<input type="hidden" name="advisor_{i}_photoUrl" value={advisor.photoUrl} />
+			{/each}
+			{#each directors as director, i}
+				<input type="hidden" name="director_{i}_name"     value={director.name} />
+				<input type="hidden" name="director_{i}_title"    value={director.title} />
+				<input type="hidden" name="director_{i}_bio"      value={director.bio} />
+				<input type="hidden" name="director_{i}_photoUrl" value={director.photoUrl} />
+			{/each}
 			<div class="space-y-4">
 				{#each [['Leadership', leadership], ['Advisors', advisors], ['Directors', directors]] as [label, list]}
 					<div class="rounded-xl border border-white/15 bg-navy-700/50 p-5">
@@ -324,17 +374,18 @@
 				← Previous
 			</button>
 			<span class="text-xs text-white/25">Step {step + 1} of {steps.length}</span>
-			{#if step < steps.length - 1}
-				<button type="button" on:click={() => step = step + 1}
-					class="rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
-					Next →
-				</button>
-			{:else}
+			<div class="flex items-center gap-2">
+				{#if step < steps.length - 1}
+					<button type="button" on:click={() => step = step + 1}
+						class="rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
+						Next →
+					</button>
+				{/if}
 				<button type="submit"
 					class="rounded-md bg-yellow-500 px-5 py-2 text-sm font-semibold text-navy-950 hover:bg-yellow-400 transition-colors">
 					Save & Publish
 				</button>
-			{/if}
+			</div>
 		</div>
 	</form>
 </div>

@@ -14,6 +14,7 @@ const DEFAULTS: Record<string, 'basic' | 'advanced' | 'admin'> = {
 	'design':                  'basic',
 	'legal':                   'basic',
 	'how-to-play':             'basic',
+	'technology':              'advanced',
 	'investment':              'advanced',
 	'talent':                  'advanced',
 	'investment-thesis':       'advanced',
@@ -24,6 +25,7 @@ const DEFAULTS: Record<string, 'basic' | 'advanced' | 'admin'> = {
 	'player-commitments':      'advanced',
 	'inaugural-venue':         'advanced',
 	'financial-projections':   'advanced',
+	'cpa-financials':          'advanced',
 	'financial-statements':    'advanced',
 	'cap-table':               'advanced',
 };

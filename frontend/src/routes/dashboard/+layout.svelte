@@ -4,7 +4,7 @@
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy,
 		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
-		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle
+		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen
 	} from 'lucide-svelte';
 	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
@@ -27,6 +27,15 @@
 		{ href: '/dashboard/the-sport',              label: 'The Sport',           icon: Disc,        children: [] },
 		{ href: '/dashboard/market-opportunity',     label: 'Market Opportunity',  icon: Globe,       children: [] },
 		{ href: '/dashboard/why-fli-wins',           label: 'Why FLI Wins',        icon: Trophy,      children: [] },
+		{ href: '/dashboard/technology',             label: 'Technology',          icon: Cpu,         children: [
+			{ id: 'fantasy-app',    label: 'Fantasy App' },
+			{ id: 'discord',        label: 'Discord Community' },
+			{ id: 'flihub',         label: 'FLIHUB — League OS' },
+			{ id: 'ai-draft',       label: 'AI Draft System' },
+			{ id: 'ai-production',  label: 'AI Production' },
+			{ id: 'value-table',    label: 'Platform Value' },
+			{ id: 'moat',           label: 'Competitive Moat' },
+		]},
 		{ href: '/dashboard/investment',             label: 'Investment',          icon: DollarSign,  children: [
 			{ id: 'opportunity',    label: 'Investment Opportunity' },
 			{ id: 'vision',         label: 'The Vision' },
@@ -69,8 +78,17 @@
 		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, children: [] },
 		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      children: [] },
 		{ href: '/dashboard/financial-projections',  label: 'Financial Projections', icon: Table2,    children: [] },
-		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    children: [] },
-		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, children: [] },
+		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    pending: true, children: [] },
+		{ href: '/dashboard/cpa-financials',         label: 'CPA Financials',       icon: BookOpen,   children: [
+			{ id: 'phases',           label: 'Phase Overview' },
+			{ id: 'pl-table',         label: 'Full P&L' },
+			{ id: 'revenue-product',  label: 'Revenue by Product' },
+			{ id: 'sensitivity',      label: 'Sensitivity Analysis' },
+			{ id: 'flywheel',         label: 'Cash Flow Flywheel' },
+			{ id: 'live-progress',    label: 'Live Progress' },
+			{ id: 'investor-summary', label: 'Investor Summary' },
+		]},
+		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, pending: true, children: [] },
 		{ href: '/dashboard/how-to-play',            label: 'How to Play',         icon: PlayCircle,  children: [] },
 	];
 
@@ -134,6 +152,7 @@
 							{/if}
 							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
 							{item.label}
+
 						</a>
 
 						<!-- Sub-nav: only show when this page is active and has children -->

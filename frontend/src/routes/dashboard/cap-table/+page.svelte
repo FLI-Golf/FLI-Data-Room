@@ -51,15 +51,6 @@
 		<p class="mt-1 text-white/50">Current ownership structure, all investors, and outstanding loans.</p>
 	</div>
 
-	{#if !hasData}
-	<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 flex items-start gap-3">
-		<Upload class="h-4 w-4 text-yellow-400 shrink-0 mt-0.5" />
-		<p class="text-xs text-white/50 leading-relaxed">
-			Cap table not yet entered. Go to <a href="/admin/content/cap-table" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Content Editor → Cap Table</a> to add equity holders, loans, and seed round details.
-		</p>
-	</div>
-	{/if}
-
 	<!-- Confidentiality warning -->
 	<div class="rounded-xl border border-brand-600/30 bg-brand-600/10 p-4 flex items-start gap-3">
 		<AlertTriangle class="h-4 w-4 text-brand-400 shrink-0 mt-0.5" />
@@ -68,20 +59,33 @@
 		</p>
 	</div>
 
-	<!-- Upload notice -->
-	<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5 flex items-start gap-3">
-		<Upload class="h-4 w-4 text-yellow-400 shrink-0 mt-0.5" />
+	{#if !hasData}
+	<!-- Pending state -->
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-8 text-center space-y-4">
+		<div class="h-14 w-14 rounded-full bg-brand-600/15 border border-brand-500/30 flex items-center justify-center mx-auto">
+			<PieChart class="h-7 w-7 text-brand-400" />
+		</div>
 		<div>
-			<div class="text-sm font-semibold text-yellow-400 mb-1">Update Cap Table — Action Required</div>
-			<p class="text-xs text-white/50 leading-relaxed">
-				Replace all placeholder rows below with actual investor names, share counts, amounts invested, and percentages.
-				Also upload the full cap table as a PDF or Excel file via
-				<a href="/admin/documents" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Documents</a>
-				as a PDF or Excel file.
-				Include all equity holders, convertible notes, SAFEs, and outstanding loans.
-			</p>
+			<div class="text-lg font-bold text-white">Cap Table Pending Seed Close</div>
+			<p class="text-sm text-white/45 mt-1 max-w-md mx-auto">Equity structure and ownership percentages will be finalized upon close of the Q2 2026 seed round. The structure, broker, and terms are confirmed below.</p>
+		</div>
+		<div class="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto text-left mt-2">
+			{#each [
+				{ label: 'Structure',      value: 'Equity / SAFE',              color: 'text-white' },
+				{ label: 'Round Target',   value: '$7,500,000',                  color: 'text-brand-400' },
+				{ label: 'Placement Agent',value: 'Young America Capital, LLC',  color: 'text-fli-blue-300' },
+				{ label: 'Broker Status',  value: 'SEC Registered · FINRA, SIPC',color: 'text-white' },
+				{ label: 'Timeline',       value: 'Q2 2026',                     color: 'text-yellow-400' },
+				{ label: 'Price Per Unit', value: 'TBD at close',                color: 'text-white/50' },
+			] as item}
+				<div class="rounded-lg border border-white/8 bg-white/3 p-3">
+					<div class="text-xs text-white/30 uppercase tracking-widest mb-1">{item.label}</div>
+					<div class="text-sm font-bold {item.color}">{item.value}</div>
+				</div>
+			{/each}
 		</div>
 	</div>
+	{/if}
 
 	<!-- Q2 2026 Seed Round summary -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
@@ -106,7 +110,8 @@
 		</div>
 	</div>
 
-	<!-- Equity holders -->
+	{#if hasData}
+	<!-- Equity holders — only shown when real data is entered -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<h2 class="text-base font-bold text-white mb-4">Equity Holders</h2>
 		<div class="overflow-x-auto">
@@ -124,7 +129,7 @@
 				<tbody class="divide-y divide-white/5 text-xs">
 					{#each equityHolders as holder}
 						<tr class="text-white/50">
-							<td class="py-2.5 pr-4 font-medium {hasData ? 'text-white' : 'text-white/40 italic'}">{holder.name}</td>
+							<td class="py-2.5 pr-4 font-medium text-white">{holder.name}</td>
 							<td class="py-2.5 px-4">
 								<span class="rounded-full bg-white/8 px-2 py-0.5 text-xs text-white/40">{holder.type}</span>
 							</td>
@@ -134,7 +139,6 @@
 							<td class="py-2.5 pl-4 text-right font-mono">{holder.pct ? holder.pct + '%' : '—'}</td>
 						</tr>
 					{/each}
-					<!-- Totals row -->
 					<tr class="border-t border-white/15 bg-white/3 font-bold text-xs">
 						<td class="py-2.5 pr-4 text-white">Total</td>
 						<td class="py-2.5 px-4"></td>
@@ -165,7 +169,7 @@
 				<tbody class="divide-y divide-white/5 text-xs">
 					{#each loans as loan}
 						<tr class="text-white/50">
-							<td class="py-2.5 pr-4 font-medium {hasData ? 'text-white' : 'text-white/40 italic'}">{loan.lender}</td>
+							<td class="py-2.5 pr-4 font-medium text-white">{loan.lender}</td>
 							<td class="py-2.5 px-4 text-right font-mono">{loan.amount ? fmt(loan.amount) : '—'}</td>
 							<td class="py-2.5 px-4 text-right">{loan.rate || '—'}</td>
 							<td class="py-2.5 px-4 text-right">{loan.maturity || '—'}</td>
@@ -176,6 +180,33 @@
 			</table>
 		</div>
 	</div>
+	{:else}
+	<!-- Anticipated structure — shown pre-close -->
+	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
+		<div class="flex items-center gap-2 mb-4">
+			<Info class="h-5 w-5 text-white/40" />
+			<h2 class="text-base font-bold text-white">Anticipated Equity Structure</h2>
+			<span class="ml-auto rounded-full bg-yellow-500/15 px-2.5 py-0.5 text-xs font-semibold text-yellow-400">Pre-Close</span>
+		</div>
+		<p class="text-sm text-white/50 mb-5 leading-relaxed">The full cap table — including founder equity, investor allocations, and any option pool — will be published here upon close of the Q2 2026 seed round. The anticipated structure is outlined below.</p>
+		<div class="space-y-3">
+			{#each [
+				{ label: 'Founder / Management Equity', detail: 'Retained common shares — percentage TBD at close', badge: 'Common', color: 'text-brand-400' },
+				{ label: 'Seed Round Investors',        detail: '$7.5M raise · Equity or SAFE · Q2 2026 close', badge: 'Preferred / SAFE', color: 'text-fli-blue-300' },
+				{ label: 'Option Pool',                 detail: 'Reserved for future employees and advisors — size TBD', badge: 'Options', color: 'text-yellow-400' },
+				{ label: 'Outstanding Loans',           detail: 'No outstanding debt obligations at this time', badge: 'Clean', color: 'text-green-400' },
+			] as row}
+				<div class="flex items-center gap-4 rounded-lg border border-white/8 bg-white/3 px-4 py-3">
+					<div class="flex-1 min-w-0">
+						<div class="text-sm font-semibold text-white">{row.label}</div>
+						<div class="text-xs text-white/40 mt-0.5">{row.detail}</div>
+					</div>
+					<span class="rounded-full bg-white/8 px-2.5 py-0.5 text-xs font-medium {row.color} shrink-0">{row.badge}</span>
+				</div>
+			{/each}
+		</div>
+	</div>
+	{/if}
 
 	<!-- Dilution note -->
 	<div class="rounded-xl border border-white/10 bg-white/3 p-4 flex items-start gap-3">

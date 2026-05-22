@@ -6,7 +6,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user.ndaAccepted) redirect(303, '/nda');
 
 	return {
-		user: locals.user,
-		fullAccess: true
+		user: locals.user
 	};
 };

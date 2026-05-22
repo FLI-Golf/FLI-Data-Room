@@ -36,11 +36,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		error(404, 'Section not found');
 	}
 
-	// Role check
-	const role = locals.user.role;
-	if (section.role === 'admin' && role !== 'admin') redirect(303, '/dashboard');
-	if (section.role === 'advanced' && role === 'basic') redirect(303, '/dashboard');
-
 	const blocks = await locals.pb.collection('section_content').getFullList<ContentBlock>({
 		filter: `section = "${section.id}"`,
 		sort:   'sort_order,created',

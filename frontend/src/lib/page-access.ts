@@ -64,10 +64,5 @@ export async function requirePageAccess(slug: string, locals: App.Locals): Promi
 		// Use fallback silently
 	}
 
-	const userRank = ROLE_RANK[locals.user.role] ?? 0;
-	const requiredRank = ROLE_RANK[required] ?? 0;
-
-	if (userRank < requiredRank) {
-		error(403, `This page requires ${required} access.`);
-	}
+	// All authenticated + NDA-accepted users have full access
 }

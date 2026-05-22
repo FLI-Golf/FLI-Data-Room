@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Shield, Users, Lock } from 'lucide-svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -9,20 +8,6 @@
 	function mediaUrl(m: { collectionId: string; id: string; file: string }) {
 		return `${pb_url}/api/files/${m.collectionId}/${m.id}/${m.file}`;
 	}
-
-	const roleLabel: Record<string, string> = {
-		basic:    'All Members',
-		advanced: 'Advanced Access',
-		admin:    'Admin Only'
-	};
-	const roleStyle: Record<string, string> = {
-		basic:    'border-white/20 bg-white/8 text-white/50',
-		advanced: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-400',
-		admin:    'border-brand-600/30 bg-brand-600/10 text-brand-500'
-	};
-	const roleIcon: Record<string, typeof Users> = {
-		basic: Users, advanced: Shield, admin: Lock
-	};
 </script>
 
 <svelte:head>
@@ -32,10 +17,6 @@
 <div class="max-w-3xl space-y-8">
 	<!-- Header -->
 	<div>
-		<div class="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest mb-4 {roleStyle[data.section.role]}">
-			<svelte:component this={roleIcon[data.section.role]} class="h-3 w-3" />
-			{roleLabel[data.section.role]}
-		</div>
 		<h1 class="text-3xl font-black text-white">{data.section.name}</h1>
 		{#if data.section.description}
 			<p class="mt-1 text-white/50">{data.section.description}</p>

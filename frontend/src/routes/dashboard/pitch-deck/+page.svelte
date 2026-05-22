@@ -77,14 +77,7 @@
 		<p class="mt-1 text-white/50">FLI Golf League · Q2 2026 Seed Round · $7.5M</p>
 	</div>
 
-	{#if !data.fullAccess}
-		<div class="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-5 text-sm text-yellow-300">
-			You have <strong>Basic</strong> access. You can view the overview sections below.
-			Contact <a href="mailto:investors@fligolf.com" class="underline">investors@fligolf.com</a> to request Advanced access for the full deck and financials.
-		</div>
-	{/if}
-
-	<!-- Sections visible to all authenticated + NDA users -->
+	<!-- Pitch deck sections -->
 	<div class="space-y-6">
 		<!-- The Opportunity -->
 		<div id="overview" class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
@@ -482,14 +475,7 @@
 	</div>
 </div>
 
-	<!-- Advanced/Admin only sections -->
-	{#if data.fullAccess}
-		<div class="space-y-6">
-			<div class="flex items-center gap-3">
-				<div class="h-px flex-1 bg-yellow-500/20" />
-				<span class="text-xs text-yellow-400 font-semibold uppercase tracking-widest">Advanced Access</span>
-				<div class="h-px flex-1 bg-yellow-500/20" />
-			</div>
+	<div class="space-y-6">
 
 			<!-- Use of Proceeds -->
 			<div id="proceeds" class="rounded-xl border border-yellow-500/40 bg-navy-700/50 p-6 space-y-6">
@@ -804,7 +790,6 @@
 				</p>
 			</div>
 		</div>
-	{/if}
 
 	<div class="pt-4">
 		<a href="/dashboard/documents" class="text-sm text-brand-600 hover:text-yellow-400 transition-colors">

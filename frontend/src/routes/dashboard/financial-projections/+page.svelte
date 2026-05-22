@@ -1,89 +1,29 @@
 <script lang="ts">
-	import { Table2, Upload, ExternalLink, TrendingUp, TrendingDown } from 'lucide-svelte';
+	import { Table2, Upload, ExternalLink, TrendingUp, TrendingDown, BarChart2, LineChart } from 'lucide-svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 
 	type ProjRow = { year: string; revenue: string; cogs: string; grossProfit: string; opex: string; ebitda: string; netIncome: string; margin: string; notes: string };
 	type StreamRow = { stream: string; pct2026: string; pct2031: string };
 
-	// Default projections used when no content saved yet
 	const DEFAULT_PROJECTIONS = [
-		{
-			year: '2026',
-			revenue:      2.8,
-			cogs:         1.2,
-			grossProfit:  1.6,
-			opex:         3.4,
-			ebitda:      -1.8,
-			netIncome:   -1.8,
-			margin:       null,
-			notes: 'Inaugural season. Seed capital deployed. Single event production.',
-		},
-		{
-			year: '2027',
-			revenue:     21.4,
-			cogs:         7.5,
-			grossProfit: 13.9,
-			opex:        12.8,
-			ebitda:       1.1,
-			netIncome:    1.1,
-			margin:       5.1,
-			notes: 'Full 4-event season. Media rights deal activated. Sponsorship ramp.',
-		},
-		{
-			year: '2028',
-			revenue:     30.0,
-			cogs:         9.8,
-			grossProfit: 20.2,
-			opex:        15.0,
-			ebitda:       5.2,
-			netIncome:    5.2,
-			margin:      17.3,
-			notes: 'Expanded venue footprint. Sports betting integration revenue.',
-		},
-		{
-			year: '2029',
-			revenue:     62.8,
-			cogs:        18.4,
-			grossProfit: 44.4,
-			opex:        23.2,
-			ebitda:      21.2,
-			netIncome:   21.2,
-			margin:      33.8,
-			notes: 'National broadcast deal. Tribal gaming partnerships at scale.',
-		},
-		{
-			year: '2030',
-			revenue:    113.2,
-			cogs:        30.1,
-			grossProfit: 83.1,
-			opex:        39.1,
-			ebitda:      44.0,
-			netIncome:   44.0,
-			margin:      38.9,
-			notes: 'International expansion. Fantasy sports and media licensing.',
-		},
-		{
-			year: '2031',
-			revenue:    182.7,
-			cogs:        45.2,
-			grossProfit:137.5,
-			opex:        52.0,
-			ebitda:      85.5,
-			netIncome:   85.5,
-			margin:      46.8,
-			notes: 'Full league maturity. Multiple revenue streams at scale.',
-		},
+		{ year: '2026', revenue: 2.8,   cogs: 1.2,  grossProfit: 1.6,   opex: 3.4,  ebitda: -1.8, netIncome: -1.8, margin: null,  notes: 'Inaugural season. Seed capital deployed. Single event production.' },
+		{ year: '2027', revenue: 21.4,  cogs: 7.5,  grossProfit: 13.9,  opex: 12.8, ebitda: 1.1,  netIncome: 1.1,  margin: 5.1,   notes: 'Full 4-event season. Media rights deal activated. Sponsorship ramp.' },
+		{ year: '2028', revenue: 30.0,  cogs: 9.8,  grossProfit: 20.2,  opex: 15.0, ebitda: 5.2,  netIncome: 5.2,  margin: 17.3,  notes: 'Expanded venue footprint. Sports betting integration revenue.' },
+		{ year: '2029', revenue: 62.8,  cogs: 18.4, grossProfit: 44.4,  opex: 23.2, ebitda: 21.2, netIncome: 21.2, margin: 33.8,  notes: 'National broadcast deal. Tribal gaming partnerships at scale.' },
+		{ year: '2030', revenue: 113.2, cogs: 30.1, grossProfit: 83.1,  opex: 39.1, ebitda: 44.0, netIncome: 44.0, margin: 38.9,  notes: 'International expansion. Fantasy sports and media licensing.' },
+		{ year: '2031', revenue: 182.7, cogs: 45.2, grossProfit: 137.5, opex: 52.0, ebitda: 85.5, netIncome: 85.5, margin: 46.8,  notes: 'Full league maturity. Multiple revenue streams at scale.' },
 	];
 
 	const DEFAULT_STREAMS = [
-		{ stream: 'Event Ticket Sales',          pct2026: '45', pct2031: '12' },
-		{ stream: 'Sponsorship & Naming Rights',  pct2026: '30', pct2031: '22' },
-		{ stream: 'Media Rights & Streaming',     pct2026: '10', pct2031: '28' },
-		{ stream: 'Sports Betting (B2B)',          pct2026:  '5', pct2031: '18' },
-		{ stream: 'Fantasy Sports & Gaming',       pct2026:  '5', pct2031: '10' },
-		{ stream: 'Tribal Gaming Partnerships',    pct2026:  '3', pct2031:  '6' },
-		{ stream: 'Merchandise & Licensing',       pct2026:  '2', pct2031:  '4' },
+		{ stream: 'Event Ticket Sales',         pct2026: '45', pct2031: '12' },
+		{ stream: 'Sponsorship & Naming Rights', pct2026: '30', pct2031: '22' },
+		{ stream: 'Media Rights & Streaming',    pct2026: '10', pct2031: '28' },
+		{ stream: 'Sports Betting (B2B)',         pct2026:  '5', pct2031: '18' },
+		{ stream: 'Fantasy Sports & Gaming',      pct2026:  '5', pct2031: '10' },
+		{ stream: 'Tribal Gaming Partnerships',   pct2026:  '3', pct2031:  '6' },
+		{ stream: 'Merchandise & Licensing',      pct2026:  '2', pct2031:  '4' },
 	];
 
 	$: hasData = ((data.content?.projections as ProjRow[]) ?? []).some(p => p.revenue);
@@ -115,6 +55,140 @@
 	function fmt(v: number) {
 		return `$${Math.abs(v).toFixed(1)}M`;
 	}
+
+	// ── Chart logic ──────────────────────────────────────────────────────────
+	type Tab = 'table' | 'revenue' | 'ebitda';
+	let tab: Tab = 'table';
+
+	let revenueCanvas: HTMLCanvasElement;
+	let ebitdaCanvas: HTMLCanvasElement;
+	let revenueChart: import('chart.js').Chart | null = null;
+	let ebitdaChart: import('chart.js').Chart | null = null;
+
+	async function buildRevenueChart() {
+		if (!revenueCanvas) return;
+		const { Chart, BarElement, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, BarController, LineController } = await import('chart.js');
+		Chart.register(BarElement, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, BarController, LineController);
+		if (revenueChart) revenueChart.destroy();
+		revenueChart = new Chart(revenueCanvas, {
+			type: 'bar',
+			data: {
+				labels: projections.map(p => p.year),
+				datasets: [
+					{
+						label: 'Revenue ($M)',
+						data: projections.map(p => p.revenue),
+						backgroundColor: 'rgba(255,255,255,0.15)',
+						borderColor: 'rgba(255,255,255,0.5)',
+						borderWidth: 1,
+						borderRadius: 4,
+						order: 2
+					},
+					{
+						label: 'Gross Profit ($M)',
+						data: projections.map(p => p.grossProfit),
+						backgroundColor: 'rgba(99,179,237,0.25)',
+						borderColor: 'rgba(99,179,237,0.8)',
+						borderWidth: 1,
+						borderRadius: 4,
+						order: 3
+					},
+					{
+						type: 'line' as const,
+						label: 'Net Margin (%)',
+						data: projections.map(p => p.margin),
+						borderColor: 'rgba(251,191,36,0.9)',
+						backgroundColor: 'rgba(251,191,36,0.1)',
+						borderWidth: 2,
+						pointRadius: 4,
+						pointBackgroundColor: 'rgba(251,191,36,1)',
+						tension: 0.3,
+						yAxisID: 'yPct',
+						order: 1
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: {
+					legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { size: 12 } } },
+					tooltip: {
+						callbacks: {
+							label: (ctx) => {
+								if (ctx.dataset.yAxisID === 'yPct') return ` ${ctx.dataset.label}: ${(ctx.parsed.y ?? 0).toFixed(1)}%`;
+								return ` ${ctx.dataset.label}: $${(ctx.parsed.y ?? 0).toFixed(1)}M`;
+							}
+						}
+					}
+				},
+				scales: {
+					x: { ticks: { color: 'rgba(255,255,255,0.6)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+					y: { ticks: { color: 'rgba(255,255,255,0.6)', callback: (v) => `$${v}M` }, grid: { color: 'rgba(255,255,255,0.05)' } },
+					yPct: {
+						position: 'right',
+						ticks: { color: 'rgba(251,191,36,0.7)', callback: (v) => `${v}%` },
+						grid: { drawOnChartArea: false }
+					}
+				}
+			}
+		});
+	}
+
+	async function buildEbitdaChart() {
+		if (!ebitdaCanvas) return;
+		const { Chart, BarElement, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, BarController, LineController } = await import('chart.js');
+		Chart.register(BarElement, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, BarController, LineController);
+		if (ebitdaChart) ebitdaChart.destroy();
+		ebitdaChart = new Chart(ebitdaCanvas, {
+			type: 'bar',
+			data: {
+				labels: projections.map(p => p.year),
+				datasets: [
+					{
+						label: 'Revenue ($M)',
+						data: projections.map(p => p.revenue),
+						backgroundColor: 'rgba(255,255,255,0.08)',
+						borderColor: 'rgba(255,255,255,0.3)',
+						borderWidth: 1,
+						borderRadius: 4,
+						order: 2
+					},
+					{
+						label: 'EBITDA ($M)',
+						data: projections.map(p => p.ebitda),
+						backgroundColor: projections.map(p => p.ebitda < 0 ? 'rgba(192,57,43,0.65)' : 'rgba(34,197,94,0.65)'),
+						borderColor: projections.map(p => p.ebitda < 0 ? 'rgba(192,57,43,1)' : 'rgba(34,197,94,1)'),
+						borderWidth: 1,
+						borderRadius: 4,
+						order: 1
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: {
+					legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { size: 12 } } },
+					tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: $${(ctx.parsed.y ?? 0).toFixed(1)}M` } }
+				},
+				scales: {
+					x: { ticks: { color: 'rgba(255,255,255,0.6)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+					y: { ticks: { color: 'rgba(255,255,255,0.6)', callback: (v) => `$${v}M` }, grid: { color: 'rgba(255,255,255,0.05)' } }
+				}
+			}
+		});
+	}
+
+	$: if (tab === 'revenue') setTimeout(buildRevenueChart, 50);
+	$: if (tab === 'ebitda') setTimeout(buildEbitdaChart, 50);
+
+	onMount(() => () => {
+		revenueChart?.destroy();
+		ebitdaChart?.destroy();
+	});
 </script>
 
 <svelte:head>
@@ -142,21 +216,44 @@
 	{#if excelDocId}
 	<div class="flex justify-end">
 		<a href="/api/documents/{excelDocId}" target="_blank"
-			class="flex items-center gap-2 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
+		class="flex items-center gap-2 rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
 			<ExternalLink class="h-4 w-4" /> Download Excel Model
 		</a>
 	</div>
 	{/if}
 
-	<!-- P&L table -->
+	<!-- P&L section with tabs -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
-		<div class="flex items-center justify-between mb-5">
-			<h2 class="text-lg font-bold text-white flex items-center gap-2">
-				<Table2 class="h-5 w-5 text-white/40" />
-				Pro Forma Income Statement ($M)
-			</h2>
-			<span class="text-xs text-white/30">2026 – 2031</span>
+		<div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+			<h2 class="text-lg font-bold text-white">Pro Forma Income Statement ($M)</h2>
+			<!-- Tab bar -->
+			<div class="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+				<button
+					on:click={() => (tab = 'table')}
+					class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
+						{tab === 'table' ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}"
+				>
+					<Table2 class="h-3.5 w-3.5" /> Table
+				</button>
+				<button
+					on:click={() => (tab = 'revenue')}
+					class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
+						{tab === 'revenue' ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}"
+				>
+					<BarChart2 class="h-3.5 w-3.5" /> Revenue
+				</button>
+				<button
+					on:click={() => (tab = 'ebitda')}
+					class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
+						{tab === 'ebitda' ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}"
+				>
+					<LineChart class="h-3.5 w-3.5" /> EBITDA
+				</button>
+			</div>
 		</div>
+
+		<!-- Table tab -->
+		{#if tab === 'table'}
 		<div class="overflow-x-auto">
 			<table class="w-full text-sm">
 				<thead>
@@ -197,6 +294,23 @@
 			</table>
 		</div>
 		<p class="text-xs text-white/25 mt-4">Figures in USD millions. Parentheses indicate losses. Upload the Excel model for full line-item detail.</p>
+		{/if}
+
+		<!-- Revenue chart tab -->
+		{#if tab === 'revenue'}
+		<div>
+			<p class="text-xs text-white/40 mb-4">Revenue and gross profit by year, with net margin overlay (right axis).</p>
+			<canvas bind:this={revenueCanvas} class="w-full" style="max-height:360px"></canvas>
+		</div>
+		{/if}
+
+		<!-- EBITDA chart tab -->
+		{#if tab === 'ebitda'}
+		<div>
+			<p class="text-xs text-white/40 mb-4">EBITDA vs. revenue by year. Red bars indicate pre-profitability years.</p>
+			<canvas bind:this={ebitdaCanvas} class="w-full" style="max-height:360px"></canvas>
+		</div>
+		{/if}
 	</div>
 
 	<!-- Revenue mix -->

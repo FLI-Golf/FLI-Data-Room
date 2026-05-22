@@ -65,8 +65,8 @@
 		{ label: 'Disc Golf Network (streaming)',    url: 'https://www.discgolfnetwork.com' },
 	];
 
-	$: videoUrl   = (data.content?.videoUrl   as string) ?? '';
-	$: videoTitle = (data.content?.videoTitle as string) ?? 'Intro Video — Coming Soon';
+	$: videoUrl   = (data.content?.videoUrl   as string) || 'https://drive.google.com/file/d/1C895DZEMAJ4vuY77iiRkc-ikS8p5hHeM/preview';
+	$: videoTitle = (data.content?.videoTitle as string) ?? 'FLI Golf — How to Play';
 	$: fliDifference = ((data.content?.fliDifference as typeof DEFAULT_DIFF) ?? []).filter(d => d.label).length > 0
 		? (data.content?.fliDifference as typeof DEFAULT_DIFF).filter(d => d.label)
 		: DEFAULT_DIFF;
@@ -94,7 +94,7 @@
 					title={videoTitle}
 					class="w-full h-full"
 					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allow="autoplay"
 					allowfullscreen
 				></iframe>
 			</div>

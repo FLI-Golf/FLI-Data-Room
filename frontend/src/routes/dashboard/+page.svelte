@@ -334,10 +334,9 @@
 		{/if}
 	</div>
 
-	{#if data.user?.role === 'advanced' || data.user?.role === 'admin'}
-		<!-- Advanced investor section -->
-		<div>
-			<div class="text-xs font-semibold text-white/25 uppercase tracking-widest mb-3">Advanced Investor Materials</div>
+	<!-- Investor materials -->
+	<div>
+		<div class="text-xs font-semibold text-white/25 uppercase tracking-widest mb-3">Investor Materials</div>
 			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 				<a href="/dashboard/management" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group">
 					<div class="flex items-center gap-3 mb-2">
@@ -419,8 +418,7 @@
 					<div class="text-xs text-white/40">Ownership · investors · loans</div>
 				</a>
 			</div>
-		</div>
-	{/if}
+	</div>
 
 	<!-- How to Play — visible to all -->
 	<a href="/dashboard/how-to-play" class="rounded-xl border border-white/15 bg-navy-700/50 p-5 hover:bg-navy-700/60 transition-colors group flex items-center gap-4">

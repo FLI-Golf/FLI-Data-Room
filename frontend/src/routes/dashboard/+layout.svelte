@@ -3,7 +3,7 @@
 	import type { LayoutData } from './$types';
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy,
-		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart, Lock,
+		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
 		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle
 	} from 'lucide-svelte';
 	import * as LucideIcons from 'lucide-svelte';
@@ -27,7 +27,7 @@
 		{ href: '/dashboard/the-sport',              label: 'The Sport',           icon: Disc,        children: [] },
 		{ href: '/dashboard/market-opportunity',     label: 'Market Opportunity',  icon: Globe,       children: [] },
 		{ href: '/dashboard/why-fli-wins',           label: 'Why FLI Wins',        icon: Trophy,      children: [] },
-		{ href: '/dashboard/investment',             label: 'Investment',          icon: DollarSign,  role: 'advanced', children: [
+		{ href: '/dashboard/investment',             label: 'Investment',          icon: DollarSign,  children: [
 			{ id: 'opportunity',    label: 'Investment Opportunity' },
 			{ id: 'vision',         label: 'The Vision' },
 			{ id: 'business-model', label: 'Business Model' },
@@ -40,10 +40,10 @@
 			{ id: 'comparisons',    label: 'Global Comparisons' },
 			{ id: 'next-steps',     label: 'Next Steps' },
 		]},
-		{ href: '/dashboard/proceeds',               label: 'Use of Proceeds',     icon: PieChart,    role: 'advanced', children: [] },
-		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis',   icon: TrendingUp,  role: 'advanced', children: [] },
+		{ href: '/dashboard/proceeds',               label: 'Use of Proceeds',     icon: PieChart,    children: [] },
+		{ href: '/dashboard/investment-thesis',      label: 'Investment Thesis',   icon: TrendingUp,  children: [] },
 		{ href: '/dashboard/design',                 label: 'Design',              icon: Image,       children: [] },
-		{ href: '/dashboard/talent',                 label: 'Talent Overview',     icon: UserCheck,   role: 'advanced', children: [
+		{ href: '/dashboard/talent',                 label: 'Talent Overview',     icon: UserCheck,   children: [
 			{ id: 'championship-equity',  label: 'Championship Equity' },
 			{ id: 'countries',            label: 'Countries' },
 			{ id: 'competitive-structure',label: 'Competitive Structure' },
@@ -59,18 +59,18 @@
 			{ id: 'activation',  label: 'Network Activation' },
 		]},
 		{ href: '/dashboard/legal',                  label: 'Legal / Disclaimers', icon: Scale,        children: [] },
-		{ href: '/dashboard/management',             label: 'Management & Team',   icon: Briefcase,   role: 'advanced', children: [
+		{ href: '/dashboard/management',             label: 'Management & Team',   icon: Briefcase,   children: [
 			{ id: 'leadership',  label: 'Leadership' },
 			{ id: 'advisors',    label: 'Advisors' },
 			{ id: 'directors',   label: 'Directors' },
 		]},
-		{ href: '/dashboard/industry-reports',       label: 'Industry Reports',    icon: BarChart2,   role: 'advanced', children: [] },
-		{ href: '/dashboard/sponsorships',           label: 'Sponsorships',        icon: Handshake,   role: 'advanced', children: [] },
-		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, role: 'advanced', children: [] },
-		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      role: 'advanced', children: [] },
-		{ href: '/dashboard/financial-projections',  label: 'Financial Projections', icon: Table2,    role: 'advanced', children: [] },
-		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    role: 'advanced', children: [] },
-		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, role: 'advanced', children: [] },
+		{ href: '/dashboard/industry-reports',       label: 'Industry Reports',    icon: BarChart2,   children: [] },
+		{ href: '/dashboard/sponsorships',           label: 'Sponsorships',        icon: Handshake,   children: [] },
+		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, children: [] },
+		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      children: [] },
+		{ href: '/dashboard/financial-projections',  label: 'Financial Projections', icon: Table2,    children: [] },
+		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    children: [] },
+		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, children: [] },
 		{ href: '/dashboard/how-to-play',            label: 'How to Play',         icon: PlayCircle,  children: [] },
 	];
 
@@ -124,25 +124,20 @@
 				<div class="space-y-0.5">
 					{#each nav as item}
 						{@const active = activePath === item.href}
-						{@const locked = item.role === 'advanced' && data.user?.role === 'basic'}
 						<a
-							href={locked ? undefined : item.href}
-							aria-disabled={locked}
+							href={item.href}
 							class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors relative
-								{locked ? 'cursor-not-allowed opacity-40' : active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
+								{active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
 						>
-							{#if active && !locked}
+							{#if active}
 								<span class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-brand-500 rounded-r"></span>
 							{/if}
-							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active && !locked ? 'text-brand-400' : 'text-white/25'}" />
+							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
 							{item.label}
-							{#if locked}
-								<Lock class="h-3 w-3 text-white/30 ml-auto shrink-0" />
-							{/if}
 						</a>
 
 						<!-- Sub-nav: only show when this page is active and has children -->
-						{#if active && !locked && item.children.length > 0}
+						{#if active && item.children.length > 0}
 							<div class="ml-4 pl-3 border-l border-white/10 space-y-0.5 mb-1">
 								{#each item.children as child}
 									{@const subActive = activeSection === child.id}
@@ -183,9 +178,6 @@
 										{/if}
 										{section.name}
 									</span>
-									{#if section.role === 'advanced'}
-										<span class="text-xs font-semibold text-yellow-400/70 bg-yellow-500/10 rounded px-1.5 py-0.5 shrink-0">Adv</span>
-									{/if}
 								</a>
 							{/each}
 						</div>

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import {
 		DollarSign, TrendingUp, Target, CheckCircle2, ArrowRight,
-		Building2, Users, Tv, Shield, Globe, Trophy, Zap, Hash
+		Building2, Users, Tv, Shield, Globe, Trophy, Zap, Hash, Table2, BarChart2
 	} from 'lucide-svelte';
+	import { onMount } from 'svelte';
 
 	const sections = [
 		{ id: 'opportunity',     label: 'Investment Opportunity' },
@@ -19,11 +20,90 @@
 	];
 
 	const competitors = [
-		{ league: 'LIV Golf',   startup: '$2B+',   valuation: '$1.5B+',          revenue: '$500M+ annually' },
-		{ league: 'MLS (Early)',startup: '$75M',   valuation: '$11B+',           revenue: '$1B+ annually' },
-		{ league: 'UFC (Early)',startup: '$2M',    valuation: '$12B+',           revenue: '$1.5B+ annually' },
-		{ league: 'FLI Golf',   startup: '$20M ask',valuation: '$57M–$120M proj',revenue: '$100M+ potential', highlight: true },
+		{ league: 'LIV Golf',   startup: '$2B+',    valuation: '$1.5B+',           revenue: '$500M+ annually',  highlight: false },
+		{ league: 'MLS (Early)',startup: '$75M',    valuation: '$11B+',            revenue: '$1B+ annually',    highlight: false },
+		{ league: 'UFC (Early)',startup: '$2M',     valuation: '$12B+',            revenue: '$1.5B+ annually',  highlight: false },
+		{ league: 'FLI Golf',   startup: '$20M ask',valuation: '$57M–$120M proj', revenue: '$100M+ potential', highlight: true  },
 	];
+
+	// Numeric values (in $M) for charting — midpoints used for ranges
+	const competitorChart = [
+		{ league: 'LIV Golf',    startup: 2000,  valuation: 1500,  revenue: 500  },
+		{ league: 'MLS (Early)', startup: 75,    valuation: 11000, revenue: 1000 },
+		{ league: 'UFC (Early)', startup: 2,     valuation: 12000, revenue: 1500 },
+		{ league: 'FLI Golf',    startup: 20,    valuation: 88.5,  revenue: 100  },
+	];
+
+	type MarketTab = 'table' | 'chart';
+	let marketTab: MarketTab = 'table';
+	let marketCanvas: HTMLCanvasElement;
+	let marketChart: import('chart.js').Chart | null = null;
+
+	async function buildMarketChart() {
+		if (!marketCanvas) return;
+		const { Chart, BarElement, LinearScale, LogarithmicScale, CategoryScale, Tooltip, Legend, BarController } = await import('chart.js');
+		Chart.register(BarElement, LinearScale, LogarithmicScale, CategoryScale, Tooltip, Legend, BarController);
+		if (marketChart) marketChart.destroy();
+		marketChart = new Chart(marketCanvas, {
+			type: 'bar',
+			data: {
+				labels: competitorChart.map(r => r.league),
+				datasets: [
+					{
+						label: 'Startup Cost ($M)',
+						data: competitorChart.map(r => r.startup),
+						backgroundColor: competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(220,38,38,0.75)' : 'rgba(255,255,255,0.12)'),
+						borderColor:     competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(220,38,38,1)'    : 'rgba(255,255,255,0.35)'),
+						borderWidth: 1,
+						borderRadius: 4,
+					},
+					{
+						label: 'Valuation ($M)',
+						data: competitorChart.map(r => r.valuation),
+						backgroundColor: competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(220,38,38,0.45)' : 'rgba(99,179,237,0.2)'),
+						borderColor:     competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(220,38,38,0.8)'  : 'rgba(99,179,237,0.6)'),
+						borderWidth: 1,
+						borderRadius: 4,
+					},
+					{
+						label: 'Revenue Potential ($M)',
+						data: competitorChart.map(r => r.revenue),
+						backgroundColor: competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(251,191,36,0.5)' : 'rgba(34,197,94,0.2)'),
+						borderColor:     competitorChart.map(r => r.league === 'FLI Golf' ? 'rgba(251,191,36,0.9)' : 'rgba(34,197,94,0.5)'),
+						borderWidth: 1,
+						borderRadius: 4,
+					},
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: {
+					legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { size: 11 } } },
+					tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: $${(ctx.parsed.y ?? 0).toLocaleString()}M` } }
+				},
+				scales: {
+					x: { ticks: { color: 'rgba(255,255,255,0.6)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+					y: {
+						type: 'logarithmic',
+						ticks: {
+							color: 'rgba(255,255,255,0.5)',
+							callback: (v) => {
+								const n = Number(v);
+								if (n >= 1000) return `$${n / 1000}B`;
+								return `$${n}M`;
+							}
+						},
+						grid: { color: 'rgba(255,255,255,0.05)' }
+					}
+				}
+			}
+		});
+	}
+
+	$: if (marketTab === 'chart') setTimeout(buildMarketChart, 50);
+	onMount(() => () => marketChart?.destroy());
 
 	const exitScenarios = [
 		{ strategy: 'Franchise Sales (Conservative)', valuation: '$60M',   share: '$31M+' },
@@ -227,28 +307,58 @@
 	<section id="market" class="space-y-5">
 		<h2 class="text-xl font-bold text-white border-b border-white/10 pb-3">4. Market & Competitor Analysis</h2>
 		<p class="text-white/65 leading-relaxed">FLI Golf League is positioned at the intersection of golf, disc golf, and emerging sports entertainment.</p>
+
 		<div class="rounded-xl border border-white/10 bg-navy-700/40 overflow-hidden">
-			<table class="w-full text-sm">
-				<thead>
-					<tr class="border-b border-white/10 bg-white/5">
-						<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">League</th>
-						<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Startup Cost</th>
-						<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Current Valuation</th>
-						<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Revenue Potential</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each competitors as row}
-						<tr class="border-b border-white/6 {row.highlight ? 'bg-brand-600/10' : 'hover:bg-white/3'} transition-colors">
-							<td class="px-4 py-3 font-semibold {row.highlight ? 'text-brand-400' : 'text-white'}">{row.league}</td>
-							<td class="px-4 py-3 text-white/60">{row.startup}</td>
-							<td class="px-4 py-3 text-white/60">{row.valuation}</td>
-							<td class="px-4 py-3 text-white/60">{row.revenue}</td>
+			<!-- Tab bar -->
+			<div class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/3">
+				<span class="text-xs font-semibold text-white/40 uppercase tracking-wide">League Comparison</span>
+				<div class="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+					<button
+						on:click={() => (marketTab = 'table')}
+						class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
+							{marketTab === 'table' ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}"
+					>
+						<Table2 class="h-3.5 w-3.5" /> Table
+					</button>
+					<button
+						on:click={() => (marketTab = 'chart')}
+						class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
+							{marketTab === 'chart' ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}"
+					>
+						<BarChart2 class="h-3.5 w-3.5" /> Chart
+					</button>
+				</div>
+			</div>
+
+			{#if marketTab === 'table'}
+				<table class="w-full text-sm">
+					<thead>
+						<tr class="border-b border-white/10 bg-white/5">
+							<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">League</th>
+							<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Startup Cost</th>
+							<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Current Valuation</th>
+							<th class="text-left px-4 py-3 text-xs font-semibold text-white/40 uppercase tracking-wide">Revenue Potential</th>
 						</tr>
-					{/each}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{#each competitors as row}
+							<tr class="border-b border-white/6 {row.highlight ? 'bg-brand-600/10' : 'hover:bg-white/3'} transition-colors">
+								<td class="px-4 py-3 font-semibold {row.highlight ? 'text-brand-400' : 'text-white'}">{row.league}</td>
+								<td class="px-4 py-3 text-white/60">{row.startup}</td>
+								<td class="px-4 py-3 text-white/60">{row.valuation}</td>
+								<td class="px-4 py-3 text-white/60">{row.revenue}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			{:else}
+				<div class="p-5">
+					<p class="text-xs text-white/40 mb-4">Log scale — values in $M. FLI Golf highlighted in red. Chart uses midpoints for ranges.</p>
+					<canvas bind:this={marketCanvas} class="w-full" style="max-height:340px"></canvas>
+				</div>
+			{/if}
 		</div>
+
 		<div class="space-y-2">
 			{#each [
 				'Like LIV Golf, FLI disrupts traditional formats with new rules and big payouts',

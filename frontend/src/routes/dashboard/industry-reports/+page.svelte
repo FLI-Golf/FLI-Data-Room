@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BarChart2, TrendingUp, Upload, ExternalLink } from 'lucide-svelte';
+	import { BarChart2, TrendingUp, Upload, ExternalLink, X, ChevronRight } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 
@@ -13,9 +13,33 @@
 	type Report = { title: string; source: string; year: string; description: string; url: string; docId: string; proprietary: boolean };
 
 	const PLACEHOLDER_REPORTS: Report[] = [
-		{ title: 'PDGA Growth & Participation Report', source: 'Professional Disc Golf Association', year: '2024', description: 'Annual membership and course registration data showing 86% participation growth since 2020.', url: '', docId: '', proprietary: false },
-		{ title: 'Global Sports Betting Market Forecast', source: 'Industry Research Firm', year: '2024–2030', description: 'Market sizing for the $187B+ global sports betting industry and addressable segments for emerging sports leagues.', url: '', docId: '', proprietary: false },
-		{ title: 'FLI Golf — Industry Growth & Dynamics Report', source: 'FLI Golf / AI-Assisted Analysis', year: '2025', description: 'Proprietary growth analysis covering disc golf market dynamics, competitive landscape, and FLI\'s addressable opportunity.', url: '', docId: '', proprietary: true },
+		{
+			title: 'PDGA Growth & Participation Report',
+			source: 'Professional Disc Golf Association',
+			year: '2024',
+			description: 'Annual membership and course registration data showing 86% participation growth since 2020.',
+			url: 'https://udisc.com/disc-golf-growth-report',
+			docId: '',
+			proprietary: false,
+		},
+		{
+			title: 'Global Sports Betting Market Forecast',
+			source: 'Industry Research Firm',
+			year: '2024–2030',
+			description: 'Market sizing for the $187B+ global sports betting industry and addressable segments for emerging sports leagues.',
+			url: 'https://fli-bp.netlify.app/global',
+			docId: '',
+			proprietary: false,
+		},
+		{
+			title: 'FLI Golf — Industry Growth & Dynamics Report',
+			source: 'FLI Golf / AI-Assisted Analysis',
+			year: '2025',
+			description: "Proprietary growth analysis covering disc golf market dynamics, competitive landscape, and FLI's addressable opportunity.",
+			url: '',
+			docId: '',
+			proprietary: true,
+		},
 	];
 
 	$: reports = ((data.content?.reports as Report[]) ?? []).length > 0
@@ -23,6 +47,8 @@
 		: PLACEHOLDER_REPORTS;
 
 	$: hasData = ((data.content?.reports as Report[]) ?? []).length > 0;
+
+	let activeEmbed: Report | null = null;
 </script>
 
 <svelte:head>
@@ -60,8 +86,8 @@
 	<!-- Report cards -->
 	<div class="space-y-3">
 		{#each reports as report}
-			<div class="rounded-xl border {report.proprietary ? 'border-brand-600/30 bg-brand-600/10' : 'border-white/15 bg-navy-700/50'} p-5">
-				<div class="flex items-start justify-between gap-4">
+			<div class="rounded-xl border {report.proprietary ? 'border-brand-600/30 bg-brand-600/10' : 'border-white/15 bg-navy-700/50'} overflow-hidden">
+				<div class="p-5 flex items-start justify-between gap-4">
 					<div class="flex items-start gap-3 min-w-0">
 						<div class="h-9 w-9 rounded-lg {report.proprietary ? 'bg-brand-600/30' : 'bg-white/8'} flex items-center justify-center shrink-0 mt-0.5">
 							{#if report.proprietary}
@@ -76,10 +102,23 @@
 							{#if report.description}<p class="text-xs text-white/50 mt-2 leading-relaxed">{report.description}</p>{/if}
 						</div>
 					</div>
-					<div class="shrink-0">
+					<div class="shrink-0 flex items-center gap-2">
 						{#if report.url}
-							<a href={report.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-500 transition-colors">
-								<ExternalLink class="h-3 w-3" /> View
+							<button
+								on:click={() => activeEmbed = activeEmbed?.url === report.url ? null : report}
+								class="flex items-center gap-1.5 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-500 transition-colors"
+							>
+								{#if activeEmbed?.url === report.url}
+									<X class="h-3 w-3" /> Close
+								{:else}
+									<ChevronRight class="h-3 w-3" /> View
+								{/if}
+							</button>
+							<a href={report.url} target="_blank" rel="noopener noreferrer"
+								class="flex items-center gap-1 rounded-md border border-white/15 px-2.5 py-1.5 text-xs text-white/40 hover:text-white hover:border-white/30 transition-colors"
+								title="Open in new tab"
+							>
+								<ExternalLink class="h-3 w-3" />
 							</a>
 						{:else if report.docId}
 							<a href="/api/documents/{report.docId}" target="_blank" class="flex items-center gap-1.5 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-500 transition-colors">
@@ -90,6 +129,18 @@
 						{/if}
 					</div>
 				</div>
+
+				<!-- Inline embed panel -->
+				{#if activeEmbed?.url === report.url}
+					<div class="border-t border-white/10" style="height:600px">
+						<iframe
+							src={report.url}
+							title={report.title}
+							class="w-full h-full"
+							frameborder="0"
+						></iframe>
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</div>

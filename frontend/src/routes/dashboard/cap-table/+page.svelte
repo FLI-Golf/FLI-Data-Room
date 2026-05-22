@@ -64,7 +64,7 @@
 	<div class="rounded-xl border border-brand-600/30 bg-brand-600/10 p-4 flex items-start gap-3">
 		<AlertTriangle class="h-4 w-4 text-brand-400 shrink-0 mt-0.5" />
 		<p class="text-xs text-white/60 leading-relaxed">
-			The cap table is highly sensitive. This page is restricted to <span class="text-white/80 font-semibold">advanced</span> role investors only. Do not share or screenshot. All access is logged.
+			The cap table is highly sensitive. Do not share or screenshot. All access is logged.
 		</p>
 	</div>
 
@@ -77,7 +77,7 @@
 				Replace all placeholder rows below with actual investor names, share counts, amounts invested, and percentages.
 				Also upload the full cap table as a PDF or Excel file via
 				<a href="/admin/documents" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Documents</a>
-				with required role set to <span class="text-white/70">advanced</span>.
+				as a PDF or Excel file.
 				Include all equity holders, convertible notes, SAFEs, and outstanding loans.
 			</p>
 		</div>

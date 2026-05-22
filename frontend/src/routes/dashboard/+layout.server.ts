@@ -13,18 +13,10 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	if (!locals.user) redirect(303, '/login');
 	if (!locals.user.ndaAccepted) redirect(303, '/nda');
 
-	const role = locals.user.role;
-
-	// Build role filter — each role sees its own level and below
-	const roleFilter =
-		role === 'admin'    ? `published = true` :
-		role === 'advanced' ? `published = true && (role = "basic" || role = "advanced")` :
-		                      `published = true && role = "basic"`;
-
 	let sections: Section[] = [];
 	try {
 		sections = await locals.pb.collection('sections').getFullList<Section>({
-			filter: roleFilter,
+			filter: 'published = true',
 			sort:   'sort_order,name',
 			fields: 'id,name,slug,role,sort_order'
 		});

@@ -430,7 +430,6 @@
 		<div class="px-5 py-3 border-t border-white/8">
 			<p class="text-xs text-white/25">Figures in USD millions. Parentheses indicate losses or costs.</p>
 		</div>
-		</div>
 		{/if}
 	</div>
 	<!-- REVENUE BY PRODUCT -->

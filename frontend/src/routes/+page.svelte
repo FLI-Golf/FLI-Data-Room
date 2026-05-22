@@ -50,22 +50,25 @@
 					</div>
 				</div>
 				<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-4">
-					Stadium-Style<br />
-					<span class="text-brand-500">Professional</span><br />
-					Disc Golf
+					FLI Golf is not<br />
+					a disc golf league —<br />
+					<span class="text-brand-500">it is the first sport</span><br />
+					built for what's next.
 				</h1>
+				<p class="text-base text-white/60 max-w-lg mb-3 leading-relaxed">
+					FLI Golf is not a disc golf league — it is the first sport built specifically for gender equality, betting, media and live entertainment from day one.
+				</p>
 				<p class="text-base text-white/60 max-w-lg mb-6 leading-relaxed">
-					FLI Golf League is creating the world's first stadium-engineered professional disc golf
-					league — built for media, betting, and franchise scale from Day 1.
+					FliHub unifies project management, budgets, expenses, sponsors, vendors, people, and league operations into a single business operating system.
 				</p>
 				<div class="flex flex-wrap justify-center lg:justify-start gap-3">
 					{#if data.user}
 						<a href="/dashboard" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-							Enter Data Room →
+							Start Now →
 						</a>
 					{:else}
 						<a href="/register" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-							Request Investor Access →
+							Start Now →
 						</a>
 						<a href="/login" class="rounded-md border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition-colors">
 							Sign In

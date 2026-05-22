@@ -71,6 +71,184 @@
 		{ code: 'TECH',    name: 'Technology',                          actual: 0,     budget: 200000 },
 	];
 
+	import { onMount } from 'svelte';
+
+	// ── Tab state ─────────────────────────────────────────────────────────────
+	type PlTab  = 'table' | 'revenue' | 'profit' | 'margin';
+	type RevTab = 'table' | 'chart';
+	type SenTab = 'bars'  | 'chart';
+
+	let plTab:  PlTab  = 'table';
+	let revTab: RevTab = 'table';
+	let senTab: SenTab = 'bars';
+
+	// ── Canvas refs ───────────────────────────────────────────────────────────
+	let revenueCanvas:  HTMLCanvasElement;
+	let profitCanvas:   HTMLCanvasElement;
+	let marginCanvas:   HTMLCanvasElement;
+	let revStreamCanvas:HTMLCanvasElement;
+	let senCanvas:      HTMLCanvasElement;
+
+	let charts: Record<string, import('chart.js').Chart | null> = {};
+
+	async function getChart() {
+		const { Chart, BarElement, LineElement, PointElement, LinearScale,
+			CategoryScale, Tooltip, Legend, BarController, LineController } = await import('chart.js');
+		Chart.register(BarElement, LineElement, PointElement, LinearScale,
+			CategoryScale, Tooltip, Legend, BarController, LineController);
+		return Chart;
+	}
+
+	const GRID  = 'rgba(255,255,255,0.05)';
+	const TICK  = 'rgba(255,255,255,0.5)';
+
+	async function buildRevenueChart() {
+		if (!revenueCanvas) return;
+		const Chart = await getChart();
+		charts.revenue?.destroy();
+		charts.revenue = new Chart(revenueCanvas, {
+			type: 'bar',
+			data: {
+				labels: years,
+				datasets: [
+					{ label: 'Sales ($M)',        data: pl.sales,       backgroundColor: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.4)', borderWidth: 1, borderRadius: 4, order: 2 },
+					{ label: 'Gross Profit ($M)', data: pl.grossProfit, backgroundColor: 'rgba(99,179,237,0.25)',  borderColor: 'rgba(99,179,237,0.7)',   borderWidth: 1, borderRadius: 4, order: 3 },
+					{ type: 'line' as const, label: 'Net Profit ($M)', data: pl.netProfit,
+						borderColor: 'rgba(34,197,94,0.9)', backgroundColor: 'rgba(34,197,94,0.1)',
+						borderWidth: 2, pointRadius: 4, pointBackgroundColor: 'rgba(34,197,94,1)', tension: 0.3, order: 1 },
+				]
+			},
+			options: {
+				responsive: true, maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: { legend: { labels: { color: TICK, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => ` ${c.dataset.label}: $${(c.parsed.y ?? 0).toFixed(2)}M` } } },
+				scales: {
+					x: { ticks: { color: TICK }, grid: { color: GRID } },
+					y: { ticks: { color: TICK, callback: (v) => `$${v}M` }, grid: { color: GRID } },
+				}
+			}
+		});
+	}
+
+	async function buildProfitChart() {
+		if (!profitCanvas) return;
+		const Chart = await getChart();
+		charts.profit?.destroy();
+		charts.profit = new Chart(profitCanvas, {
+			type: 'bar',
+			data: {
+				labels: years,
+				datasets: [
+					{ label: 'Total Expenses ($M)', data: pl.totalExp, backgroundColor: 'rgba(239,68,68,0.3)', borderColor: 'rgba(239,68,68,0.7)', borderWidth: 1, borderRadius: 4, order: 2 },
+					{ label: 'Net Profit ($M)',     data: pl.netProfit,
+						backgroundColor: pl.netProfit.map(v => v < 0 ? 'rgba(239,68,68,0.5)' : 'rgba(34,197,94,0.5)'),
+						borderColor:     pl.netProfit.map(v => v < 0 ? 'rgba(239,68,68,1)'   : 'rgba(34,197,94,1)'),
+						borderWidth: 1, borderRadius: 4, order: 1 },
+				]
+			},
+			options: {
+				responsive: true, maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: { legend: { labels: { color: TICK, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => ` ${c.dataset.label}: $${(c.parsed.y ?? 0).toFixed(2)}M` } } },
+				scales: {
+					x: { ticks: { color: TICK }, grid: { color: GRID } },
+					y: { ticks: { color: TICK, callback: (v) => `$${v}M` }, grid: { color: GRID } },
+				}
+			}
+		});
+	}
+
+	async function buildMarginChart() {
+		if (!marginCanvas) return;
+		const Chart = await getChart();
+		charts.margin?.destroy();
+		charts.margin = new Chart(marginCanvas, {
+			type: 'line',
+			data: {
+				labels: years,
+				datasets: [
+					{ label: 'Gross Margin %', data: pl.grossMargin, borderColor: 'rgba(99,179,237,0.9)', backgroundColor: 'rgba(99,179,237,0.1)', borderWidth: 2, pointRadius: 4, tension: 0.3 },
+					{ label: 'Net Margin %',   data: pl.netMargin,   borderColor: 'rgba(251,191,36,0.9)', backgroundColor: 'rgba(251,191,36,0.1)', borderWidth: 2, pointRadius: 4, tension: 0.3 },
+				]
+			},
+			options: {
+				responsive: true, maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: { legend: { labels: { color: TICK, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => ` ${c.dataset.label}: ${(c.parsed.y ?? 0).toFixed(2)}%` } } },
+				scales: {
+					x: { ticks: { color: TICK }, grid: { color: GRID } },
+					y: { ticks: { color: TICK, callback: (v) => `${v}%` }, grid: { color: GRID } },
+				}
+			}
+		});
+	}
+
+	async function buildRevStreamChart() {
+		if (!revStreamCanvas) return;
+		const Chart = await getChart();
+		charts.revStream?.destroy();
+		// Top 8 streams by 2031 value for readability
+		const top = [...revenueStreams].sort((a,b) => b.vals[5] - a.vals[5]).slice(0, 8);
+		const colors = ['rgba(99,179,237,0.7)','rgba(34,197,94,0.7)','rgba(251,191,36,0.7)',
+			'rgba(168,85,247,0.7)','rgba(239,68,68,0.7)','rgba(249,115,22,0.7)',
+			'rgba(20,184,166,0.7)','rgba(236,72,153,0.7)'];
+		charts.revStream = new Chart(revStreamCanvas, {
+			type: 'bar',
+			data: {
+				labels: years,
+				datasets: top.map((s, i) => ({
+					label: s.label, data: s.vals,
+					backgroundColor: colors[i], borderColor: colors[i].replace('0.7','1'),
+					borderWidth: 1, borderRadius: 3, stack: 'streams',
+				}))
+			},
+			options: {
+				responsive: true, maintainAspectRatio: true,
+				interaction: { mode: 'index', intersect: false },
+				plugins: { legend: { labels: { color: TICK, font: { size: 10 }, boxWidth: 12 } }, tooltip: { callbacks: { label: (c) => ` ${c.dataset.label}: $${(c.parsed.y ?? 0).toFixed(2)}M` } } },
+				scales: {
+					x: { stacked: true, ticks: { color: TICK }, grid: { color: GRID } },
+					y: { stacked: true, ticks: { color: TICK, callback: (v) => `$${v}M` }, grid: { color: GRID } },
+				}
+			}
+		});
+	}
+
+	async function buildSenChart() {
+		if (!senCanvas) return;
+		const Chart = await getChart();
+		charts.sen?.destroy();
+		charts.sen = new Chart(senCanvas, {
+			type: 'bar',
+			data: {
+				labels: sensitivity.map(s => s.label),
+				datasets: [{
+					label: '2031 Net Profit ($M)',
+					data: sensitivity.map(s => s.value),
+					backgroundColor: ['rgba(239,68,68,0.5)','rgba(99,179,237,0.5)','rgba(34,197,94,0.5)','rgba(34,197,94,0.7)'],
+					borderColor:     ['rgba(239,68,68,1)',   'rgba(99,179,237,1)',  'rgba(34,197,94,1)',  'rgba(34,197,94,1)'],
+					borderWidth: 1, borderRadius: 6,
+				}]
+			},
+			options: {
+				responsive: true, maintainAspectRatio: true, indexAxis: 'y' as const,
+				plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` $${(c.parsed.x ?? 0).toFixed(2)}M` } } },
+				scales: {
+					x: { ticks: { color: TICK, callback: (v) => `$${v}M` }, grid: { color: GRID } },
+					y: { ticks: { color: TICK } },
+				}
+			}
+		});
+	}
+
+	$: if (plTab  === 'revenue') setTimeout(buildRevenueChart,  50);
+	$: if (plTab  === 'profit')  setTimeout(buildProfitChart,   50);
+	$: if (plTab  === 'margin')  setTimeout(buildMarginChart,   50);
+	$: if (revTab === 'chart')   setTimeout(buildRevStreamChart,50);
+	$: if (senTab === 'chart')   setTimeout(buildSenChart,      50);
+
+	onMount(() => () => Object.values(charts).forEach(c => c?.destroy()));
+
 	function fmt(v: number, decimals = 2) {
 		if (v === 0) return '—';
 		return `$${Math.abs(v).toFixed(decimals)}M`;
@@ -149,10 +327,27 @@
 	</div>
 	<!-- FULL PL TABLE -->
 	<div id="pl-table" class="rounded-xl border border-white/15 bg-navy-700/50 overflow-hidden">
-		<div class="px-6 py-4 border-b border-white/8 flex items-center gap-2">
-			<BarChart2 class="h-5 w-5 text-white/40" />
-			<h2 class="text-lg font-bold text-white">Full P&L Summary</h2>
+		<div class="px-6 py-4 border-b border-white/8 flex items-center justify-between gap-3 flex-wrap">
+			<div class="flex items-center gap-2">
+				<BarChart2 class="h-5 w-5 text-white/40" />
+				<h2 class="text-lg font-bold text-white">Full P&L Summary</h2>
+			</div>
+			<div class="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+				{#each [['table','Table'],['revenue','Revenue'],['profit','Profit'],['margin','Margins']] as [t, label]}
+					<button on:click={() => plTab = t as PlTab}
+						class="px-3 py-1.5 rounded-md text-xs font-medium transition-colors {plTab === t ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}">
+						{label}
+					</button>
+				{/each}
+			</div>
 		</div>
+		{#if plTab === 'revenue'}
+			<div class="p-6"><p class="text-xs text-white/40 mb-4">Sales, gross profit, and net profit by year.</p><canvas bind:this={revenueCanvas} style="max-height:340px"></canvas></div>
+		{:else if plTab === 'profit'}
+			<div class="p-6"><p class="text-xs text-white/40 mb-4">Net profit vs total expenses. Red bars indicate loss years.</p><canvas bind:this={profitCanvas} style="max-height:340px"></canvas></div>
+		{:else if plTab === 'margin'}
+			<div class="p-6"><p class="text-xs text-white/40 mb-4">Gross margin % and net margin % by year.</p><canvas bind:this={marginCanvas} style="max-height:340px"></canvas></div>
+		{:else}
 		<div class="overflow-x-auto">
 			<table class="w-full text-sm">
 				<thead>
@@ -235,13 +430,28 @@
 		<div class="px-5 py-3 border-t border-white/8">
 			<p class="text-xs text-white/25">Figures in USD millions. Parentheses indicate losses or costs.</p>
 		</div>
+		</div>
+		{/if}
 	</div>
 	<!-- REVENUE BY PRODUCT -->
 	<div id="revenue-product" class="rounded-xl border border-white/15 bg-navy-700/50 overflow-hidden">
-		<div class="px-6 py-4 border-b border-white/8 flex items-center gap-2">
-			<Layers class="h-5 w-5 text-white/40" />
-			<h2 class="text-lg font-bold text-white">Projected Sales by Product</h2>
+		<div class="px-6 py-4 border-b border-white/8 flex items-center justify-between gap-3 flex-wrap">
+			<div class="flex items-center gap-2">
+				<Layers class="h-5 w-5 text-white/40" />
+				<h2 class="text-lg font-bold text-white">Projected Sales by Product</h2>
+			</div>
+			<div class="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+				{#each [['table','Table'],['chart','Stacked Chart']] as [t, label]}
+					<button on:click={() => revTab = t as RevTab}
+						class="px-3 py-1.5 rounded-md text-xs font-medium transition-colors {revTab === t ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}">
+						{label}
+					</button>
+				{/each}
+			</div>
 		</div>
+		{#if revTab === 'chart'}
+			<div class="p-6"><p class="text-xs text-white/40 mb-4">Top 8 revenue streams stacked by year (sorted by 2031 value).</p><canvas bind:this={revStreamCanvas} style="max-height:380px"></canvas></div>
+		{:else}
 		<div class="overflow-x-auto">
 			<table class="w-full text-sm">
 				<thead>
@@ -279,15 +489,30 @@
 				</tfoot>
 			</table>
 		</div>
+		{/if}
 	</div>
 	<!-- SENSITIVITY -->
 	<div id="sensitivity" class="grid sm:grid-cols-2 gap-5">
 		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
-			<div class="flex items-center gap-2 mb-4">
-				<Activity class="h-5 w-5 text-white/40" />
-				<h2 class="text-lg font-bold text-white">Sensitivity Analysis</h2>
+			<div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
+				<div class="flex items-center gap-2">
+					<Activity class="h-5 w-5 text-white/40" />
+					<h2 class="text-lg font-bold text-white">Sensitivity Analysis</h2>
+				</div>
+				<div class="flex items-center gap-1 rounded-lg bg-white/5 p-1">
+					{#each [['bars','Bars'],['chart','Chart']] as [t, label]}
+						<button on:click={() => senTab = t as SenTab}
+							class="px-3 py-1.5 rounded-md text-xs font-medium transition-colors {senTab === t ? 'bg-white/15 text-white' : 'text-white/40 hover:text-white/70'}">
+							{label}
+						</button>
+					{/each}
+				</div>
 			</div>
 			<p class="text-xs text-white/40 mb-5">2031 Net Profit impact by scenario</p>
+			{#if senTab === 'chart'}
+				<canvas bind:this={senCanvas} style="max-height:220px"></canvas>
+				<p class="text-xs text-white/25 mt-4">Bear assumes 30% revenue shortfall with partial cost reduction. Bull scenarios assume proportional opex scaling.</p>
+			{:else}
 			<div class="space-y-4">
 				{#each sensitivity as s}
 					<div>
@@ -302,6 +527,7 @@
 				{/each}
 			</div>
 			<p class="text-xs text-white/25 mt-4">Bear assumes 30% revenue shortfall with partial cost reduction. Bull scenarios assume proportional opex scaling.</p>
+			{/if}
 		</div>
 		<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 			<div class="flex items-center gap-2 mb-4">

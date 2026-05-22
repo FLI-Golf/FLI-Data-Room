@@ -50,10 +50,7 @@
 					</div>
 				</div>
 				<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-4">
-					FLI Golf is not<br />
-					a disc golf league —<br />
-					<span class="text-brand-500">it is the first sport</span><br />
-					built for what's next.
+					<span class="text-brand-500">FLI Golf</span>
 				</h1>
 				<p class="text-base text-white/60 max-w-lg mb-3 leading-relaxed">
 					FLI Golf is not a disc golf league — it is the first sport built specifically for gender equality, betting, media and live entertainment from day one.

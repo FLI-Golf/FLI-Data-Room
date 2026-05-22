@@ -181,6 +181,81 @@ Production variables are set in the Netlify dashboard.
 
 Schema changes made in the PocketBase admin UI generate migration files in `pocketbase/pb_migrations/`. Always commit these files so any environment can replay the schema to match production. See [`pocketbase/pb_migrations/README.md`](pocketbase/pb_migrations/README.md) for export instructions.
 
+## Content Redundancy — Known Issues & Cleanup Plan
+
+The data room was built intentionally broad — include more than needed, then remove what's redundant. The following issues have been identified and are candidates for cleanup before the data room is shown to investors at scale.
+
+### 🔴 High Priority — Conflicting or Confusing Data
+
+#### 1. Two financial model pages with different numbers
+`financial-projections/` and `cpa-financials/` both show a 2026–2031 P&L, but with slightly different figures (e.g. 2031 revenue: $182.7M vs $188.98M). This creates investor confusion about which is authoritative.
+
+**Plan:** Merge `financial-projections/` into `cpa-financials/` as a tab. Retire the standalone `financial-projections/` page or redirect it.
+
+#### 2. Two player roster pages with identical players
+`talent/` and `player-commitments/` both hardcode the same 20 players. A roster change requires updating two separate arrays.
+
+**Plan:** Merge into one page with a "Talent Overview" tab and a "Roster / LOI" tab.
+
+---
+
+### 🟡 Medium Priority — Duplicate Content Across Pages
+
+#### 3. $7.5M seed round details on 7+ pages
+The same raise facts — $7.5M, Q2 2026, Young America Capital, SEC/FINRA/SIPC, 4-bucket use of proceeds — appear verbatim on `investment-thesis/`, `proceeds/`, `cap-table/`, `financial-statements/`, `cpa-financials/`, `pitch-deck/`, and the landing page.
+
+**Plan:** Keep `proceeds/` as the canonical detail page. All other pages show a single stat card and link to it.
+
+#### 4. `investment/` is a superset of 3 other pages
+`investment/` contains investment opportunity, vision, business model, market analysis, growth plan, exit strategies, and risk factors — overlapping with `investment-thesis/`, `why-fli-wins/`, and `market-opportunity/`. It appears to be an older, more verbose version of content that was later split into dedicated pages.
+
+**Plan:** Audit whether `investment/` is still needed or can be retired in favor of the dedicated pages.
+
+#### 5. Stadium format explained on 3 pages
+The FLI stadium concept (par-3 course, spectator seating, broadcast-first design) is covered on `how-to-play/`, `design/`, and `why-fli-wins/`. The `design/` page is the thinnest in the dashboard — essentially a single image and 3 bullets covered more thoroughly elsewhere.
+
+**Plan:** Fold `design/` content into `how-to-play/`. Remove the standalone `design/` page.
+
+---
+
+### 🟢 Low Priority — Repeated Stats (Acceptable for Now)
+
+#### 6. Sport growth stats on 4 pages
+86% participation growth, 17,000+ courses, 20M+ players, 99 countries appear on `the-sport/`, `industry-reports/`, `investment-thesis/`, and the landing page. `the-sport/` is the authoritative source.
+
+**Plan:** Centralize into a shared data module (`$lib/sport-stats.ts`) so a single update propagates everywhere.
+
+#### 7. Market opportunity numbers on 4 pages
+$18B SAM, $180M at 1% capture, and the 9 revenue pools appear on `market-opportunity/`, `investment-thesis/`, `industry-reports/`, `pitch-deck/`, and the landing page.
+
+**Plan:** Same as above — shared data module.
+
+#### 8. Living analogs (TGL/MLP/LIV) on 3 pages
+Covered on `why-fli-wins/`, `investment-thesis/`, and `investment/`.
+
+**Plan:** Keep the full treatment on `why-fli-wins/` only. Replace other instances with a one-liner and a link.
+
+#### 9. Tribal gaming narrative on 4 pages
+$43.9B GGR, Gary Santos background, tribal land venue advantage appears on `why-fli-wins/`, `investment-thesis/`, `market-opportunity/`, `pitch-deck/`, and `management/`.
+
+**Plan:** Keep the full treatment on `market-opportunity/` and `management/`. Reduce other instances to a stat + link.
+
+---
+
+### Cleanup Priority Order
+
+| Priority | Action | Pages affected |
+|---|---|---|
+| 1 | Merge `talent/` + `player-commitments/` | 2 pages → 1 |
+| 2 | Merge `financial-projections/` into `cpa-financials/` | 2 pages → 1 |
+| 3 | Remove Use of Proceeds block from `investment-thesis/`, link to `proceeds/` | 1 page |
+| 4 | Fold `design/` into `how-to-play/` | 2 pages → 1 |
+| 5 | Audit and potentially retire `investment/` | 1 page |
+| 6 | Centralize sport stats and market numbers into shared data modules | 4+ pages each |
+| 7 | Reduce $7.5M seed block to stat card + link on all pages except `proceeds/` | 6 pages |
+
+---
+
 ## Adding a New Dashboard Section
 
 1. Create `frontend/src/routes/dashboard/<slug>/+page.svelte`

@@ -139,6 +139,7 @@
 
 			<nav class="flex-1 px-2 py-3 overflow-y-auto">
 
+
 				<div class="space-y-0.5">
 					{#each nav as item}
 						{@const active = activePath === item.href}

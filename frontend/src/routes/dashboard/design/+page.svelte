@@ -11,7 +11,7 @@
 	<!-- Hole Breakdown Image -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 overflow-hidden">
 		<img
-			src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/gqo6zce9t5tulwr/p_6_agm7oc1zcx.png"
+			src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/ou0ppyj1jcxfm4z/dsyc6740wxq7_f7lwzhhjlq.png"
 			alt="FGL Hole Breakdown — Format Design"
 			class="w-full h-auto"
 		/>

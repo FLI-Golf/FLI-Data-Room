@@ -15,10 +15,12 @@
 
 	<!-- Nav -->
 	<nav class="relative z-10 flex items-center justify-between px-6 py-5 max-w-7xl mx-auto">
-		<div class="flex items-center gap-1.5">
-			<span class="text-xl font-black tracking-tight text-white">FLI</span>
-			<span class="text-xl font-black tracking-tight text-white">GOLF</span>
-			<span class="text-xs font-semibold text-white/40 uppercase tracking-widest ml-1">League</span>
+		<div class="flex items-center">
+			<img
+				src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/ojfm3by0qzvgk7n/fgqxajwd8mxi_fzdd8cwt0l.png"
+				alt="FLI Golf League"
+				class="h-10 w-auto"
+			/>
 		</div>
 		<div class="flex items-center gap-3">
 			{#if data.user}

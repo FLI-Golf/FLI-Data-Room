@@ -53,7 +53,7 @@
 		<!-- The FGL Difference -->
 		<div class="rounded-xl border border-yellow-500/40 bg-navy-800/50 p-5 flex flex-col items-center justify-center text-center gap-4">
 			<img
-				src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+				src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png"
 				alt="FGL Logo"
 				class="h-20 w-auto"
 			/>

@@ -19,7 +19,7 @@
 		<div class="text-center">
 			<div class="flex flex-col items-center mb-3">
 				<img
-					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png"
 					alt="FLI Shield Logo"
 					class="h-16 w-auto mb-2"
 				/>

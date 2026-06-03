@@ -22,12 +22,22 @@
 	// Track optimistic UI updates
 	let saving: Record<string, boolean> = {};
 	let saved: Record<string, boolean> = {};
+	let failed: Record<string, boolean> = {};
 
 	function handleEnhance(id: string) {
 		return ({ submitter }: { submitter: HTMLElement | null }) => {
 			saving[id] = true;
 			saved[id] = false;
-			return async ({ update }: { update: () => Promise<void> }) => {
+			failed[id] = false;
+			return async ({ result, update }: { result: { type: string }; update: () => Promise<void> }) => {
+				if (result.type === 'failure' || result.type === 'error') {
+					saving[id] = false;
+					saved[id] = false;
+					failed[id] = true;
+					setTimeout(() => { failed[id] = false; }, 2500);
+					return;
+				}
+
 				await update();
 				saving[id] = false;
 				saved[id] = true;
@@ -113,6 +123,8 @@
 								<span class="text-xs text-white/30 w-12">Saving…</span>
 							{:else if saved[page.id]}
 								<span class="text-xs text-green-400 w-12">Saved ✓</span>
+							{:else if failed[page.id]}
+								<span class="text-xs text-brand-400 w-12">Failed</span>
 							{:else}
 								<span class="w-12"></span>
 							{/if}

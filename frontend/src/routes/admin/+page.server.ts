@@ -66,5 +66,25 @@ export const actions: Actions = {
 		} catch {
 			return fail(500, { error: 'Failed to revoke access.' });
 		}
+	},
+
+	deleteUser: async ({ request, locals }) => {
+		const data = await request.formData();
+		const userId = data.get('userId')?.toString();
+		if (!userId) return fail(400, { error: 'Missing user ID.' });
+
+		if (!locals.user || locals.user.role !== 'admin') return fail(403, { error: 'Forbidden.' });
+		if (locals.user.id === userId) return fail(400, { error: 'You cannot delete your own account.' });
+
+		try {
+			const token = await getSuperuserToken();
+			const res = await fetch(`${PUBLIC_POCKETBASE_URL}/api/collections/users/records/${userId}`, {
+				method: 'DELETE',
+				headers: { Authorization: token }
+			});
+			if (!res.ok) return fail(500, { error: 'Failed to delete user.' });
+		} catch {
+			return fail(500, { error: 'Failed to delete user.' });
+		}
 	}
 };

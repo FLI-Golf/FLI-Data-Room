@@ -14,16 +14,36 @@ export const actions: Actions = {
 		const sponsors = [];
 		let i = 0;
 		while (fd.get(`sponsor_${i}_name`) !== null) {
+			const name = fd.get(`sponsor_${i}_name`)?.toString().trim() ?? '';
+			const category = fd.get(`sponsor_${i}_category`)?.toString().trim() ?? '';
+			const value = fd.get(`sponsor_${i}_value`)?.toString().trim() ?? '';
+			const docId = fd.get(`sponsor_${i}_docId`)?.toString().trim() ?? '';
+			const notes = fd.get(`sponsor_${i}_notes`)?.toString().trim() ?? '';
+
+			// Ignore completely empty rows.
+			if (!name && !category && !value && !docId && !notes) {
+				i++;
+				continue;
+			}
+
+			if (!name) {
+				return fail(400, { error: `Sponsor ${i + 1} is missing a name.` });
+			}
+
 			sponsors.push({
-				name:       fd.get(`sponsor_${i}_name`)?.toString().trim() ?? '',
+				name,
 				tier:       fd.get(`sponsor_${i}_tier`)?.toString().trim() ?? '',
-				category:   fd.get(`sponsor_${i}_category`)?.toString().trim() ?? '',
-				value:      fd.get(`sponsor_${i}_value`)?.toString().trim() ?? '',
+				category,
+				value,
 				loiStatus:  fd.get(`sponsor_${i}_loiStatus`)?.toString() ?? 'pending',
-				docId:      fd.get(`sponsor_${i}_docId`)?.toString().trim() ?? '',
-				notes:      fd.get(`sponsor_${i}_notes`)?.toString().trim() ?? '',
+				docId,
+				notes,
 			});
 			i++;
+		}
+
+		if (sponsors.length === 0) {
+			return fail(400, { error: 'Please add at least one sponsor before saving.' });
 		}
 
 		try {

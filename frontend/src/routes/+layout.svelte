@@ -7,7 +7,7 @@
 
 	export let data: LayoutData;
 
-	const LOGO_URL = 'https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png';
+	const LOGO_URL = 'https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png';
 
 	let visible = false;
 
@@ -22,7 +22,9 @@
 	}
 </script>
 
-<slot />
+<div class="ui-boost">
+	<slot />
+</div>
 
 <!-- Scroll-to-top FAB -->
 {#if visible}

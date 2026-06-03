@@ -24,13 +24,13 @@
 <div class="space-y-16 max-w-5xl">
 <!-- COVER -->
 <section id="overview" class="rounded-2xl border border-white/10 bg-navy-800/60 p-10 text-center space-y-6">
-	<div class="inline-flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-600/10 px-4 py-1.5 text-xs font-semibold text-brand-400 uppercase tracking-widest">
+	<div class="inline-flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-600/10 px-4 py-1.5 text-xs font-semibold text-white uppercase tracking-widest">
 		Confidential · Presented by Young America Capital
 	</div>
 	<div>
 		<h1 class="text-4xl font-black text-white tracking-tight leading-tight">FLI GOLF LEAGUE</h1>
-		<p class="mt-2 text-lg font-bold text-brand-400 uppercase tracking-widest">Stadium-Style Professional Disc Golf</p>
-		<p class="mt-3 text-white/50 text-sm max-w-xl mx-auto">Engineered for Media, Betting &amp; Franchise Scale · Building the Operating System for the Future of Sports</p>
+		<p class="mt-2 text-lg font-bold text-white uppercase tracking-widest">Stadium-Style Professional Disc Golf</p>
+		<p class="mt-3 text-white text-sm max-w-xl mx-auto">Engineered for Media, Betting &amp; Franchise Scale · Building the Operating System for the Future of Sports</p>
 	</div>
 	<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
 		{#each [
@@ -41,27 +41,27 @@
 		] as item}
 			<div class="rounded-xl border border-white/10 bg-navy-950/60 p-4">
 				<div class="text-2xl font-black text-brand-400">{item.stat}</div>
-				<div class="text-xs text-white/45 mt-1">{item.label}</div>
+				<div class="text-xs text-white mt-1">{item.label}</div>
 			</div>
 		{/each}
 	</div>
 	<div class="pt-2 space-y-1">
 		<p class="text-white font-black text-lg tracking-widest">FAIRWAYS. GREENS. LEGENDS.</p>
-		<p class="text-white/40 text-xs">5 Proprietary Tech Platforms · $150M+ Combined Value Potential</p>
-		<p class="text-white/30 text-xs">Fantasy App · Discord Community · FLIHUB OS · AI Draft System · AI Production</p>
+		<p class="text-white text-xs">5 Proprietary Tech Platforms · $150M+ Combined Value Potential</p>
+		<p class="text-white text-xs">Fantasy App · Discord Community · FLIHUB OS · AI Draft System · AI Production</p>
 	</div>
 </section>
 <!-- DISCLAIMER -->
 <section id="disclaimer" class="rounded-xl border border-white/10 bg-navy-950/80 p-8 space-y-6">
 	<div class="flex items-center gap-3 border-b border-white/10 pb-4">
 		<span class="rounded-full bg-yellow-500/15 px-3 py-1 text-xs font-bold text-yellow-400 uppercase tracking-widest">Legal &amp; Compliance</span>
-		<span class="text-xs text-white/30">FINRA / SEC Disclaimer</span>
+		<span class="text-xs text-white">FINRA / SEC Disclaimer</span>
 	</div>
-	<div class="space-y-4 text-xs text-white/40 leading-relaxed">
+	<div class="space-y-4 text-xs text-white leading-relaxed">
 		<p>This Presentation (the "Presentation") contains sensitive business and financial information. It is being delivered on behalf of the Company by Young America Capital, LLC ("YAC"). The sole purpose of this Presentation is to assist the recipient in deciding whether to proceed with a further inquiry of the Company. This Presentation does not purport to be all-inclusive or to necessarily contain all the information that a prospective investor may desire in evaluating a possible business transaction with the Company. By accepting this Presentation, the recipient agrees to keep confidential the information contained herein or made available in connection with any further inquiry of the Company. This Presentation may not be photocopied, reproduced, or distributed to others at any time without the prior written consent of Young America Capital, LLC.</p>
 		<p>Neither the Company nor YAC makes any express or implied representation or warranty as to the accuracy or completeness of the information contained herein. The recipient shall be entitled to rely solely on the representations and warranties made to it in any definitive agreement and the due diligence that recipient conducts. This Presentation does not constitute an offer to sell or solicitation of an offer to buy securities in any jurisdiction where, or to any person to whom, it is unlawful to make such offer or solicitation. Investments in private placements may be illiquid, highly speculative and you may lose your entire investment.</p>
 		<div class="border-t border-white/10 pt-4">
-			<p class="font-semibold text-white/50 mb-2">Cautionary Statement Concerning Forward Looking Statements</p>
+			<p class="font-semibold text-white mb-2">Cautionary Statement Concerning Forward Looking Statements</p>
 			<p>This document contains forward-looking statements. We base these forward-looking statements on our expectations and projections about future events, which we derive from the information currently available to us. Such forward-looking statements relate to future events or our future performance, including: our financial performance and projections; our growth in revenue and earnings; and our business prospects and opportunities. Forward-looking statements are only predictions. Actual events and results may differ materially and are subject to risks, uncertainties, and assumptions about us. We are not obligated to publicly update or revise any forward-looking statement.</p>
 		</div>
 		<ul class="list-disc list-inside space-y-1 pt-2">
@@ -76,7 +76,7 @@
 <!-- OPPORTUNITY -->
 <section id="the-opportunity" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">The Opportunity</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">The Opportunity</p>
 		<h2 class="text-2xl font-black text-white">One Category. Zero Competition.</h2>
 		<p class="mt-2 text-white/50 text-sm max-w-2xl">FLI Golf League is creating the world's first stadium-style professional disc golf league — engineered for media, betting, and franchise scale from Day 1. Built on 5 proprietary technology platforms, FGL is not just a sports league. It's the operating system for the future of sports entertainment.</p>
 	</div>
@@ -89,17 +89,17 @@
 		] as item}
 			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-5 text-center">
 				<div class="text-2xl font-black text-brand-400">{item.stat}</div>
-				<div class="text-xs text-white/45 mt-1">{item.label}</div>
+				<div class="text-xs text-white mt-1">{item.label}</div>
 			</div>
 		{/each}
 	</div>
 	<div class="grid sm:grid-cols-2 gap-4">
 		<div class="rounded-xl border border-white/10 bg-navy-800/50 p-6 space-y-3">
-			<p class="text-xs font-bold text-brand-400 uppercase tracking-widest">The League Advantage</p>
+			<p class="text-xs font-bold text-white uppercase tracking-widest">The League Advantage</p>
 			<p class="text-sm text-white/60 leading-relaxed">No stadium-style disc golf league exists anywhere in the world. No franchise model. No sportsbook integration. No gender-equal payout. No AI-powered broadcast infrastructure. FGL is not entering a market — it is creating one, with every structural advantage locked in before Day 1.</p>
 		</div>
 		<div class="rounded-xl border border-white/10 bg-navy-800/50 p-6 space-y-3">
-			<p class="text-xs font-bold text-brand-400 uppercase tracking-widest">The Technology Advantage</p>
+			<p class="text-xs font-bold text-white uppercase tracking-widest">The Technology Advantage</p>
 			<p class="text-sm text-white/60 leading-relaxed">5 proprietary tech platforms — Fantasy App, Discord Community, FLIHUB League OS, AI Draft System, and AI Production Infrastructure — create compounding defensibility, SaaS licensing upside, and a combined platform value potential that no sports competitor can replicate.</p>
 			<div class="grid grid-cols-3 gap-3 pt-2">
 				{#each [
@@ -109,7 +109,7 @@
 				] as item}
 					<div class="text-center">
 						<div class="text-lg font-black text-yellow-400">{item.stat}</div>
-						<div class="text-xs text-white/35">{item.label}</div>
+						<div class="text-xs text-white">{item.label}</div>
 					</div>
 				{/each}
 			</div>
@@ -120,7 +120,7 @@
 <!-- WHY NOW -->
 <section id="why-now" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Why Disc Golf. Why Now.</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Why Disc Golf. Why Now.</p>
 		<h2 class="text-2xl font-black text-white">The Sport. The Moment. The Technology.</h2>
 	</div>
 	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -135,7 +135,7 @@
 			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-5 space-y-2">
 				<div class="text-xl font-black text-brand-400">{item.stat}</div>
 				<div class="text-xs font-bold text-white uppercase tracking-wide">{item.label}</div>
-				<p class="text-xs text-white/50 leading-relaxed">{item.body}</p>
+				<p class="text-xs text-white leading-relaxed">{item.body}</p>
 				<p class="text-xs text-yellow-400/80 font-medium">→ {item.arrow}</p>
 			</div>
 		{/each}
@@ -145,7 +145,7 @@
 <!-- PROBLEM -->
 <section id="limitations" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">The Problem</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">The Problem</p>
 		<h2 class="text-2xl font-black text-white">The Barriers Holding Disc Golf Back</h2>
 		<p class="mt-2 text-white/50 text-sm">Disc golf has the players, the passion, and the growth. What it has never had is the infrastructure to match its potential.</p>
 	</div>
@@ -165,7 +165,7 @@
 						<div class="text-xs text-brand-400/80 font-medium mt-0.5">Impact: {item.impact}</div>
 					</div>
 				</div>
-				<p class="text-xs text-white/50 leading-relaxed">{item.body}</p>
+				<p class="text-xs text-white leading-relaxed">{item.body}</p>
 			</div>
 		{/each}
 	</div>
@@ -176,7 +176,7 @@
 <!-- SOLUTION -->
 <section id="built-different" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">The Solution</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">The Solution</p>
 		<h2 class="text-2xl font-black text-white">The FGL Fix — Built Before Day 1</h2>
 		<p class="mt-1 text-xs font-bold text-yellow-400 tracking-wide">★ TOP 24 WORLD-RANKED PLAYERS — ALL COMMITTED ★</p>
 	</div>
@@ -206,7 +206,7 @@
 <!-- TECH -->
 <section id="broadcast" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Tech Infrastructure · Platform 01–05</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Tech Infrastructure · Platform 01–05</p>
 		<h2 class="text-2xl font-black text-white">Built for Broadcast Scale</h2>
 		<p class="mt-2 text-white/50 text-sm max-w-2xl">Five proprietary systems — integrated, owned, and activated at Season 1 launch. No disc golf organization has ever assembled this stack. FGL is not just a sports league — it is a technology company operating through sport.</p>
 	</div>
@@ -220,11 +220,11 @@
 		] as p}
 			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-5 space-y-2">
 				<div class="flex items-center justify-between">
-					<span class="text-xs text-white/35">{p.label}</span>
+					<span class="text-xs text-white">{p.label}</span>
 					<span class="rounded-full px-2 py-0.5 text-xs font-bold {p.badgeColor}">● {p.badge}</span>
 				</div>
 				<div class="text-sm font-bold text-white">{p.title}</div>
-				<p class="text-xs text-white/50 leading-relaxed">{p.body}</p>
+				<p class="text-xs text-white leading-relaxed">{p.body}</p>
 				<p class="text-xs text-yellow-400/70 font-medium">{p.value}</p>
 			</div>
 		{/each}
@@ -280,7 +280,7 @@
 			] as item}
 				<div class="rounded-lg border border-white/8 bg-navy-800/30 p-4 space-y-1">
 					<div class="text-xs font-bold text-white">{item.title}</div>
-					<p class="text-xs text-white/45 leading-relaxed">{item.body}</p>
+					<p class="text-xs text-white leading-relaxed">{item.body}</p>
 				</div>
 			{/each}
 		</div>
@@ -292,7 +292,7 @@
 <!-- GAMING -->
 <section id="gaming-tribal" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Gaming &amp; Tribal Strategy</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Gaming &amp; Tribal Strategy</p>
 		<h2 class="text-2xl font-black text-white">The Untapped Revenue Stream. FGL Is First.</h2>
 	</div>
 	<div class="grid sm:grid-cols-2 gap-4">
@@ -305,7 +305,7 @@
 			] as item}
 				<div class="rounded-lg border border-white/10 bg-navy-800/40 p-4 space-y-1">
 					<div class="text-xs font-bold text-yellow-400">{item.title}</div>
-					<p class="text-xs text-white/50 leading-relaxed">{item.body}</p>
+					<p class="text-xs text-white leading-relaxed">{item.body}</p>
 				</div>
 			{/each}
 			<div class="rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-3 text-xs text-yellow-300 font-medium text-center">
@@ -317,8 +317,8 @@
 				<div class="h-12 w-12 rounded-full bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-lg font-black text-brand-400 shrink-0">GS</div>
 				<div>
 					<div class="text-sm font-bold text-white">Gary G. Santos</div>
-					<div class="text-xs text-white/40">Tribal &amp; Gaming — Strategic Lead</div>
-					<div class="text-xs text-white/30 mt-0.5">23 yrs tribal governance · Tule River Indian Tribe · $47M budget managed · IGA Board 10+ yrs</div>
+					<div class="text-xs text-white">Tribal &amp; Gaming — Strategic Lead</div>
+					<div class="text-xs text-white mt-0.5">23 yrs tribal governance · Tule River Indian Tribe · $47M budget managed · IGA Board 10+ yrs</div>
 				</div>
 			</div>
 			<div class="space-y-2">
@@ -333,7 +333,7 @@
 						<span class="text-brand-400 font-bold text-xs mt-0.5 shrink-0">▸</span>
 						<div>
 							<span class="text-xs font-bold text-white">{item.label} — </span>
-							<span class="text-xs text-white/45">{item.body}</span>
+							<span class="text-xs text-white">{item.body}</span>
 						</div>
 					</div>
 				{/each}
@@ -345,7 +345,7 @@
 <!-- COMPETITIVE -->
 <section id="competitive" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Competitive Landscape</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Competitive Landscape</p>
 		<h2 class="text-2xl font-black text-white">FGL Is Built Different — In Every Dimension</h2>
 	</div>
 	<div class="rounded-xl border border-white/10 overflow-hidden">
@@ -386,9 +386,9 @@
 <!-- TEAM -->
 <section id="the-team" class="rounded-xl border border-white/10 bg-navy-800/40 p-6 flex items-center justify-between gap-4">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Leadership</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Leadership</p>
 		<h2 class="text-lg font-black text-white">The People Behind the Platform</h2>
-		<p class="text-sm text-white/45 mt-1">Full executive team bios, photos, and advisor profiles are available in the dedicated section.</p>
+		<p class="text-sm text-white mt-1">Full executive team bios, photos, and advisor profiles are available in the dedicated section.</p>
 	</div>
 	<a href="/dashboard/management" class="shrink-0 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
 		View Management &amp; Team →
@@ -397,7 +397,7 @@
 <!-- ROSTER -->
 <section id="roster" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">The Roster</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">The Roster</p>
 		<h2 class="text-2xl font-black text-white">Elite Athletes. Massive Reach.</h2>
 	</div>
 	<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -410,7 +410,7 @@
 			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-5 space-y-1">
 				<div class="text-2xl font-black text-brand-400">{item.stat}</div>
 				<div class="text-xs font-bold text-white">{item.label}</div>
-				<div class="text-xs text-white/35">{item.sub}</div>
+				<div class="text-xs text-white">{item.sub}</div>
 				<div class="text-xs text-yellow-400/70 font-medium pt-1">→ {item.arrow}</div>
 			</div>
 		{/each}
@@ -430,7 +430,7 @@
 			] as item}
 				<div class="rounded-lg border border-white/8 bg-navy-950/40 p-3 text-center">
 					<div class="text-lg font-black text-yellow-400">{item.stat}</div>
-					<div class="text-xs text-white/40 mt-0.5 leading-tight">{item.label}</div>
+					<div class="text-xs text-white mt-0.5 leading-tight">{item.label}</div>
 				</div>
 			{/each}
 		</div>
@@ -439,14 +439,14 @@
 		</div>
 	</div>
 	<div class="rounded-lg border border-white/8 bg-navy-800/30 p-4">
-		<p class="text-xs text-white/50 leading-relaxed"><span class="text-white font-semibold">The Roster as Technology Multiplier —</span> Every follower is a potential fantasy user. Every viewer is a potential bettor. Every fan is a potential Discord member. The roster is the organic marketing engine that activates every FGL technology platform from Day 1.</p>
+		<p class="text-xs text-white leading-relaxed"><span class="text-white font-semibold">The Roster as Technology Multiplier —</span> Every follower is a potential fantasy user. Every viewer is a potential bettor. Every fan is a potential Discord member. The roster is the organic marketing engine that activates every FGL technology platform from Day 1.</p>
 	</div>
 	<p class="text-xs text-white/25 italic">Past performance is not indicative of future results. An investment in the Company's securities is speculative, illiquid and there may be a total risk of loss.</p>
 </section>
 <!-- FINANCIALS -->
 <section id="financials" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">Financial Forecast</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Financial Forecast</p>
 		<h2 class="text-2xl font-black text-white">Built to Scale. Engineered to Profit.</h2>
 	</div>
 	<div class="rounded-xl border border-white/10 overflow-hidden">
@@ -487,7 +487,7 @@
 			<div class="rounded-lg border border-white/8 bg-navy-800/30 p-3 space-y-1">
 				<div class="text-xs font-black text-brand-400">{item.year}</div>
 				<div class="text-xs font-bold text-white leading-tight">{item.label}</div>
-				<p class="text-xs text-white/35 leading-relaxed">{item.body}</p>
+				<p class="text-xs text-white leading-relaxed">{item.body}</p>
 			</div>
 		{/each}
 	</div>
@@ -496,13 +496,13 @@
 <!-- ASK -->
 <section id="proceeds" class="space-y-6">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-1">The Ask</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">The Ask</p>
 		<h2 class="text-2xl font-black text-white">The Opportunity to Build the Future of Sports</h2>
 	</div>
 	<div class="rounded-2xl border border-brand-500/30 bg-brand-600/5 p-8 text-center space-y-3">
 		<div class="text-4xl font-black text-white">$7.5M Seed Round</div>
-		<div class="text-sm text-brand-400 font-semibold uppercase tracking-widest">Inaugural Season Launch Capital · Raising Now · Q2 2026</div>
-		<div class="text-xs text-white/40">Presented by Young America Capital</div>
+		<div class="text-sm text-white font-semibold uppercase tracking-widest">Inaugural Season Launch Capital · Raising Now · Q2 2026</div>
+		<div class="text-xs text-white">Presented by Young America Capital</div>
 	</div>
 	<div class="rounded-xl border border-white/10 bg-navy-800/40 p-6 space-y-3">
 		<p class="text-xs font-bold text-white/60 uppercase tracking-widest">Why Now</p>
@@ -521,7 +521,7 @@
 			] as item}
 				<div class="rounded-xl border border-white/10 bg-navy-800/50 p-4 text-center">
 					<div class="text-xl font-black text-yellow-400">{item.stat}</div>
-					<div class="text-xs text-white/40 mt-1">{item.label}</div>
+					<div class="text-xs text-white mt-1">{item.label}</div>
 				</div>
 			{/each}
 		</div>
@@ -539,7 +539,7 @@
 					<div class="text-2xl font-black text-brand-400 shrink-0 w-12 text-center">{item.pct}</div>
 					<div>
 						<div class="text-xs font-bold text-white">{item.label}</div>
-						<p class="text-xs text-white/45 mt-1 leading-relaxed">{item.body}</p>
+						<p class="text-xs text-white mt-1 leading-relaxed">{item.body}</p>
 					</div>
 				</div>
 			{/each}
@@ -550,7 +550,7 @@
 <!-- CONTACT -->
 <section id="contact" class="rounded-2xl border border-white/10 bg-navy-800/60 p-10 text-center space-y-8">
 	<div>
-		<p class="text-xs font-semibold text-brand-400 uppercase tracking-widest mb-2">Contact</p>
+		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-2">Contact</p>
 		<h2 class="text-xl font-black text-white">For More Information About FLI Golf and Its Investment Opportunity</h2>
 	</div>
 
@@ -576,12 +576,12 @@
 					<div class="h-10 w-10 rounded-full bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-sm font-black text-brand-400 shrink-0">{person.initials}</div>
 					<div>
 						<div class="text-sm font-bold text-white">{person.name}</div>
-						<div class="text-xs text-white/40">{person.role}</div>
+						<div class="text-xs text-white">{person.role}</div>
 					</div>
 				</div>
 				<div class="space-y-1">
 					<a href="mailto:{person.email}" class="block text-xs text-brand-400 hover:text-yellow-400 transition-colors">{person.email}</a>
-					<p class="text-xs text-white/40">✆ {person.phone}</p>
+					<p class="text-xs text-white">✆ {person.phone}</p>
 				</div>
 			</div>
 		{/each}

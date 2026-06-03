@@ -1,6 +1,7 @@
 import { fail } from '@sveltejs/kit';
 import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 import { POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PASSWORD } from '$env/static/private';
+import { ACCESS_PAGES } from '$lib/page-access';
 import type { PageServerLoad, Actions } from './$types';
 
 interface PageAccess {
@@ -27,12 +28,40 @@ async function getSuperuserToken(): Promise<string> {
 
 export const load: PageServerLoad = async () => {
 	const token = await getSuperuserToken();
-	const res = await fetch(
-		`${PUBLIC_POCKETBASE_URL}/api/collections/page_access/records?perPage=200&sort=group,label`,
-		{ headers: { Authorization: token } }
-	);
-	const json = await res.json();
-	return { pages: (json.items ?? []) as PageAccess[] };
+
+	const fetchRecords = async (): Promise<PageAccess[]> => {
+		const res = await fetch(
+			`${PUBLIC_POCKETBASE_URL}/api/collections/page_access/records?perPage=200&sort=group,label`,
+			{ headers: { Authorization: token } }
+		);
+		const json = await res.json();
+		return (json.items ?? []) as PageAccess[];
+	};
+
+	let pages = await fetchRecords();
+	const existing = new Set(pages.map((page) => page.slug));
+	const missing = ACCESS_PAGES.filter((page) => !existing.has(page.slug));
+
+	if (missing.length > 0) {
+		await Promise.all(
+			missing.map((page) =>
+				fetch(`${PUBLIC_POCKETBASE_URL}/api/collections/page_access/records`, {
+					method: 'POST',
+					headers: { Authorization: token, 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						slug: page.slug,
+						label: page.label,
+						group: page.group,
+						role: page.defaultRole
+					})
+				})
+			)
+		);
+
+		pages = await fetchRecords();
+	}
+
+	return { pages };
 };
 
 export const actions: Actions = {

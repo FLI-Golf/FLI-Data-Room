@@ -9,6 +9,8 @@
 	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
 
+	$: previewSuffix = data.previewRole ? `?view=${data.previewRole}` : '';
+
 	const nav = [
 		{ href: '/dashboard',                        label: 'Dashboard',           icon: LayoutDashboard, children: [] },
 		{ href: '/dashboard/pitch-deck',             label: 'Pitch Deck',          icon: FileText, children: [
@@ -92,6 +94,17 @@
 		{ href: '/dashboard/how-to-play',            label: 'How to Play',         icon: PlayCircle,  children: [] },
 	];
 
+	function slugFromHref(href: string): string {
+		return href === '/dashboard' ? 'dashboard' : href.replace('/dashboard/', '');
+	}
+
+	function withPreview(href: string): string {
+		return `${href}${previewSuffix}`;
+	}
+
+	$: allowedSlugs = new Set(data.visibleSlugs ?? []);
+	$: visibleNav = nav.filter((item) => allowedSlugs.has(slugFromHref(item.href)));
+
 	$: activePath = $page.url.pathname;
 	$: activeHash = $page.url.hash;
 
@@ -127,7 +140,7 @@
 			<!-- Logo -->
 			<a href="/dashboard" class="px-5 py-4 border-b border-white/10 flex items-center gap-3 hover:bg-white/5 transition-colors">
 				<img
-					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png"
 					alt="FLI Shield Logo"
 					class="h-10 w-auto shrink-0"
 				/>
@@ -138,13 +151,30 @@
 			</a>
 
 			<nav class="flex-1 px-2 py-3 overflow-y-auto">
+				<div class="px-1 pb-3 mb-3 border-b border-white/10">
+					<div class="flex items-center gap-2.5 px-2 py-2 mb-1 rounded-lg bg-white/5">
+						<div class="h-7 w-7 rounded-full bg-brand-600/30 border border-brand-500/40 flex items-center justify-center text-xs font-black text-brand-400 shrink-0">
+							{data.user?.name?.charAt(0) ?? '?'}
+						</div>
+						<div class="min-w-0 flex-1">
+							<div class="text-xs font-semibold text-white truncate">{data.user?.name}</div>
+							<div class="text-xs text-white/35 truncate">{data.user?.email}</div>
+						</div>
+						<span class="shrink-0 rounded-full bg-yellow-500/15 px-1.5 py-0.5 text-xs font-medium text-yellow-400 capitalize">{data.user?.role}</span>
+					</div>
+					<form method="POST" action="/logout">
+						<button type="submit" class="w-full rounded-md px-3 py-1.5 text-left text-sm text-white/35 hover:bg-white/6 hover:text-white transition-colors">
+							Sign Out
+						</button>
+					</form>
+				</div>
 
 
 				<div class="space-y-0.5">
-					{#each nav as item}
+					{#each visibleNav as item}
 						{@const active = activePath === item.href}
 						<a
-							href={item.href}
+							href={withPreview(item.href)}
 							class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors relative
 								{active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
 						>
@@ -162,7 +192,7 @@
 								{#each item.children as child}
 									{@const subActive = activeSection === child.id}
 									<a
-										href="{item.href}#{child.id}"
+										href="{withPreview(item.href)}#{child.id}"
 										class="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors
 											{subActive ? 'text-white bg-white/8' : 'text-white/40 hover:text-white hover:bg-white/6'}"
 									>
@@ -183,7 +213,7 @@
 							{#each data.sections as section}
 								{@const active = activePath === `/dashboard/${section.slug}`}
 								<a
-									href="/dashboard/{section.slug}"
+											href={withPreview(`/dashboard/${section.slug}`)}
 									class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium transition-colors relative
 										{active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
 								>
@@ -208,38 +238,32 @@
 				{#if data.user?.role === 'admin'}
 					<div class="mt-3 pt-3 border-t border-white/10 space-y-0.5">
 						<div class="px-3 mb-1 text-xs font-semibold text-white/25 uppercase tracking-widest">Admin</div>
-						<a href="/dashboard/documents"
-							class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium text-white/50 hover:bg-white/6 hover:text-white transition-colors">
-							<FileText class="h-4 w-4 shrink-0 text-white/25" />
-							Documents
-						</a>
+						{#if allowedSlugs.has('documents')}
+									<a href={withPreview('/dashboard/documents')}
+								class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium text-white/50 hover:bg-white/6 hover:text-white transition-colors">
+								<FileText class="h-4 w-4 shrink-0 text-white/25" />
+								Documents
+							</a>
+						{/if}
 						<a href="/admin"
 							class="flex items-center justify-center gap-2 rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-navy-950 hover:bg-yellow-400 transition-colors mt-1">
 							<Settings class="h-4 w-4" />
 							Admin Panel
 						</a>
+								<div class="mt-3 rounded-lg border border-white/10 bg-white/5 p-3 space-y-2">
+									<div class="text-[11px] font-semibold uppercase tracking-widest text-white/30">Data Room Preview</div>
+									<a href="/dashboard?view=basic" class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+										<span>Data Room Basic</span>
+										<span class="text-xs text-white/30">Basic</span>
+									</a>
+									<a href="/dashboard?view=advanced" class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+										<span>Data Room Advanced</span>
+										<span class="text-xs text-white/30">Advanced</span>
+									</a>
+								</div>
 					</div>
 				{/if}
 			</nav>
-
-			<!-- User footer -->
-			<div class="px-3 py-3 border-t border-white/10">
-				<div class="flex items-center gap-2.5 px-2 py-2 mb-1 rounded-lg bg-white/5">
-					<div class="h-7 w-7 rounded-full bg-brand-600/30 border border-brand-500/40 flex items-center justify-center text-xs font-black text-brand-400 shrink-0">
-						{data.user?.name?.charAt(0) ?? '?'}
-					</div>
-					<div class="min-w-0 flex-1">
-						<div class="text-xs font-semibold text-white truncate">{data.user?.name}</div>
-						<div class="text-xs text-white/35 truncate">{data.user?.email}</div>
-					</div>
-					<span class="shrink-0 rounded-full bg-yellow-500/15 px-1.5 py-0.5 text-xs font-medium text-yellow-400 capitalize">{data.user?.role}</span>
-				</div>
-				<form method="POST" action="/logout">
-					<button type="submit" class="w-full rounded-md px-3 py-1.5 text-left text-sm text-white/35 hover:bg-white/6 hover:text-white transition-colors">
-						Sign Out
-					</button>
-				</form>
-			</div>
 		</aside>
 
 		<main class="flex-1 p-8">

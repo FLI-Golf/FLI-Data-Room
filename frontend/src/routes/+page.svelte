@@ -35,46 +35,43 @@
 	</nav>
 
 	<!-- Hero content -->
-	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-12">
-		<div class="flex flex-col lg:flex-row items-center gap-10">
+	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-0 pb-12 -mt-6 lg:-mt-10">
+		<div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-6 xl:gap-10">
 			<!-- Left: text -->
-			<div class="flex-1 text-center lg:text-left">
-				<div class="flex flex-col items-center lg:items-start gap-4 mb-6">
+			<div class="flex-1 text-center lg:pl-12 xl:pl-20 2xl:pl-28">
+				<div class="flex flex-col items-center gap-4 mb-1">
 					<img
-						src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+						src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png"
 						alt="FLI Shield Logo"
-						class="h-64 sm:h-80 lg:h-96 xl:h-112 w-auto max-w-full"
+						class="h-64 sm:h-80 lg:h-[30rem] xl:h-[36rem] w-auto max-w-full"
 					/>
-					<div class="inline-flex items-center rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-400 uppercase tracking-widest">
+					<div class="inline-flex items-center rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-400 uppercase tracking-widest lg:-translate-y-[100px]">
 						$7.5M Seed · Q2 2026
 					</div>
 				</div>
-				<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-4">
-					<span class="text-brand-500">FLI Golf</span>
-				</h1>
-				<p class="text-base text-white/60 max-w-lg mb-3 leading-relaxed">
-					FLI Golf is not a disc golf league — it is the first sport built specifically for gender equality, betting, media and live entertainment from day one.
-				</p>
-				<p class="text-base text-white/60 max-w-lg mb-6 leading-relaxed">
-					FliHub unifies project management, budgets, expenses, sponsors, vendors, people, and league operations into a single business operating system.
-				</p>
-				<div class="flex flex-wrap justify-center lg:justify-start gap-3">
-					{#if data.user}
-						<a href="/dashboard" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-							Start Now →
-						</a>
-					{:else}
-						<a href="/register" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
-							Start Now →
-						</a>
-						<a href="/login" class="rounded-md border border-white/20 px-5 py-2.5 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition-colors">
-							Sign In
-						</a>
-					{/if}
+				<div class="-mt-1 lg:-mt-3">
+					<div class="lg:-translate-y-[100px]">
+						<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-3">
+							<span class="text-brand-500">FLI Golf</span>
+						</h1>
+						<p class="text-base text-white/60 max-w-lg mx-auto mb-3 leading-relaxed">
+							FLI Golf is not a disc golf league — it is the first sport built specifically for gender equality, betting, media and live entertainment from day one.
+						</p>
+						<p class="text-base text-white/60 max-w-lg mx-auto mb-6 leading-relaxed">
+							FliHub unifies project management, budgets, expenses, sponsors, vendors, people, and league operations into a single business operating system.
+						</p>
+					</div>
+					<div class="flex flex-wrap justify-center gap-3">
+						{#if data.user}
+							<a href="/dashboard" class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
+								Start Now →
+							</a>
+						{/if}
+					</div>
 				</div>
 			</div>
 			<!-- Right: image -->
-			<div class="flex-1 flex justify-center lg:justify-end">
+			<div class="hidden lg:flex flex-1 justify-end">
 				<img
 					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/ojfm3by0qzvgk7n/fgqxajwd8mxi_fzdd8cwt0l.png"
 					alt="FLI Golf League"

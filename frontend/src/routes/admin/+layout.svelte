@@ -8,7 +8,7 @@
 		<aside class="w-60 min-h-screen border-r border-white/15 bg-navy-950 flex flex-col">
 			<div class="px-6 py-5 border-b border-white/15 flex flex-col items-center text-center">
 				<img
-					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/1zf32ato6zddp24/fgl_logo_cmyk_01_7s51ljmqp7.png"
+					src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/och1g39ziqrso2q/fli_logo_fbyrcne7eh.png"
 					alt="FLI Shield Logo"
 					class="h-14 w-auto mb-2"
 				/>
@@ -39,9 +39,17 @@
 					Content Editor
 				</a>
 				<div class="pt-4 mt-4 border-t border-white/15">
-					<a href="/dashboard" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
-						← Data Room
-					</a>
+					<div class="space-y-1">
+						<a href="/dashboard" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+							← Data Room
+						</a>
+						<a href="/dashboard?view=basic" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+							Data Room Basic
+						</a>
+						<a href="/dashboard?view=advanced" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+							Data Room Advanced
+						</a>
+					</div>
 				</div>
 			</nav>
 

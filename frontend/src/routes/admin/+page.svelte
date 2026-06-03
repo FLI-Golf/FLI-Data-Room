@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
 	export let data: PageData;
+	const currentUserId = data.user?.id;
 </script>
 
 <svelte:head>
@@ -62,17 +63,36 @@
 							{/if}
 						</td>
 						<td class="px-5 py-3">
-							{#if user.ndaAccepted}
-								<form method="POST" action="?/revokeAccess" use:enhance>
-									<input type="hidden" name="userId" value={user.id} />
-									<button
-										type="submit"
-										class="text-xs text-red-500 hover:text-red-300 transition-colors"
-									>
-										Revoke NDA
-									</button>
-								</form>
-							{/if}
+							<div class="flex flex-col items-start gap-2">
+								{#if user.ndaAccepted}
+									<form method="POST" action="?/revokeAccess" use:enhance>
+										<input type="hidden" name="userId" value={user.id} />
+										<button
+											type="submit"
+											class="text-xs text-red-500 hover:text-red-300 transition-colors"
+										>
+											Revoke NDA
+										</button>
+									</form>
+								{/if}
+
+								{#if user.id !== currentUserId}
+									<form method="POST" action="?/deleteUser" use:enhance>
+										<input type="hidden" name="userId" value={user.id} />
+										<button
+											type="submit"
+											on:click={(event) => {
+												if (!confirm('Delete this user account? This cannot be undone.')) {
+													event.preventDefault();
+												}
+											}}
+											class="text-xs text-red-400 hover:text-red-300 transition-colors"
+										>
+											Delete User
+										</button>
+									</form>
+								{/if}
+							</div>
 						</td>
 					</tr>
 				{/each}

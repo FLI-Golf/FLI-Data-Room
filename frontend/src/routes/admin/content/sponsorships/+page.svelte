@@ -6,16 +6,16 @@
 	export let data: PageData;
 	export let form: ActionData;
 
-	type Sponsor = { name: string; tier: string; category: string; value: string; loiStatus: string; docId: string; notes: string };
+	type Sponsor = { name: string; tier?: string; category: string; value: string; loiStatus: string; docId: string; notes: string };
 
 	let sponsors: Sponsor[] = (data.saved?.sponsors as Sponsor[]) ?? [
-		{ name: '', tier: 'Title Sponsor', category: '', value: '', loiStatus: 'pending', docId: '', notes: '' },
+		{ name: '', category: '', value: '', loiStatus: 'pending', docId: '', notes: '' },
 	];
 
 	let step = 0;
 	const steps = ['Sponsors', 'Review'];
 
-	function add() { sponsors = [...sponsors, { name: '', tier: 'Official Partner', category: '', value: '', loiStatus: 'pending', docId: '', notes: '' }]; }
+	function add() { sponsors = [...sponsors, { name: '', category: '', value: '', loiStatus: 'pending', docId: '', notes: '' }]; }
 	function remove(i: number) { sponsors = sponsors.filter((_, idx) => idx !== i); }
 
 	const inputClass = 'w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/50';
@@ -27,7 +27,7 @@
 	<div>
 		<a href="/admin/content" class="text-xs text-white/30 hover:text-white/60 transition-colors">← Content Editor</a>
 		<h1 class="text-2xl font-black text-white mt-1">Sponsorships</h1>
-		<p class="text-sm text-white/50 mt-1">Enter each sponsor's details and LOI status. Upload the actual LOI PDFs via Admin → Documents.</p>
+		<p class="text-sm text-white/50 mt-1">Enter each sponsor and LOI status. Upload the actual LOI PDFs via Admin → Documents.</p>
 	</div>
 
 	{#if form?.error}
@@ -48,7 +48,7 @@
 			<div class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-900/15 p-4 flex items-start gap-3">
 				<Info class="h-4 w-4 text-fli-blue-300 shrink-0 mt-0.5" />
 				<p class="text-xs text-white/55 leading-relaxed">
-					Add one entry per sponsor. Set <strong class="text-white/70">LOI Status</strong> to <em>Signed</em> only when the LOI has been executed. The <strong class="text-white/70">Doc ID</strong> links to the uploaded LOI PDF — paste the PocketBase record ID from Admin → Documents. <strong class="text-white/70">Value</strong> is the sponsorship dollar amount or "TBD".
+					Add one entry per sponsor. Set <strong class="text-white/70">LOI Status</strong> to <em>Signed</em> only when the LOI has been executed. The <strong class="text-white/70">Doc ID</strong> links to the uploaded LOI PDF — paste the PocketBase record ID from Admin → Documents. <strong class="text-white/70">Value</strong> is optional and can be "TBD".
 				</p>
 			</div>
 
@@ -65,15 +65,7 @@
 							<label class="block text-xs font-medium text-white/60">Sponsor Name <span class="text-brand-400">*</span></label>
 							<input name="sponsor_{i}_name" bind:value={sponsor.name} required type="text" placeholder="e.g. Acme Corporation" class={inputClass} />
 						</div>
-						<div class="space-y-1">
-							<label class="block text-xs font-medium text-white/60">Tier</label>
-							<select name="sponsor_{i}_tier" bind:value={sponsor.tier} class={inputClass}>
-								<option>Title Sponsor</option>
-								<option>Presenting Sponsor</option>
-								<option>Official Partner</option>
-								<option>Supporting Sponsor</option>
-							</select>
-						</div>
+						<input type="hidden" name="sponsor_{i}_tier" value={sponsor.tier ?? ''} />
 						<div class="space-y-1">
 							<label class="block text-xs font-medium text-white/60">Category / Industry</label>
 							<input name="sponsor_{i}_category" bind:value={sponsor.category} type="text" placeholder="e.g. Beverage, Apparel, Technology" class={inputClass} />
@@ -113,12 +105,23 @@
 				<h3 class="text-sm font-bold text-white mb-3">{sponsors.filter(s => s.name).length} sponsor(s) to save</h3>
 				{#each sponsors.filter(s => s.name) as s}
 					<div class="flex items-center justify-between text-xs py-1.5 border-b border-white/5 last:border-0">
-						<span><span class="font-medium text-white">{s.name}</span><span class="text-white/40"> · {s.tier}</span></span>
+						<span><span class="font-medium text-white">{s.name}</span></span>
 						<span class="{s.loiStatus === 'signed' ? 'text-green-400' : 'text-white/30'} capitalize">{s.loiStatus}</span>
 					</div>
 				{/each}
 				{#if !sponsors.some(s => s.name)}<p class="text-xs text-brand-400">No sponsors entered yet.</p>{/if}
 			</div>
+
+			{#each sponsors as sponsor, i}
+				<input type="hidden" name="sponsor_{i}_name" value={sponsor.name} />
+				<input type="hidden" name="sponsor_{i}_tier" value={sponsor.tier} />
+				<input type="hidden" name="sponsor_{i}_category" value={sponsor.category} />
+				<input type="hidden" name="sponsor_{i}_value" value={sponsor.value} />
+				<input type="hidden" name="sponsor_{i}_loiStatus" value={sponsor.loiStatus} />
+				<input type="hidden" name="sponsor_{i}_docId" value={sponsor.docId} />
+				<input type="hidden" name="sponsor_{i}_notes" value={sponsor.notes} />
+			{/each}
+
 			<p class="text-xs text-white/30">Saving will immediately update the Sponsorships page visible to investors.</p>
 		{/if}
 

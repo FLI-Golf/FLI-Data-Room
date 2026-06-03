@@ -47,3 +47,25 @@
 		transition: background-color 5000s ease-in-out 0s;
 	}
 }
+
+@layer components {
+	/* Global UI contrast/stroke boost for cards and icon accents. */
+	.ui-boost [class*='border-white/10'],
+	.ui-boost [class*='border-white/15'],
+	.ui-boost [class*='border-brand-600/20'],
+	.ui-boost [class*='border-brand-600/30'],
+	.ui-boost [class*='border-brand-500/30'],
+	.ui-boost [class*='border-brand-500/40'] {
+		border-width: 2px;
+	}
+
+	.ui-boost [class*='border-white/15'] {
+		border-color: rgb(255 255 255 / 0.24);
+	}
+
+	.ui-boost svg[class*='text-brand-400'],
+	.ui-boost svg[class*='text-brand-500'],
+	.ui-boost svg[class*='text-red-500'] {
+		color: #ff8f8f;
+	}
+}

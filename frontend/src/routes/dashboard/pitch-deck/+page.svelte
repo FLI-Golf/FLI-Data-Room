@@ -1,6 +1,30 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import DeckImageSlot from '$lib/components/DeckImageSlot.svelte';
 	export let data: PageData;
+
+	type DeckMedia = {
+		id: string;
+		name: string;
+		file: string;
+		alt?: string;
+		collectionId: string;
+	};
+
+	const mediaByName = new Map(
+		((data.media ?? []) as DeckMedia[]).map((m) => [m.name.trim().toLowerCase(), m])
+	);
+
+	function mediaUrl(name: string): string | null {
+		const match = mediaByName.get(name.toLowerCase());
+		if (!match) return null;
+		return `${data.pbUrl}/api/files/${match.collectionId}/${match.id}/${match.file}`;
+	}
+
+	function mediaAlt(name: string, fallback: string): string {
+		const match = mediaByName.get(name.toLowerCase());
+		return match?.alt?.trim() || fallback;
+	}
 
 	const forecast = [
 		{ year: '2026', sales: '$2,824,000',   cogs: '$1,800,000',  expenses: '$2,813,129',  profit: '—',           margin: '—' },
@@ -19,18 +43,46 @@
 		{ name: 'AI Production Infra', stage1: '$500K–$2M',    stage2: '$3M–$10M',  full: '$10M–$50M+',  status: 'SECURED' },
 	];
 
+	const sourceDeckPdfPath = '/decks/FLI_Golf_League_Deck.pdf';
+
 </script>
 <svelte:head><title>Pitch Deck — FLI Golf League</title></svelte:head>
 <div class="space-y-16 max-w-5xl">
-<!-- COVER -->
-<section id="overview" class="rounded-2xl border border-white/10 bg-navy-800/60 p-10 text-center space-y-6">
-	<div class="inline-flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-600/10 px-4 py-1.5 text-xs font-semibold text-white uppercase tracking-widest">
-		Confidential · Presented by Young America Capital
-	</div>
+<section class="rounded-xl border border-yellow-500/25 bg-yellow-500/5 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 	<div>
-		<h1 class="text-4xl font-black text-white tracking-tight leading-tight">FLI GOLF LEAGUE</h1>
-		<p class="mt-2 text-lg font-bold text-white uppercase tracking-widest">Stadium-Style Professional Disc Golf</p>
-		<p class="mt-3 text-white text-sm max-w-xl mx-auto">Engineered for Media, Betting &amp; Franchise Scale · Building the Operating System for the Future of Sports</p>
+		<p class="text-xs font-semibold uppercase tracking-widest text-yellow-300">Deck Source</p>
+		<p class="text-sm text-white/70">Current source PDF: FLI_Golf_League_Deck.pdf</p>
+	</div>
+	<a
+		href={sourceDeckPdfPath}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="inline-flex items-center justify-center rounded-md border border-yellow-400/40 bg-yellow-500/10 px-3 py-2 text-xs font-semibold text-yellow-300 hover:bg-yellow-500/20 transition-colors"
+	>
+		Open Source PDF
+	</a>
+</section>
+<!-- COVER -->
+<section id="overview" class="rounded-2xl border border-white/10 bg-navy-800/60 p-10 space-y-8">
+	<div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+		<div class="space-y-4 text-center lg:text-left">
+			<div class="inline-flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-600/10 px-4 py-1.5 text-xs font-semibold text-white uppercase tracking-widest mx-auto lg:mx-0">
+				Confidential · Presented by Young America Capital
+			</div>
+			<div>
+				<h1 class="text-4xl font-black text-white tracking-tight leading-tight">FLI GOLF LEAGUE</h1>
+				<p class="mt-2 text-lg font-bold text-white uppercase tracking-widest">Stadium-Style Professional Disc Golf</p>
+				<p class="mt-3 text-white text-sm max-w-xl mx-auto lg:mx-0">Engineered for Media, Betting &amp; Franchise Scale · Building the Operating System for the Future of Sports</p>
+			</div>
+		</div>
+		<DeckImageSlot
+			src={mediaUrl('deck-cover-hero-image')}
+			alt={mediaAlt('deck-cover-hero-image', 'Pitch deck cover hero image')}
+			label="deck-cover-hero-image"
+			containerClass="rounded-xl border border-white/10 bg-navy-950/40 p-3 h-full"
+			imageClass="w-full h-full min-h-[280px] max-h-[380px] object-cover rounded-lg"
+			placeholderClass="h-[320px]"
+		/>
 	</div>
 	<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
 		{#each [
@@ -115,6 +167,13 @@
 			</div>
 		</div>
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-opportunity-market-growth-graphic')}
+		alt={mediaAlt('deck-opportunity-market-growth-graphic', 'Opportunity market growth graphic')}
+		label="deck-opportunity-market-growth-graphic"
+		imageClass="mx-auto w-[15%] max-w-full max-h-[360px] object-contain rounded-lg"
+		placeholderClass="h-72"
+	/>
 	<p class="text-xs text-white/25 italic">Picture images for illustrative purposes only. Past performance is not indicative of future results. An investment in the Company's securities is speculative, illiquid and there may be a total risk of loss.</p>
 </section>
 <!-- WHY NOW -->
@@ -140,6 +199,13 @@
 			</div>
 		{/each}
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-why-now-social-proof-collage')}
+		alt={mediaAlt('deck-why-now-social-proof-collage', 'Why now social proof collage')}
+		label="deck-why-now-social-proof-collage"
+		imageClass="mx-auto w-full max-h-[520px] object-contain rounded-lg"
+		placeholderClass="h-[420px]"
+	/>
 	<p class="text-xs text-white/25 italic">Past performance is not indicative of future results. An investment in the Company's securities is speculative, illiquid and there may be a total risk of loss.</p>
 </section>
 <!-- PROBLEM -->
@@ -169,6 +235,14 @@
 			</div>
 		{/each}
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-problem-limitations-visual')}
+		alt={mediaAlt('deck-problem-limitations-visual', 'Problem and limitations visual')}
+		label="deck-problem-limitations-visual"
+		containerClass="rounded-xl border border-brand-600/20 bg-brand-600/5 p-3"
+		imageClass="mx-auto w-[90%] max-w-full max-h-[360px] object-contain rounded-lg"
+		placeholderClass="h-72"
+	/>
 	<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
 		<p class="text-sm text-yellow-300 font-medium">Every one of these barriers has been identified, engineered around, and solved by FLI Golf League before the inaugural season begins.</p>
 	</div>
@@ -197,6 +271,24 @@
 				<p class="text-xs text-yellow-400/80 font-medium">→ {item.arrow}</p>
 			</div>
 		{/each}
+	</div>
+	<div class="grid sm:grid-cols-2 gap-4">
+		<DeckImageSlot
+			src={mediaUrl('deck-solution-stadium-render')}
+			alt={mediaAlt('deck-solution-stadium-render', 'Stadium course render')}
+			label="deck-solution-stadium-render"
+			containerClass="rounded-xl border border-fli-blue-700/30 bg-fli-blue-900/20 p-3"
+			imageClass="w-full max-h-[300px] object-cover rounded-lg"
+			placeholderClass="h-64"
+		/>
+		<DeckImageSlot
+			src={mediaUrl('deck-solution-broadcast-team-photo')}
+			alt={mediaAlt('deck-solution-broadcast-team-photo', 'Broadcast team photo')}
+			label="deck-solution-broadcast-team-photo"
+			containerClass="rounded-xl border border-fli-blue-700/30 bg-fli-blue-900/20 p-3"
+			imageClass="w-full max-h-[300px] object-cover rounded-lg"
+			placeholderClass="h-64"
+		/>
 	</div>
 	<div class="rounded-xl border border-green-500/20 bg-green-500/5 p-4 text-center">
 		<p class="text-sm text-green-300 font-medium">Every problem from the previous slide has a direct, built, and contracted solution already in place. This is not a roadmap. This is a reality.</p>
@@ -229,6 +321,13 @@
 			</div>
 		{/each}
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-tech-platform-stack-diagram')}
+		alt={mediaAlt('deck-tech-platform-stack-diagram', 'Technology platform stack diagram')}
+		label="deck-tech-platform-stack-diagram"
+		imageClass="mx-auto w-[calc(100%+40px)] max-w-none max-h-[520px] object-contain rounded-lg"
+		placeholderClass="h-[420px]"
+	/>
 	<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
 		<p class="text-xs text-yellow-300 font-semibold">Combined Full-Scale Ecosystem Value Potential: $150M+ &nbsp;|&nbsp; 5 Proprietary Platforms &nbsp;|&nbsp; Season 1 Full Activation &nbsp;|&nbsp; ∞ SaaS Licensing Opportunity</p>
 	</div>
@@ -311,17 +410,33 @@
 			<div class="rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-3 text-xs text-yellow-300 font-medium text-center">
 				Fantasy Platform Ready Now — Digital Player Assets · Draft Leagues · Skill-Based Contests · Zero Integration Delay · Activates Season 1
 			</div>
+			<DeckImageSlot
+				src={mediaUrl('deck-gaming-tribal-map')}
+				alt={mediaAlt('deck-gaming-tribal-map', 'Tribal gaming footprint map')}
+				label="deck-gaming-tribal-map"
+				containerClass="rounded-lg border border-white/10 bg-navy-900/40 p-3"
+				imageClass="w-full max-h-[260px] object-cover rounded-lg"
+				placeholderClass="h-52"
+			/>
 		</div>
-		<div class="rounded-xl border border-white/10 bg-navy-800/50 p-6 space-y-4">
-			<div class="flex items-center gap-3">
-				<div class="h-12 w-12 rounded-full bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-lg font-black text-brand-400 shrink-0">GS</div>
+		<div class="space-y-4">
+			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-6 space-y-4">
+				<DeckImageSlot
+					src={mediaUrl('deck-gary-santos-headshot')}
+					alt={mediaAlt('deck-gary-santos-headshot', 'Gary Santos headshot')}
+					label="deck-gary-santos-headshot"
+					containerClass="rounded-lg border border-white/10 bg-navy-900/40 p-3"
+					imageClass="w-full max-h-[240px] object-contain rounded-lg"
+					placeholderClass="h-52"
+				/>
 				<div>
 					<div class="text-sm font-bold text-white">Gary G. Santos</div>
 					<div class="text-xs text-white">Tribal &amp; Gaming — Strategic Lead</div>
 					<div class="text-xs text-white mt-0.5">23 yrs tribal governance · Tule River Indian Tribe · $47M budget managed · IGA Board 10+ yrs</div>
 				</div>
 			</div>
-			<div class="space-y-2">
+
+			<div class="rounded-xl border border-white/10 bg-navy-800/50 p-6 space-y-2">
 				{#each [
 					{ label: 'Tribal Venue Hosting',    body: 'Tribal lands as premier FGL event venues with built-in gaming infrastructure already in place.' },
 					{ label: 'Sportsbook Partnerships', body: 'Licensed sportsbook integration delivering event betting markets and in-play wagering from tournament open.' },
@@ -348,6 +463,13 @@
 		<p class="text-xs font-semibold text-white uppercase tracking-widest mb-1">Competitive Landscape</p>
 		<h2 class="text-2xl font-black text-white">FGL Is Built Different — In Every Dimension</h2>
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-competitive-landscape-graphic')}
+		alt={mediaAlt('deck-competitive-landscape-graphic', 'Competitive landscape graphic')}
+		label="deck-competitive-landscape-graphic"
+		imageClass="w-full max-h-[300px] object-cover rounded-lg"
+		placeholderClass="h-64"
+	/>
 	<div class="rounded-xl border border-white/10 overflow-hidden">
 		<table class="w-full text-xs">
 			<thead>
@@ -415,6 +537,22 @@
 			</div>
 		{/each}
 	</div>
+	<div class="grid sm:grid-cols-2 gap-4">
+		<DeckImageSlot
+			src={mediaUrl('deck-roster-athlete-collage')}
+			alt={mediaAlt('deck-roster-athlete-collage', 'Athlete roster collage')}
+			label="deck-roster-athlete-collage"
+			imageClass="w-full max-h-[320px] object-cover rounded-lg"
+			placeholderClass="h-72"
+		/>
+		<DeckImageSlot
+			src={mediaUrl('deck-roster-highlight-image')}
+			alt={mediaAlt('deck-roster-highlight-image', 'Roster highlight image')}
+			label="deck-roster-highlight-image"
+			imageClass="w-full max-h-[320px] object-cover rounded-lg"
+			placeholderClass="h-72"
+		/>
+	</div>
 	<div class="rounded-xl border border-white/10 bg-navy-800/40 p-6 space-y-4">
 		<p class="text-xs font-bold text-white/60 uppercase tracking-widest">The Most Accomplished Roster in Disc Golf History</p>
 		<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -475,6 +613,13 @@
 			</tbody>
 		</table>
 	</div>
+	<DeckImageSlot
+		src={mediaUrl('deck-financials-growth-chart-image')}
+		alt={mediaAlt('deck-financials-growth-chart-image', 'Financial growth chart')}
+		label="deck-financials-growth-chart-image"
+		imageClass="w-full max-h-[340px] object-contain rounded-lg"
+		placeholderClass="h-72"
+	/>
 	<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
 		{#each [
 			{ year: '2026', label: 'Inaugural Season Launch',       body: 'League operations, Season 1 events, fantasy platform activation, tribal gaming pipeline initiated' },
@@ -557,11 +702,20 @@
 	<!-- YAC Logo box -->
 	<div class="flex justify-center">
 		<div class="rounded-xl bg-white px-8 py-5 inline-flex items-center justify-center shadow-lg">
-			<img
-				src="https://pocketbase-rxik-production.up.railway.app/api/files/pbc_2708086759/fwn423e3tdwgx2m/yac_logo_9r7f1g6cvl.png"
-				alt="Young America Capital"
-				class="h-20 w-auto"
-			/>
+			{#if mediaUrl('deck-contact-yac-logo')}
+				<img
+					src={mediaUrl('deck-contact-yac-logo')}
+					alt="Young America Capital"
+					class="h-20 w-auto"
+				/>
+			{:else}
+				<div class="h-20 w-56 rounded-lg border-2 border-dashed border-navy-800/30 bg-navy-100/60 px-4 flex items-center justify-center text-center">
+					<div>
+						<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-navy-800/70">Replace image</p>
+						<p class="mt-1 text-xs text-navy-800/60">deck-contact-yac-logo</p>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 

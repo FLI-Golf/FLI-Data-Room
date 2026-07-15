@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
 	import {
-		LayoutDashboard, FileText, Disc, Globe, Trophy,
+		LayoutDashboard, FileText, Disc, Globe, Trophy, Heart,
 		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
 		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen
 	} from 'lucide-svelte';
@@ -92,6 +92,17 @@
 		]},
 		{ href: '/dashboard/cap-table',              label: 'Cap Table',           icon: PieChartIcon, pending: true, children: [] },
 		{ href: '/dashboard/how-to-play',            label: 'How to Play',         icon: PlayCircle,  children: [] },
+		{ href: '/dashboard/grass-league',           label: 'Grass League',         icon: Trophy,      children: [
+			{ id: 'key-takeaways',  label: 'Key Takeaways' },
+			{ id: 'comparison',     label: 'Strategic Comparison' },
+		]},
+		{ href: '/dashboard/humanitarian',           label: 'Humanitarian Prospectus', icon: Heart, children: [
+			{ id: 'overview',        label: 'Overview' },
+			{ id: 'pillars',         label: 'Eight Pillars of Impact' },
+			{ id: 'giving-program',  label: 'Player Giving Program' },
+			{ id: 'partners',        label: '24 Partner Organizations' },
+			{ id: 'closing',         label: 'Long-Term Impact' },
+		]},
 	];
 
 	function slugFromHref(href: string): string {

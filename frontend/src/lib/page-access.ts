@@ -35,6 +35,8 @@ export const ACCESS_PAGES: AccessPage[] = [
 	{ slug: 'cpa-financials',        label: 'CPA Financials',        group: 'Finance',   defaultRole: 'advanced' },
 	{ slug: 'cap-table',             label: 'Cap Table',             group: 'Finance',   defaultRole: 'advanced' },
 	{ slug: 'how-to-play',           label: 'How to Play',           group: 'Core',      defaultRole: 'basic' },
+	{ slug: 'grass-league',          label: 'Grass League',          group: 'Core',      defaultRole: 'advanced' },
+	{ slug: 'humanitarian',          label: 'Humanitarian Prospectus', group: 'Core',    defaultRole: 'basic' },
 	{ slug: 'documents',             label: 'Documents',             group: 'Admin',     defaultRole: 'admin' }
 ];
 

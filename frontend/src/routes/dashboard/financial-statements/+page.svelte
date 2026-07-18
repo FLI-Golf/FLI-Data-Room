@@ -34,7 +34,7 @@
 		</div>
 		<div class="flex items-center justify-center gap-2 text-xs text-yellow-400">
 			<Clock class="h-3.5 w-3.5" />
-			<span>Expected: Q2 2026 · Prepared by CPA</span>
+			<span>Expected: Q3 2026 · Prepared by CPA</span>
 		</div>
 	</div>
 
@@ -71,7 +71,7 @@
 		<div class="space-y-3">
 			{#each [
 				'FLI Golf League is a pre-revenue company. FY 2024 and FY 2025 reflect formation and pre-launch operating expenses only.',
-				'The $7.5M seed round (Q2 2026) is the first institutional capital raise. No prior equity rounds have been completed.',
+				'The $7.5M seed round (Q3 2026) is the first institutional capital raise. No prior equity rounds have been completed.',
 				'Forward-looking financial projections — including the full 2026–2031 P&L model — are available in the CPA Financials section.',
 				'No outstanding debt obligations. The company is debt-free entering the seed round.',
 			] as point}

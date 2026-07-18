@@ -46,7 +46,7 @@
 						class="h-64 sm:h-80 lg:h-[30rem] xl:h-[36rem] w-auto max-w-full"
 					/>
 					<div class="inline-flex items-center rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-400 uppercase tracking-widest lg:-translate-y-[100px]">
-						$7.5M Seed · Q2 2026
+						$7.5M Seed · Q3 2026
 					</div>
 				</div>
 				<div class="-mt-1 lg:-mt-3">

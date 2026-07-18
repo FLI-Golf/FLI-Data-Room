@@ -67,7 +67,7 @@
 		</div>
 		<div>
 			<div class="text-lg font-bold text-white">Cap Table Pending Seed Close</div>
-			<p class="text-sm text-white/45 mt-1 max-w-md mx-auto">Equity structure and ownership percentages will be finalized upon close of the Q2 2026 seed round. The structure, broker, and terms are confirmed below.</p>
+			<p class="text-sm text-white/45 mt-1 max-w-md mx-auto">Equity structure and ownership percentages will be finalized upon close of the Q3 2026 seed round. The structure, broker, and terms are confirmed below.</p>
 		</div>
 		<div class="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto text-left mt-2">
 			{#each [
@@ -75,7 +75,7 @@
 				{ label: 'Round Target',   value: '$7,500,000',                  color: 'text-brand-400' },
 				{ label: 'Placement Agent',value: 'Young America Capital, LLC',  color: 'text-fli-blue-300' },
 				{ label: 'Broker Status',  value: 'SEC Registered · FINRA, SIPC',color: 'text-white' },
-				{ label: 'Timeline',       value: 'Q2 2026',                     color: 'text-yellow-400' },
+				{ label: 'Timeline',       value: 'Q3 2026',                     color: 'text-yellow-400' },
 				{ label: 'Price Per Unit', value: 'TBD at close',                color: 'text-white/50' },
 			] as item}
 				<div class="rounded-lg border border-white/8 bg-white/3 p-3">
@@ -87,11 +87,11 @@
 	</div>
 	{/if}
 
-	<!-- Q2 2026 Seed Round summary -->
+	<!-- Q3 2026 Seed Round summary -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
 		<h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
 			<PieChart class="h-5 w-5 text-brand-400" />
-			Q2 2026 Seed Round
+			Q3 2026 Seed Round
 		</h2>
 		<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
 			{#each [
@@ -188,11 +188,11 @@
 			<h2 class="text-base font-bold text-white">Anticipated Equity Structure</h2>
 			<span class="ml-auto rounded-full bg-yellow-500/15 px-2.5 py-0.5 text-xs font-semibold text-yellow-400">Pre-Close</span>
 		</div>
-		<p class="text-sm text-white/50 mb-5 leading-relaxed">The full cap table — including founder equity, investor allocations, and any option pool — will be published here upon close of the Q2 2026 seed round. The anticipated structure is outlined below.</p>
+		<p class="text-sm text-white/50 mb-5 leading-relaxed">The full cap table — including founder equity, investor allocations, and any option pool — will be published here upon close of the Q3 2026 seed round. The anticipated structure is outlined below.</p>
 		<div class="space-y-3">
 			{#each [
 				{ label: 'Founder / Management Equity', detail: 'Retained common shares — percentage TBD at close', badge: 'Common', color: 'text-brand-400' },
-				{ label: 'Seed Round Investors',        detail: '$7.5M raise · Equity or SAFE · Q2 2026 close', badge: 'Preferred / SAFE', color: 'text-fli-blue-300' },
+				{ label: 'Seed Round Investors',        detail: '$7.5M raise · Equity or SAFE · Q3 2026 close', badge: 'Preferred / SAFE', color: 'text-fli-blue-300' },
 				{ label: 'Option Pool',                 detail: 'Reserved for future employees and advisors — size TBD', badge: 'Options', color: 'text-yellow-400' },
 				{ label: 'Outstanding Loans',           detail: 'No outstanding debt obligations at this time', badge: 'Clean', color: 'text-green-400' },
 			] as row}
@@ -212,7 +212,7 @@
 	<div class="rounded-xl border border-white/10 bg-white/3 p-4 flex items-start gap-3">
 		<Info class="h-4 w-4 text-white/30 shrink-0 mt-0.5" />
 		<p class="text-xs text-white/40 leading-relaxed">
-			Post-money ownership percentages will be updated following close of the Q2 2026 seed round. Any convertible instruments (SAFEs, convertible notes) will convert at the terms specified in their respective agreements. Consult legal counsel for dilution modeling.
+			Post-money ownership percentages will be updated following close of the Q3 2026 seed round. Any convertible instruments (SAFEs, convertible notes) will convert at the terms specified in their respective agreements. Consult legal counsel for dilution modeling.
 		</p>
 	</div>
 

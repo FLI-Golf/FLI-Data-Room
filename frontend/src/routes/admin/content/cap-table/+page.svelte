@@ -65,7 +65,7 @@
 		{#if step === 0}
 			<div class="rounded-xl border border-fli-blue-700/30 bg-fli-blue-900/15 p-4 flex items-start gap-3">
 				<Info class="h-4 w-4 text-fli-blue-300 shrink-0 mt-0.5" />
-				<p class="text-xs text-white/55 leading-relaxed">Enter the Q2 2026 seed round details. <strong class="text-white/70">Raised to Date</strong> should reflect actual capital received, not commitments. Update this as the round closes.</p>
+				<p class="text-xs text-white/55 leading-relaxed">Enter the Q3 2026 seed round details. <strong class="text-white/70">Raised to Date</strong> should reflect actual capital received, not commitments. Update this as the round closes.</p>
 			</div>
 			<div class="rounded-xl border border-white/15 bg-navy-700/50 p-5 space-y-4">
 				<div class="grid sm:grid-cols-2 gap-4">

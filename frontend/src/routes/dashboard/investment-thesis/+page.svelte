@@ -60,13 +60,13 @@
 
 	<!-- Raise details -->
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6">
-		<h2 class="text-lg font-bold text-white mb-5">The Raise — Q2 2026 Seed Round</h2>
+		<h2 class="text-lg font-bold text-white mb-5">The Raise — Q3 2026 Seed Round</h2>
 		<div class="grid sm:grid-cols-2 gap-6">
 			<div class="space-y-4">
 				{#each [
 					{ label: 'Round Size',    value: '$7.5M',                       icon: DollarSign,  color: 'text-yellow-400',   bg: 'bg-yellow-500/15' },
 					{ label: 'Round Type',    value: 'Seed',                         icon: Sprout,      color: 'text-green-400',    bg: 'bg-green-500/15' },
-					{ label: 'Timeline',      value: 'Q2 2026',                      icon: Calendar,    color: 'text-fli-blue-300', bg: 'bg-fli-blue-500/15' },
+					{ label: 'Timeline',      value: 'Q3 2026',                      icon: Calendar,    color: 'text-fli-blue-300', bg: 'bg-fli-blue-500/15' },
 					{ label: 'Presented By',  value: 'Young America Capital, LLC',   icon: Building2,   color: 'text-brand-400',    bg: 'bg-brand-600/15' },
 					{ label: 'Broker Dealer', value: 'SEC Registered · FINRA, SIPC', icon: Shield,      color: 'text-purple-300',   bg: 'bg-purple-500/15' },
 				] as row}

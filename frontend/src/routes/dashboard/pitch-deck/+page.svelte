@@ -646,7 +646,7 @@
 	</div>
 	<div class="rounded-2xl border border-brand-500/30 bg-brand-600/5 p-8 text-center space-y-3">
 		<div class="text-4xl font-black text-white">$7.5M Seed Round</div>
-		<div class="text-sm text-white font-semibold uppercase tracking-widest">Inaugural Season Launch Capital · Raising Now · Q2 2026</div>
+		<div class="text-sm text-white font-semibold uppercase tracking-widest">Inaugural Season Launch Capital · Raising Now · Q3 2026</div>
 		<div class="text-xs text-white">Presented by Young America Capital</div>
 	</div>
 	<div class="rounded-xl border border-white/10 bg-navy-800/40 p-6 space-y-3">

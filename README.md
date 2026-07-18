@@ -202,7 +202,7 @@ The data room was built intentionally broad — include more than needed, then r
 ### 🟡 Medium Priority — Duplicate Content Across Pages
 
 #### 3. $7.5M seed round details on 7+ pages
-The same raise facts — $7.5M, Q2 2026, Young America Capital, SEC/FINRA/SIPC, 4-bucket use of proceeds — appear verbatim on `investment-thesis/`, `proceeds/`, `cap-table/`, `financial-statements/`, `cpa-financials/`, `pitch-deck/`, and the landing page.
+The same raise facts — $7.5M, Q3 2026, Young America Capital, SEC/FINRA/SIPC, 4-bucket use of proceeds — appear verbatim on `investment-thesis/`, `proceeds/`, `cap-table/`, `financial-statements/`, `cpa-financials/`, `pitch-deck/`, and the landing page.
 
 **Plan:** Keep `proceeds/` as the canonical detail page. All other pages show a single stat card and link to it.
 

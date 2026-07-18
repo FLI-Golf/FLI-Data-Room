@@ -14,7 +14,7 @@
 			label: 'Seed Round',
 			red: true,
 			tooltip: [
-				'Q2 2026 seed round presented by Young America Capital, LLC',
+				'Q3 2026 seed round presented by Young America Capital, LLC',
 				'SEC-registered broker dealer · FINRA, SIPC member',
 				'Funds event production (35%), league ops (25%), media (20%), marketing & reserve (20%)',
 				'Targets first-mover advantage before any competing stadium disc golf property exists',
@@ -146,7 +146,7 @@
 <div class="max-w-6xl space-y-10 lg:ml-8 xl:ml-16 2xl:ml-24">
 	<div>
 		<h1 class="text-3xl font-black text-white">Welcome, {data.user?.name?.split(' ')[0]}.</h1>
-		<p class="mt-1 text-white/50">FLI Golf League · Investor Data Room · Q2 2026 Seed Round</p>
+		<p class="mt-1 text-white/50">FLI Golf League · Investor Data Room · Q3 2026 Seed Round</p>
 	</div>
 
 	<!-- Raise summary -->
@@ -322,7 +322,7 @@
 				</div>
 				<div class="text-white font-bold group-hover:text-yellow-400 transition-colors">Investment Thesis</div>
 			</div>
-			<div class="text-sm text-white/50">$7.5M seed · Q2 2026</div>
+			<div class="text-sm text-white/50">$7.5M seed · Q3 2026</div>
 		</a>
 		{/if}
 

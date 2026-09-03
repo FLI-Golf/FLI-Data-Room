@@ -27,6 +27,7 @@ export const ACCESS_PAGES: AccessPage[] = [
 	{ slug: 'legal',                 label: 'Legal / Disclaimers',   group: 'Core',      defaultRole: 'basic' },
 	{ slug: 'management',            label: 'Management & Team',     group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'industry-reports',      label: 'Industry Reports',      group: 'Core',      defaultRole: 'advanced' },
+	{ slug: 'revenue-precedent',     label: 'Revenue Precedent Report', group: 'Core',   defaultRole: 'advanced' },
 	{ slug: 'sponsorships',          label: 'Sponsorships',          group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'player-commitments',    label: 'Player Commitments',    group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'inaugural-venue',       label: 'Inaugural Venue',       group: 'Core',      defaultRole: 'advanced' },

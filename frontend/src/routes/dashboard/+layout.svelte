@@ -4,7 +4,7 @@
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy, Heart,
 		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
-		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen
+		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen, LineChart
 	} from 'lucide-svelte';
 	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
@@ -76,6 +76,19 @@
 			{ id: 'directors',   label: 'Directors' },
 		]},
 		{ href: '/dashboard/industry-reports',       label: 'Industry Reports',    icon: BarChart2,   children: [] },
+		{ href: '/dashboard/revenue-precedent',      label: 'Revenue Precedent Report', icon: LineChart, children: [
+			{ id: 'executive-conclusion', label: 'Executive Conclusion' },
+			{ id: 'ipl-case-study',       label: 'IPL Case Study' },
+			{ id: 'formula-e-case-study', label: 'Formula E Case Study' },
+			{ id: 'revenue-catalysts',    label: 'Revenue Catalysts' },
+			{ id: 'fgl-architecture',     label: 'FGL Revenue Architecture' },
+			{ id: 'proof-by-phase',       label: 'Proof by Phase' },
+			{ id: 'risks-failure-modes',  label: 'Risks & Failure Modes' },
+			{ id: 'board-oversight',      label: 'Board Oversight' },
+			{ id: 'diligence-checklist',  label: 'Diligence Checklist' },
+			{ id: 'external-positioning', label: 'External Positioning' },
+			{ id: 'conclusion',           label: 'Conclusion' },
+		]},
 		{ href: '/dashboard/sponsorships',           label: 'Sponsorships',        icon: Handshake,   children: [] },
 		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, children: [] },
 		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      children: [] },

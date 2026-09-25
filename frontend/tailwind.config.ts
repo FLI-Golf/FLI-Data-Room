@@ -5,24 +5,24 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// Navy — primary backgrounds
+				// Navy — primary backgrounds (lightened from the original near-black navy)
 				navy: {
-					950: '#111f6a',
-					900: '#172a85',
-					800: '#1e3499',
-					700: '#2540b0',
-					600: '#2d4dc5'
+					950: '#1c2f7d',
+					900: '#253a94',
+					800: '#2f47ab',
+					700: '#3a58c2',
+					600: '#4a6ad6'
 				},
-				// brand mapped to red — all existing brand- classes become red
+				// brand — now orange instead of red; all existing brand- classes become orange
 				brand: {
-					50:  '#fff1f1',
-					100: '#ffe0e0',
-					300: '#fca5a5',
-					400: '#fc5c5c',
-					500: '#e53e3e',
-					600: '#c0392b',
-					700: '#991b1b',
-					900: '#450f0f'
+					50:  '#fff4ec',
+					100: '#ffe4cc',
+					300: '#ffb787',
+					400: '#ff9c52',
+					500: '#f97316',
+					600: '#ea580c',
+					700: '#c2410c',
+					900: '#7c2d12'
 				},
 				// fli-blue — supporting UI, financial positives, info
 				'fli-blue': {
@@ -33,6 +33,24 @@ export default {
 					500: '#3b82f6',
 					400: '#60a5fa',
 					300: '#93c5fd'
+				},
+				// fg — FG Sports Technologies presentation palette (scoped to that section only)
+				fg: {
+					cream:  '#f7f2e9',
+					cream2: '#efe8d8',
+					cream3: '#b8cad8',
+					ink:    '#0e1e2a',
+					// "green" kept as the token name for backwards compat; shifted to a deep navy/teal-blue.
+					green: {
+						900: '#0a2233',
+						800: '#0f3247',
+						700: '#154257',
+						600: '#1c5570'
+					},
+					mint:  '#7ec8e8',
+					teal:  '#2596c4',
+					cyan:  '#3bb0d9',
+					gold:  '#e0b23c'
 				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

@@ -163,6 +163,20 @@
 		<p class="mt-1 text-white/50">Building the Operating System for the Future of Sports</p>
 	</div>
 
+	<!-- Disambiguation: this is the FLI Golf League tech overview, not the FG Sports Technologies deck -->
+	<div class="rounded-xl border border-fli-blue-600/40 bg-fli-blue-800/10 px-5 py-4 flex flex-wrap items-center justify-between gap-3">
+		<p class="text-sm text-white/70">
+			This page is FLI Golf League's internal technology overview. The standalone technology company —
+			with its own financing request and financial projections — lives in its own investor section.
+		</p>
+		<a
+			href="/dashboard/fg-sports-technologies"
+			class="shrink-0 inline-flex items-center gap-1.5 rounded-md bg-fli-blue-600/20 border border-fli-blue-500/40 px-3 py-1.5 text-xs font-semibold text-fli-blue-300 hover:bg-fli-blue-600/30 transition-colors"
+		>
+			View FG Sports Technologies →
+		</a>
+	</div>
+
 	<!-- Executive overview stats -->
 	<div class="rounded-xl border border-brand-500/60 bg-brand-600/8 p-8">
 		<div class="flex items-center gap-2 mb-1">
@@ -278,9 +292,9 @@
 	<div id="value-table">
 		<div class="flex items-center gap-2 mb-2">
 			<BarChart2 class="h-5 w-5 text-white/40" />
-			<h2 class="text-lg font-bold text-white">The Digital Asset Stack</h2>
+			<h2 class="text-lg font-bold text-white">FLI Golf League Technology Portfolio</h2>
 		</div>
-		<p class="text-sm text-white/50 mb-5">Five proprietary platforms. One integrated ecosystem. Compounding defensibility.</p>
+			<p class="text-sm text-white/50 mb-5">Five proprietary technology assets developed to support FLI Golf League, with future licensing potential.</p>
 		<div class="rounded-xl border border-white/15 bg-navy-700/50 overflow-hidden">
 			<table class="w-full text-sm">
 				<thead>
@@ -311,7 +325,7 @@
 						<td class="px-5 py-4 text-sm font-black text-white" colspan="3">
 							<div class="flex items-center gap-2">
 								<Trophy class="h-4 w-4 text-brand-400" />
-								Combined Full-Scale Ecosystem Value Potential
+								Illustrative Full-Scale Platform Value Potential
 							</div>
 						</td>
 						<td class="px-5 py-4 text-right text-xl font-black text-brand-400">$150M+</td>
@@ -319,6 +333,10 @@
 				</tfoot>
 			</table>
 		</div>
+		<p class="mt-3 text-xs leading-relaxed text-white/40">
+			This illustrative platform-value estimate is separate from FG Sports Technologies' management revenue
+			projections and is not a valuation, revenue forecast, or guarantee of future performance.
+		</p>
 	</div>
 
 	<!-- Competitive moat -->

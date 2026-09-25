@@ -38,6 +38,7 @@ export const ACCESS_PAGES: AccessPage[] = [
 	{ slug: 'how-to-play',           label: 'How to Play',           group: 'Core',      defaultRole: 'basic' },
 	{ slug: 'grass-league',          label: 'Grass League',          group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'humanitarian',          label: 'Humanitarian Prospectus', group: 'Core',    defaultRole: 'basic' },
+	{ slug: 'fg-sports-technologies', label: 'FG Sports Technologies', group: 'FG Sports Technologies', defaultRole: 'basic' },
 	{ slug: 'documents',             label: 'Documents',             group: 'Admin',     defaultRole: 'admin' }
 ];
 

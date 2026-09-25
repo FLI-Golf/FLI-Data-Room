@@ -4,7 +4,7 @@
 	import {
 		LayoutDashboard, FileText, Disc, Globe, Trophy, Heart,
 		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
-		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen, LineChart
+		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen, LineChart, Rocket, ChevronDown
 	} from 'lucide-svelte';
 	import * as LucideIcons from 'lucide-svelte';
 	export let data: LayoutData;
@@ -12,7 +12,6 @@
 	$: previewSuffix = data.previewRole ? `?view=${data.previewRole}` : '';
 
 	const nav = [
-		{ href: '/dashboard',                        label: 'Dashboard',           icon: LayoutDashboard, children: [] },
 		{ href: '/dashboard/pitch-deck',             label: 'Pitch Deck',          icon: FileText, children: [
 			{ id: 'overview',       label: 'Overview' },
 			{ id: 'limitations',    label: 'Limitations & Fix' },
@@ -118,6 +117,21 @@
 		]},
 	];
 
+	const techNav = [
+		{ href: '/dashboard/fg-sports-technologies', label: 'FG Sports Technologies', icon: Rocket, children: [
+			{ id: 'overview',    label: 'Overview' },
+			{ id: 'structure',   label: 'Company Structure' },
+			{ id: 'platforms',   label: 'FLIHub + FGF Fantasy' },
+			{ id: 'market',      label: 'Market Opportunity' },
+			{ id: 'ai',          label: 'Embedded AI' },
+			{ id: 'revenue',     label: 'Revenue Model' },
+			{ id: 'projections', label: 'Financial Projections' },
+			{ id: 'partner',     label: 'Development Partner' },
+			{ id: 'financing',   label: 'Financing Request' },
+			{ id: 'contact',     label: 'Investor Contact' },
+		]},
+	];
+
 	function slugFromHref(href: string): string {
 		return href === '/dashboard' ? 'dashboard' : href.replace('/dashboard/', '');
 	}
@@ -127,10 +141,22 @@
 	}
 
 	$: allowedSlugs = new Set(data.visibleSlugs ?? []);
-	$: visibleNav = nav.filter((item) => allowedSlugs.has(slugFromHref(item.href)));
+	$: isTechPreview = data.previewRole === 'tech';
+	$: visibleNav = isTechPreview ? [] : nav.filter((item) => allowedSlugs.has(slugFromHref(item.href)));
+	$: visibleTechNav = techNav.filter((item) => allowedSlugs.has(slugFromHref(item.href)));
 
 	$: activePath = $page.url.pathname;
 	$: activeHash = $page.url.hash;
+
+	let openGroup: 'fli' | 'fg' | null = null;
+	$: {
+		if (visibleNav.some((item) => activePath === item.href)) openGroup = 'fli';
+		else if (visibleTechNav.some((item) => activePath === item.href)) openGroup = 'fg';
+	}
+
+	function toggleGroup(group: 'fli' | 'fg') {
+		openGroup = openGroup === group ? null : group;
+	}
 
 	import { onMount } from 'svelte';
 
@@ -194,7 +220,13 @@
 				</div>
 
 
-				<div class="space-y-0.5">
+				{#if !isTechPreview && visibleNav.length > 0}
+					<button type="button" on:click={() => toggleGroup('fli')} class="flex w-full items-center justify-between gap-2.5 rounded-xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 px-3 py-3 text-left text-sm font-semibold text-white transition-all duration-200 hover:bg-fli-blue-600/75 hover:border-fli-blue-200">
+						<span class="flex items-start gap-2.5"><Disc class="h-4 w-4 shrink-0 text-fli-blue-200 mt-0.5" /><span><span class="block">FLI Golf League</span><span class="mt-0.5 block text-xs font-normal text-fli-blue-100/75">Sport, league, media &amp; sponsorship</span></span></span>
+						<ChevronDown class="h-3.5 w-3.5 text-fli-blue-100 transition-transform {openGroup === 'fli' ? 'rotate-180' : ''}" />
+					</button>
+					{#if openGroup === 'fli'}
+					<div class="space-y-0.5">
 					{#each visibleNav as item}
 						{@const active = activePath === item.href}
 						<a
@@ -207,10 +239,8 @@
 							{/if}
 							<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
 							{item.label}
-
 						</a>
 
-						<!-- Sub-nav: only show when this page is active and has children -->
 						{#if active && item.children.length > 0}
 							<div class="ml-4 pl-3 border-l border-white/10 space-y-0.5 mb-1">
 								{#each item.children as child}
@@ -228,6 +258,46 @@
 						{/if}
 					{/each}
 				</div>
+					{/if}
+				{/if}
+
+				{#if visibleTechNav.length > 0}
+					<div class="mt-3 pt-3 border-t border-white/10">
+						<button type="button" on:click={() => toggleGroup('fg')} class="flex w-full items-center justify-between gap-2.5 rounded-xl border-2 border-fg-teal/60 bg-fg-green-900/85 px-3 py-3 text-left text-sm font-semibold text-white transition-all duration-200 hover:bg-fg-green-800 hover:border-fg-cyan">
+							<span class="flex items-start gap-2.5"><Rocket class="h-4 w-4 shrink-0 text-fg-cyan mt-0.5" /><span><span class="block">FG Sports Technologies</span><span class="mt-0.5 block text-xs font-normal text-fg-cyan/75">FLIHub, FGF Fantasy, AI &amp; licensing</span></span></span>
+							<ChevronDown class="h-3.5 w-3.5 text-fg-cyan transition-transform {openGroup === 'fg' ? 'rotate-180' : ''}" />
+						</button>
+						{#if openGroup === 'fg'}
+						<div class="space-y-0.5">
+							{#each visibleTechNav as item}
+								{@const active = activePath === item.href}
+								<a
+									href={withPreview(item.href)}
+									class="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors relative
+										{active ? 'bg-white/10 text-white' : 'text-white/50 hover:bg-white/6 hover:text-white'}"
+								>
+									{#if active}
+										<span class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-brand-500 rounded-r"></span>
+									{/if}
+									<svelte:component this={item.icon} class="h-4 w-4 shrink-0 {active ? 'text-brand-400' : 'text-white/25'}" />
+									{item.label}
+								</a>
+								{#if active && item.children.length > 0}
+									<div class="ml-4 pl-3 border-l border-white/10 space-y-0.5 mb-1">
+										{#each item.children as child}
+											{@const subActive = activeSection === child.id}
+											<a href="{withPreview(item.href)}#{child.id}" class="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors {subActive ? 'text-white bg-white/8' : 'text-white/40 hover:text-white hover:bg-white/6'}">
+												<Hash class="h-3 w-3 shrink-0 {subActive ? 'text-brand-400' : 'text-white/20'}" />
+												{child.label}
+											</a>
+										{/each}
+									</div>
+								{/if}
+							{/each}
+						</div>
+						{/if}
+					</div>
+				{/if}
 
 				<!-- Dynamic sections -->
 				{#if data.sections?.length > 0}
@@ -283,6 +353,10 @@
 									<a href="/dashboard?view=advanced" class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
 										<span>Data Room Advanced</span>
 										<span class="text-xs text-white/30">Advanced</span>
+									</a>
+									<a href="/dashboard?view=tech" class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-colors">
+										<span>Data Room Tech</span>
+										<span class="text-xs text-white/30">Tech</span>
 									</a>
 								</div>
 					</div>

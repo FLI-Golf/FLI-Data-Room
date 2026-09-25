@@ -32,7 +32,12 @@
 		{ name: 'deck-roster-athlete-collage', tag: 'team', note: 'Top player collage' },
 		{ name: 'deck-roster-highlight-image', tag: 'team', note: 'Signature roster moment still image' },
 		{ name: 'deck-financials-growth-chart-image', tag: 'misc', note: 'Financial trajectory chart image' },
-		{ name: 'deck-contact-yac-logo', tag: 'logo', note: 'Young America Capital logo asset' }
+		{ name: 'deck-contact-yac-logo', tag: 'logo', note: 'Young America Capital logo asset' },
+		{ name: 'fg-cover-hero-image', tag: 'background', note: 'FG Sports Technologies cover hero visual' },
+		{ name: 'fg-connected-platform-stadium-image', tag: 'background', note: 'Connected platform night stadium visual' },
+		{ name: 'fg-market-globe-image', tag: 'background', note: 'Global fantasy market opportunity globe graphic' },
+		{ name: 'fg-partner-headshot', tag: 'team', note: 'Kevin Coghlan / development partner headshot' },
+		{ name: 'fg-yac-logo', tag: 'logo', note: 'Young America Capital logo asset (FG deck)' }
 	] as const;
 
 	function fileUrl(record: { collectionId: string; id: string; file: string }) {
@@ -87,8 +92,8 @@
 	<div class="rounded-xl border border-white/15 bg-navy-700/50 p-6 space-y-4">
 		<div class="flex items-start justify-between gap-4">
 			<div>
-				<h2 class="text-base font-bold text-white">Pitch Deck Image Placeholders</h2>
-				<p class="mt-1 text-sm text-white/50">Use these exact names when uploading so the deck image mapping stays consistent. Missing assets render a "Replace image" preview box.</p>
+				<h2 class="text-base font-bold text-white">Deck Image Placeholders</h2>
+				<p class="mt-1 text-sm text-white/50">Use these exact names when uploading so the Pitch Deck and FG Sports Technologies image mappings stay consistent. Missing assets render a "Replace image" preview box.</p>
 			</div>
 			<div class="rounded-full border border-white/20 bg-navy-900/70 px-3 py-1 text-xs text-white/80">
 				{placeholdersDone}/{deckImagePlaceholders.length} uploaded

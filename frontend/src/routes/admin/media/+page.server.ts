@@ -44,7 +44,9 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	upload: async ({ request }) => {
+	upload: async ({ request, locals }) => {
+		if (locals.user?.role !== 'admin') return fail(403, { error: 'Admin access required.' });
+
 		const data = await request.formData();
 		const name = data.get('name')?.toString();
 		const tag = data.get('tag')?.toString();
@@ -56,9 +58,11 @@ export const actions: Actions = {
 			return fail(400, { error: 'Name, tag, and file are required.' });
 		}
 
-		const allowed = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/gif', 'image/webp'];
+		// Must match the PocketBase `media` collection's file field mimeTypes exactly,
+		// otherwise PocketBase rejects the upload with a less helpful error.
+		const allowed = ['image/jpeg', 'image/png', 'image/webp'];
 		if (!allowed.includes(file.type)) {
-			return fail(400, { error: 'Only JPEG, PNG, SVG, GIF, and WebP files are allowed.' });
+			return fail(400, { error: 'Only JPEG, PNG, and WebP files are allowed.' });
 		}
 
 		try {
@@ -86,7 +90,9 @@ export const actions: Actions = {
 		}
 	},
 
-	update: async ({ request }) => {
+	update: async ({ request, locals }) => {
+		if (locals.user?.role !== 'admin') return fail(403, { error: 'Admin access required.' });
+
 		const data = await request.formData();
 		const id = data.get('id')?.toString();
 		const name = data.get('name')?.toString();
@@ -113,7 +119,9 @@ export const actions: Actions = {
 		}
 	},
 
-	delete: async ({ request }) => {
+	delete: async ({ request, locals }) => {
+		if (locals.user?.role !== 'admin') return fail(403, { error: 'Admin access required.' });
+
 		const data = await request.formData();
 		const id = data.get('id')?.toString();
 		if (!id) return fail(400, { error: 'Missing record ID.' });

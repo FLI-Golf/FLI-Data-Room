@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
-	import { BarChart2, Table2, Presentation, Disc, TrendingUp, Trophy, DollarSign, Star, FileText, Briefcase, Handshake, UserSquare2, MapPin, Receipt, PieChart, PlayCircle } from 'lucide-svelte';
+	import { BarChart2, Table2, Presentation, Disc, TrendingUp, Trophy, Cpu, DollarSign, Star, FileText, Briefcase, Handshake, UserSquare2, MapPin, Receipt, PieChart, PlayCircle } from 'lucide-svelte';
 
 	export let data: PageData;
 
@@ -140,14 +140,50 @@
 </script>
 
 <svelte:head>
-	<title>Dashboard — FLI Golf Data Room</title>
+	<title>Investor Data Room</title>
 </svelte:head>
 
 <div class="max-w-6xl space-y-10 lg:ml-8 xl:ml-16 2xl:ml-24">
 	<div>
-		<h1 class="text-3xl font-black text-white">Welcome, {data.user?.name?.split(' ')[0]}.</h1>
-		<p class="mt-1 text-white/50">FLI Golf League · Investor Data Room · Q3 2026 Seed Round</p>
+		<h1 class="text-3xl font-black text-white">Investor Data Room</h1>
+		<p class="mt-1 text-white/50">Welcome, {data.user?.name?.split(' ')[0]}. Review the connected FLI Golf League and FG Sports Technologies opportunities from the sidebar.</p>
 	</div>
+
+	<div class="rounded-xl border-2 border-white/20 bg-navy-700/45 p-5">
+		<div class="text-xs font-semibold uppercase tracking-widest text-white/40">Two connected investment areas</div>
+		<p class="mt-2 max-w-3xl text-sm leading-relaxed text-white/65">
+			FLI Golf League covers the sport, league, media and sponsorship opportunity. FG Sports Technologies covers
+			FLIHub, FGF Fantasy, embedded AI, licensing and technology financing.
+		</p>
+	</div>
+
+	<div class="grid md:grid-cols-2 gap-5">
+		{#if canSee('pitch-deck')}
+			<a href="/dashboard/pitch-deck" class="group rounded-2xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 p-7 shadow-lg shadow-fli-blue-900/20 transition-all duration-200 hover:-translate-y-1 hover:border-fli-blue-200 hover:bg-fli-blue-600/75 hover:shadow-xl hover:shadow-fli-blue-900/35">
+				<div class="flex items-start justify-between gap-4">
+					<div class="h-16 w-16 rounded-2xl border border-fli-blue-200/35 bg-fli-blue-500/15 flex items-center justify-center"><Trophy class="h-8 w-8 text-fli-blue-200" /></div>
+					<span class="text-xs font-semibold uppercase tracking-widest text-fli-blue-200">Investment Area 01</span>
+				</div>
+				<h2 class="mt-6 text-2xl font-black text-white">FLI Golf League</h2>
+				<p class="mt-2 text-sm leading-relaxed text-white/60">Sport, league, media &amp; sponsorship</p>
+				<div class="mt-6 text-sm font-semibold text-fli-blue-200 group-hover:text-white transition-colors">Open FLI Golf League <span aria-hidden="true">→</span></div>
+			</a>
+		{/if}
+
+		{#if canSee('fg-sports-technologies')}
+			<a href="/dashboard/fg-sports-technologies" class="group rounded-2xl border-2 border-fg-teal/60 bg-fg-green-900/85 p-7 shadow-lg shadow-fg-green-900/25 transition-all duration-200 hover:-translate-y-1 hover:border-fg-cyan hover:bg-fg-green-800 hover:shadow-xl hover:shadow-fg-green-900/45">
+				<div class="flex items-start justify-between gap-4">
+					<div class="h-16 w-16 rounded-2xl border border-fg-cyan/40 bg-fg-cyan/15 flex items-center justify-center"><Cpu class="h-8 w-8 text-fg-cyan" /></div>
+					<span class="text-xs font-semibold uppercase tracking-widest text-fg-cyan">Investment Area 02</span>
+				</div>
+				<h2 class="mt-6 text-2xl font-black text-white">FG Sports Technologies</h2>
+				<p class="mt-2 text-sm leading-relaxed text-white/60">FLIHub, FGF Fantasy, AI &amp; licensing</p>
+				<div class="mt-6 text-sm font-semibold text-fg-cyan group-hover:text-white transition-colors">Open FG Sports Technologies <span aria-hidden="true">→</span></div>
+			</a>
+		{/if}
+	</div>
+
+	<div class="text-xs font-semibold uppercase tracking-widest text-white/35">FLI Golf League snapshot</div>
 
 	<!-- Raise summary -->
 	<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -213,8 +249,6 @@
 			<div class="flex items-center rounded-lg border-2 border-white/20 bg-navy-800/50 p-0.5">
 				<button
 					on:click={() => tab = 'table'}
-					class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors
-						{tab === 'table' ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/70'}"
 				>
 					<Table2 class="h-3.5 w-3.5" />
 					Table

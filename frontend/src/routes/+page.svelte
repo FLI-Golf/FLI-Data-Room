@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { ArrowRight, Cpu, Trophy } from 'lucide-svelte';
 	export let data: PageData;
 </script>
 
@@ -26,7 +27,9 @@
 					Enter Data Room
 				</a>
 			{:else}
-				<a href="/login" class="text-sm font-medium text-white/60 hover:text-white transition-colors">Sign In</a>
+				<a href="/login" class="rounded-md border border-white/25 bg-white/5 px-4 py-2 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors">
+					Sign In
+				</a>
 				<a href="/register" class="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-500 transition-colors">
 					Request Access
 				</a>
@@ -45,19 +48,16 @@
 						alt="FLI Shield Logo"
 						class="h-64 sm:h-80 lg:h-[30rem] xl:h-[36rem] w-auto max-w-full"
 					/>
-					<div class="inline-flex items-center rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-lg font-bold text-yellow-400 uppercase tracking-widest lg:-translate-y-[100px]">
-						$7.5M Seed · Q3 2026
-					</div>
 				</div>
 				<div class="-mt-1 lg:-mt-3">
 					<div class="lg:-translate-y-[100px]">
 						<h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-3">
 							<span class="text-brand-500">FLI Golf</span>
 						</h1>
-						<p class="text-base text-white/60 max-w-lg mx-auto mb-3 leading-relaxed">
+						<p class="text-lg sm:text-xl text-white/70 max-w-xl mx-auto mb-4 leading-relaxed">
 							FLI Golf is not a disc golf league — it is the first sport built specifically for gender equality, betting, media and live entertainment from day one.
 						</p>
-						<p class="text-base text-white/60 max-w-lg mx-auto mb-6 leading-relaxed">
+						<p class="text-lg sm:text-xl text-white/70 max-w-xl mx-auto mb-6 leading-relaxed">
 							FliHub unifies project management, budgets, expenses, sponsors, vendors, people, and league operations into a single business operating system.
 						</p>
 					</div>
@@ -95,6 +95,85 @@
 					<div class="text-xs text-white/50 mt-1 uppercase tracking-wide">{stat.label}</div>
 				</div>
 			{/each}
+		</div>
+	</div>
+</div>
+
+<!-- Investment areas -->
+<div class="bg-navy-900 text-white py-20 px-6">
+	<div class="max-w-7xl mx-auto">
+		<div class="max-w-2xl mb-10">
+			<div class="text-xs font-semibold text-brand-300 uppercase tracking-widest mb-2">Two connected opportunities</div>
+			<h2 class="text-3xl font-black mb-3">Choose the investment area to review.</h2>
+			<p class="text-white/55 leading-relaxed">
+				One data room now contains two distinct investor presentations: the FLI Golf League operating opportunity
+				and the FG Sports Technologies platform opportunity.
+			</p>
+		</div>
+		<div class="grid lg:grid-cols-2 gap-6">
+			<div class="rounded-2xl border border-brand-500/35 bg-navy-800/70 p-8">
+				<div class="flex items-center gap-3 mb-5">
+					<div class="h-10 w-10 rounded-lg bg-brand-500/15 border border-brand-400/30 flex items-center justify-center">
+						<Trophy class="h-5 w-5 text-brand-300" />
+					</div>
+					<div>
+						<div class="text-xs font-semibold uppercase tracking-widest text-brand-300">Investment Area 01</div>
+						<h3 class="text-xl font-black">FLI Golf League</h3>
+					</div>
+				</div>
+				<p class="text-sm text-white/60 leading-relaxed mb-6">
+					The first sport built specifically for gender equality, betting, media and live entertainment from day one.
+					FLIHub unifies project management, budgets, expenses, sponsors, vendors, people and league operations.
+				</p>
+				<div class="flex flex-wrap gap-2 text-xs text-white/45 mb-7">
+					<span class="rounded-full border border-white/10 px-3 py-1">League</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Tournaments</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Players</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Media</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Sponsorships</span>
+				</div>
+				{#if data.user}
+					<a href="/dashboard/pitch-deck" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-300 hover:text-brand-200 transition-colors">
+						Open FLI Golf League deck <ArrowRight class="h-4 w-4" />
+					</a>
+				{:else}
+					<a href="/register" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-300 hover:text-brand-200 transition-colors">
+						Request access <ArrowRight class="h-4 w-4" />
+					</a>
+				{/if}
+			</div>
+
+			<div class="rounded-2xl border border-fli-blue-400/35 bg-fli-blue-900/45 p-8">
+				<div class="flex items-center gap-3 mb-5">
+					<div class="h-10 w-10 rounded-lg bg-fli-blue-400/15 border border-fli-blue-300/30 flex items-center justify-center">
+						<Cpu class="h-5 w-5 text-fli-blue-300" />
+					</div>
+					<div>
+						<div class="text-xs font-semibold uppercase tracking-widest text-fli-blue-300">Investment Area 02</div>
+						<h3 class="text-xl font-black">FG Sports Technologies</h3>
+					</div>
+				</div>
+				<p class="text-sm text-white/60 leading-relaxed mb-6">
+					The technology company powering FGL and the next generation of sports leagues through FLIHub and the FGF Fantasy App.
+					The deck covers embedded AI, recurring revenue, licensing and a $1M technology financing request.
+				</p>
+				<div class="flex flex-wrap gap-2 text-xs text-white/45 mb-7">
+					<span class="rounded-full border border-white/10 px-3 py-1">FLIHub</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">FGF Fantasy</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">AI</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Licensing</span>
+					<span class="rounded-full border border-white/10 px-3 py-1">Technology Financing</span>
+				</div>
+				{#if data.user}
+					<a href="/dashboard/fg-sports-technologies" class="inline-flex items-center gap-2 text-sm font-semibold text-fli-blue-300 hover:text-fli-blue-200 transition-colors">
+						Open FG Sports Technologies deck <ArrowRight class="h-4 w-4" />
+					</a>
+				{:else}
+					<a href="/register" class="inline-flex items-center gap-2 text-sm font-semibold text-fli-blue-300 hover:text-fli-blue-200 transition-colors">
+						Request access <ArrowRight class="h-4 w-4" />
+					</a>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>

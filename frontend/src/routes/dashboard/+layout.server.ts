@@ -16,10 +16,12 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
 
 	const previewView = url.searchParams.get('view');
 	const previewRole =
-		locals.user.role === 'admin' && (previewView === 'basic' || previewView === 'advanced')
+		locals.user.role === 'admin' && (previewView === 'basic' || previewView === 'advanced' || previewView === 'tech')
 			? previewView
 			: null;
-	const effectiveRole = previewRole ?? locals.user.role;
+	// "tech" previews the FG Sports Technologies vertical only; it reuses the
+	// 'advanced' role rank so tech pages (gated at 'advanced') remain visible.
+	const effectiveRole = previewRole === 'tech' ? 'advanced' : (previewRole ?? locals.user.role);
 
 	const accessMap = await getPageAccessMap();
 	const visibleSlugs = ACCESS_PAGES

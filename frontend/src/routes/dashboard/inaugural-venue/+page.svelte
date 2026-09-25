@@ -1,7 +1,32 @@
 <script lang="ts">
 	import { MapPin, Users, Tv, Music, Utensils, Baby, Star, Flag, CheckCircle2, Upload, X } from 'lucide-svelte';
+	import { page } from '$app/stores';
+	import AdminDeckImageSlot from '$lib/components/AdminDeckImageSlot.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
+	$: selectedVenue = $page.url.searchParams.get('venue') === 'arizona-athletic-grounds'
+		? 'arizona-athletic-grounds'
+		: 'turf-paradise';
+	$: isAdmin = data.user?.role === 'admin';
+
+	type VenueMedia = { id: string; name: string; file: string; alt?: string; collectionId: string };
+	const mediaByName = new Map(((data.media ?? []) as VenueMedia[]).map((media) => [media.name, media]));
+	const mediaUrl = (name: string) => {
+		const media = mediaByName.get(name);
+		return media ? `${data.pbUrl}/api/files/${media.collectionId}/${media.id}/${media.file}` : null;
+	};
+
+	const aagHoles = [
+		{ number: 1, title: 'Opening Gate', description: 'A welcoming opening hole framed by the permanent stadium entrance and arrival experience.', prompt: 'Editorial architectural visualization of hole 1 of a permanent stadium-style disc golf course at Arizona Athletic Grounds in Mesa, Arizona, wide fairway, dramatic entry plaza, spectator pathways, professional sports venue lighting, realistic investor presentation render, no text, landscape 16:9.' },
+		{ number: 2, title: 'East Valley Reach', description: 'A strategic early hole designed to introduce the course’s regional desert character and spectator sightlines.', prompt: 'Photorealistic stadium disc golf hole 2 at Arizona Athletic Grounds in Mesa, Arizona, desert landscaping, palm accents, clear throwing lane, grandstands and spectators in the distance, broadcast camera positions, premium sports venue concept art, no text, landscape 16:9.' },
+		{ number: 3, title: 'Home Market', description: 'A fan-facing hole connecting the course to the Phoenix–Mesa–Chandler home market.', prompt: 'Cinematic professional disc golf hole 3 at Arizona Athletic Grounds, Mesa Arizona skyline atmosphere, fans along safe viewing zones, vibrant blue and gold event lighting, tournament-ready stadium course, realistic architectural visualization, no text, landscape 16:9.' },
+		{ number: 4, title: 'Championship Turn', description: 'A technical mid-course hole built for strategic play, replay value and sponsor visibility.', prompt: 'High-end investor deck render of hole 4 at a permanent Arizona Athletic Grounds stadium disc golf course, technical fairway, sponsor activation zones, players competing, spectators with clear sightlines, desert evening light, no text, landscape 16:9.' },
+		{ number: 5, title: 'Community Line', description: 'A flexible hole supporting youth, adaptive and community programming between professional events.', prompt: 'Inclusive year-round stadium disc golf hole 5 at Arizona Athletic Grounds, children and adaptive athletes in a supervised community clinic, accessible paths, professional course design, welcoming family atmosphere, photorealistic, no text, landscape 16:9.' },
+		{ number: 6, title: 'Media Corridor', description: 'A broadcast-oriented hole with room for media, practice activity and content production.', prompt: 'Broadcast production concept for hole 6 at Arizona Athletic Grounds stadium disc golf venue, player practice area, camera operators, media platform, controlled lighting, fans behind barriers, polished sports technology investor render, no text, landscape 16:9.' },
+		{ number: 7, title: 'Activation Tent', description: 'A signature activation hole paired with food, beverage and sponsor hospitality opportunities.', prompt: 'Signature hole 7 at Arizona Athletic Grounds, stadium-style disc golf with an elegant food and beverage activation tent, sponsor hospitality, safe spectator fencing, dramatic sunset over Mesa Arizona, premium photorealistic venue render, no text, landscape 16:9.' },
+		{ number: 8, title: 'Rooftop Finish', description: 'A premium viewing hole using terraces and elevated hospitality to build late-round drama.', prompt: 'Premium rooftop-view concept of hole 8 at Arizona Athletic Grounds stadium disc golf course, elevated terrace hospitality, VIP viewing, athletes competing below, dramatic professional sports atmosphere, Arizona evening sky, realistic investor presentation image, no text, landscape 16:9.' },
+		{ number: 9, title: 'Championship Close', description: 'The closing hole and potential signature image for the FGL Championship destination.', prompt: 'Iconic closing hole 9 at the FLI Golf League stadium course at Arizona Athletic Grounds, packed grandstands, championship final throw, dramatic lighting, stage and media presence, permanent disc golf destination in Mesa Arizona, cinematic photorealism, no text, landscape 16:9.' }
+	];
 
 	type VenueZone = {
 		label: string;
@@ -28,63 +53,63 @@
 		{
 			label: "Children's Zone #1",
 			description: 'First dedicated youth activity area with supervised programming.',
-			icon: Baby, color: 'text-pink-400', border: 'border-pink-500/20', bg: 'bg-pink-500/8',
+			icon: Baby, color: 'text-pink-400', border: 'border-pink-500/30', bg: 'bg-pink-500/12',
 			before: `${PB}/7szqqgnhbobsryc/childrens_zone1_before_b61j7gxkk6.png`,
 			after:  `${PB}/rh3ig0r146pluwq/childrens_zone1_after_h9ijpsc5tl.png`,
 		},
 		{
 			label: "Children's Zone #2",
 			description: 'Second youth zone expanding capacity for family attendance.',
-			icon: Baby, color: 'text-pink-400', border: 'border-pink-500/20', bg: 'bg-pink-500/8',
+			icon: Baby, color: 'text-rose-400', border: 'border-rose-500/30', bg: 'bg-rose-500/12',
 			before: `${PB}/lrheb7kyvmaz9m8/childrens_zone2_before_f1ns37o3q0.png`,
 			after:  `${PB}/972kkn8kvm11yuy/childrens_zone2_after_make3nmz2c.png`,
 		},
 		{
 			label: 'Player Practice Area / Media Area',
 			description: 'Warm-up space for competitors and dedicated broadcast media setup.',
-			icon: Tv, color: 'text-fli-blue-400', border: 'border-fli-blue-700/20', bg: 'bg-fli-blue-800/10',
+			icon: Tv, color: 'text-fli-blue-300', border: 'border-fli-blue-500/30', bg: 'bg-fli-blue-700/15',
 			before: `${PB}/0cb7u3lsbmlnagq/practice_media_before_dztnf2ppzg.png`,
 			after:  `${PB}/0xuivzcn81f8f3n/practice_media_after_lh8905o5a9.png`,
 		},
 		{
 			label: '2nd Floor Terrace / Parents Area #1',
 			description: 'Elevated viewing terrace for parents of children in the youth zones.',
-			icon: Users, color: 'text-brand-400', border: 'border-brand-600/20', bg: 'bg-brand-600/8',
+			icon: Users, color: 'text-brand-300', border: 'border-brand-500/30', bg: 'bg-brand-500/14',
 			before: `${PB}/8rrywqgrhsmt7c3/terrace_parents_before_2sslmv18m6.png`,
 			after:  `${PB}/tow3qlot2vyuxap/terrace_parents_after_dy8orbixbh.png`,
 		},
 		{
 			label: 'Main Vending / Food & Beverage Terrace',
 			description: 'Primary concessions hub serving the main spectator areas.',
-			icon: Utensils, color: 'text-orange-400', border: 'border-orange-500/20', bg: 'bg-orange-500/8',
+			icon: Utensils, color: 'text-orange-300', border: 'border-orange-500/30', bg: 'bg-orange-500/14',
 			before: `${PB}/b02yzsrao8jxzr7/fb_terrace_before_9p5e1u0va6.png`,
 			after:  `${PB}/8y3s8hwtbqc7w77/fb_terrace_after_snxcdqpehg.png`,
 		},
 		{
 			label: 'Holes #1, #2 & #3',
 			description: 'Opening three-hole stretch setting the competitive tone of the round.',
-			icon: Flag, color: 'text-green-400', border: 'border-green-500/20', bg: 'bg-green-500/8',
+			icon: Flag, color: 'text-emerald-300', border: 'border-emerald-500/30', bg: 'bg-emerald-500/14',
 			before: `${PB}/ji3gwwv1oxlq3xe/holes123_before_oi4yalvm3d.png`,
 			after:  `${PB}/qpah6n6meykr1cf/holes123_after_tdunjgksqp.png`,
 		},
 		{
 			label: 'Holes #4, #5 & #6',
 			description: 'Mid-course holes designed for spectator sightlines and strategic play.',
-			icon: Flag, color: 'text-green-400', border: 'border-green-500/20', bg: 'bg-green-500/8',
+			icon: Flag, color: 'text-teal-300', border: 'border-teal-500/30', bg: 'bg-teal-500/14',
 			before: `${PB}/lqjzr85t44714s0/holes456_before_qztg9f40pc.png`,
 			after:  `${PB}/ysoglhtohmb7haw/holes456_after_y20kha8v2b.png`,
 		},
 		{
 			label: 'Hole #7 & On-Course F&B Tent',
 			description: 'Signature hole paired with an on-course food and drink tent; hazard area fenced off for safety.',
-			icon: Utensils, color: 'text-orange-400', border: 'border-orange-500/20', bg: 'bg-orange-500/8',
+			icon: Utensils, color: 'text-cyan-300', border: 'border-cyan-500/30', bg: 'bg-cyan-500/14',
 			before: `${PB}/jw1iog2upz48lfp/hole7_fb_before_tw3vru1z6e.png`,
 			after:  `${PB}/00b6axq8nlgtrjb/hole7_fb_after_hfqjoqfzv2.png`,
 		},
 		{
 			label: 'Holes #8 & #9',
 			description: 'Closing two holes delivering the finishing drama of the stadium round.',
-			icon: Flag, color: 'text-green-400', border: 'border-green-500/20', bg: 'bg-green-500/8',
+			icon: Flag, color: 'text-violet-300', border: 'border-violet-500/30', bg: 'bg-violet-500/14',
 			before: null,
 			after:  `${PB}/eubk6dvqiwyvash/holes89_after_0vtwprxjqx.png`,
 			note: 'No before picture available for this zone.',
@@ -92,14 +117,14 @@
 		{
 			label: 'Stage Field',
 			description: 'Main entertainment stage for pre/post-event performances and ceremonies.',
-			icon: Music, color: 'text-purple-400', border: 'border-purple-500/20', bg: 'bg-purple-500/8',
+			icon: Music, color: 'text-purple-300', border: 'border-purple-500/30', bg: 'bg-purple-500/14',
 			before: `${PB}/syxorw158jhmwsc/stage_before_2lwh43lgyx.png`,
 			after:  `${PB}/fr7tecb2lthoxj8/stage_after_0ilu5011aw.png`,
 		},
 		{
 			label: 'Rooftop Terrace',
 			description: 'Premium elevated viewing area with panoramic course views.',
-			icon: Star, color: 'text-yellow-400', border: 'border-yellow-500/20', bg: 'bg-yellow-500/8',
+			icon: Star, color: 'text-indigo-300', border: 'border-indigo-500/30', bg: 'bg-indigo-500/14',
 			before: `${PB}/waa3uijju50zs3e/rooftop_before_c0avzybjpu.png`,
 			after:  `${PB}/iu556tybwxq2lsa/rooftop_after_ow0ffbrqin.png`,
 		},
@@ -153,31 +178,58 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <svelte:head>
-	<title>Inaugural Venue — FLI Golf Data Room</title>
+	<title>Venues — FLI Golf Data Room</title>
 </svelte:head>
 
 <div class="max-w-5xl space-y-10">
 
 	<!-- Header -->
 	<div>
-		<h1 class="text-3xl font-black text-white">Planned Inaugural Venue</h1>
-		<p class="mt-1 text-white/50">FGL @ Turf Paradise — a full venue breakdown of the confirmed inaugural event site.</p>
+		<h1 class="text-3xl font-black text-white">Venues</h1>
+		<p class="mt-1 text-white/50">Preferred and competing venues for the FLI Golf League stadium-course strategy.</p>
 	</div>
 
-	{#if !hasAdminData}
+	<div class="grid md:grid-cols-2 gap-5">
+		<a href="?venue=turf-paradise" class="group rounded-2xl border-2 border-brand-400/50 bg-brand-600/15 p-6 hover:bg-brand-600/25 transition-all hover:-translate-y-0.5">
+			<div class="flex items-start justify-between gap-4">
+				<div class="h-12 w-12 rounded-xl border border-brand-300/35 bg-brand-500/15 flex items-center justify-center">
+					<MapPin class="h-6 w-6 text-brand-300" />
+				</div>
+				<span class="text-xs font-semibold uppercase tracking-widest text-brand-300">Option 01</span>
+			</div>
+			<h2 class="mt-5 text-xl font-black text-white">Turf Paradise</h2>
+			<p class="mt-1 text-sm text-white/55">Preferred inaugural venue · Phoenix, AZ</p>
+			<div class="mt-5 text-sm font-semibold text-brand-300 group-hover:text-white transition-colors">View venue details →</div>
+		</a>
+
+		<a href="?venue=arizona-athletic-grounds" class="group rounded-2xl border-2 border-fli-blue-400/50 bg-fli-blue-900/45 p-6 hover:bg-fli-blue-900/65 transition-all hover:-translate-y-0.5">
+			<div class="flex items-start justify-between gap-4">
+				<div class="h-12 w-12 rounded-xl border border-fli-blue-300/35 bg-fli-blue-400/15 flex items-center justify-center">
+					<MapPin class="h-6 w-6 text-fli-blue-300" />
+				</div>
+				<span class="text-xs font-semibold uppercase tracking-widest text-fli-blue-300">Option 02</span>
+			</div>
+			<h2 class="mt-5 text-xl font-black text-white">Arizona Athletic Grounds</h2>
+			<p class="mt-1 text-sm text-white/55">Partnership opportunity · Mesa, AZ</p>
+			<div class="mt-5 text-sm font-semibold text-fli-blue-300 group-hover:text-white transition-colors">View venue details →</div>
+		</a>
+	</div>
+
+	{#if selectedVenue === 'turf-paradise' && !hasAdminData && data.user?.role === 'admin'}
 		<div class="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-5 flex items-start gap-3">
 			<Upload class="h-4 w-4 text-yellow-400 shrink-0 mt-0.5" />
 			<div>
 				<div class="text-sm font-semibold text-yellow-400 mb-1">Venue Details Not Yet Entered</div>
 				<p class="text-xs text-white/50 leading-relaxed">
-					Go to <a href="/admin/content/inaugural-venue" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Content Editor → Inaugural Venue</a> to enter venue details. The zone breakdown below is pre-populated.
+					Go to <a href="/admin/content/inaugural-venue" class="text-yellow-400 hover:text-yellow-300 underline">Admin → Content Editor → Venues</a> to enter venue details. The zone breakdown below is pre-populated.
 				</p>
 			</div>
 		</div>
 	{/if}
 
+	{#if selectedVenue === 'turf-paradise'}
 	<!-- Venue hero card -->
-	<div class="rounded-xl border border-brand-500/40 bg-brand-600/10 overflow-hidden">
+	<div id="turf-paradise" class="rounded-xl border border-brand-500/40 bg-brand-600/10 overflow-hidden scroll-mt-6">
 		{#if displayPhotoUrl}
 			<img src={displayPhotoUrl} alt={displayName} class="w-full h-56 object-cover" />
 		{/if}
@@ -256,7 +308,75 @@
 			{/if}
 		</div>
 	</div>
+	{/if}
 
+	<!-- Additional venue opportunity -->
+	{#if selectedVenue === 'arizona-athletic-grounds'}
+	<div id="arizona-athletic-grounds" class="rounded-xl border border-fli-blue-400/40 bg-fli-blue-900/45 p-6 space-y-5 scroll-mt-6">
+		<div class="flex items-start justify-between gap-4 flex-wrap">
+			<div>
+				<div class="text-xs font-semibold uppercase tracking-widest text-fli-blue-300 mb-1">Partnership Opportunity</div>
+				<h2 class="text-2xl font-black text-white">Arizona Athletic Grounds</h2>
+				<div class="flex items-center gap-1.5 mt-1 text-white/45 text-sm"><MapPin class="h-3.5 w-3.5" />Mesa, Arizona</div>
+			</div>
+			<span class="rounded-full bg-fli-blue-400/15 px-3 py-1 text-xs font-semibold text-fli-blue-200">Competing Venue</span>
+		</div>
+		<p class="text-sm leading-relaxed text-white/65">
+			A proposed 10-year partnership opportunity to establish the first permanent stadium-style disc golf destination,
+			with professional events, year-round public play, inclusive programming and a national sports-media identity.
+		</p>
+		<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+			{#each [
+				{ label: 'Baseline', value: '15 tournaments' },
+				{ label: 'Upside', value: '60 tournaments' },
+				{ label: 'Activation', value: '30–120 days' },
+				{ label: 'Year-round', value: '$10 / round' }
+			] as stat}
+				<div class="rounded-lg border border-white/10 bg-navy-950/40 p-3">
+					<div class="text-xs uppercase tracking-wide text-white/35">{stat.label}</div>
+					<div class="mt-1 text-sm font-semibold text-white/80">{stat.value}</div>
+				</div>
+			{/each}
+		</div>
+		<p class="text-xs leading-relaxed text-white/40">
+			Planning model: local spend, attendance, visitor origin, operating days, pricing and revenue allocation remain subject to negotiation and validation.
+		</p>
+	</div>
+	{/if}
+
+	{#if selectedVenue === 'arizona-athletic-grounds'}
+		<section class="space-y-5">
+			<div>
+				<h2 class="text-lg font-bold text-white">Nine-Hole Stadium Course Concept</h2>
+				<p class="mt-1 text-sm text-white/40">Each hole has a dedicated visual prompt for image generation and a protected image slot for the final approved render.</p>
+			</div>
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+				{#each aagHoles as hole}
+					<div class="rounded-xl border border-fli-blue-400/25 bg-fli-blue-900/30 p-4 space-y-3">
+						<div class="flex items-center justify-between">
+							<div class="text-xs font-semibold uppercase tracking-widest text-fli-blue-300">Hole {hole.number}</div>
+							<div class="text-xs text-white/30">AAG concept</div>
+						</div>
+						<AdminDeckImageSlot
+							src={mediaUrl(`fg-aag-hole-${hole.number}`)}
+							alt={`Arizona Athletic Grounds hole ${hole.number}`}
+							name={`fg-aag-hole-${hole.number}`}
+							{isAdmin}
+							label={`Upload hole ${hole.number} render`}
+							prompt={hole.prompt}
+							containerClass="rounded-lg border border-white/10 bg-navy-950/40 p-2"
+							imageClass="w-full h-36 object-cover rounded-md"
+							placeholderClass="h-36"
+						/>
+						<h3 class="text-base font-bold text-white">{hole.title}</h3>
+						<p class="text-xs leading-relaxed text-white/55">{hole.description}</p>
+					</div>
+				{/each}
+			</div>
+		</section>
+	{/if}
+
+	{#if selectedVenue === 'turf-paradise'}
 	<!-- Zone breakdown -->
 	<div>
 		<h2 class="text-lg font-bold text-white mb-1">Venue Zone Breakdown</h2>
@@ -268,8 +388,12 @@
 					on:click={() => openZone(zone)}
 					class="rounded-xl border {zone.border} {zone.bg} p-4 flex items-start gap-3 text-left w-full transition-all hover:brightness-125 hover:scale-[1.02] active:scale-[0.99] cursor-pointer"
 				>
-					<div class="h-8 w-8 rounded-lg bg-navy-900/40 flex items-center justify-center shrink-0">
-						<svelte:component this={zone.icon} class="h-4 w-4 {zone.color}" />
+					<div class="h-14 w-20 rounded-lg bg-navy-900/40 overflow-hidden shrink-0">
+						{#if zone.after || zone.before}
+							<img src={`${zone.after ?? zone.before ?? ''}?thumb=160x100`} alt={zone.label} loading="lazy" class="h-full w-full object-cover" />
+						{:else}
+							<svelte:component this={zone.icon} class="h-5 w-5 {zone.color} m-auto mt-4" />
+						{/if}
 					</div>
 					<div class="min-w-0">
 						<div class="text-sm font-semibold text-white leading-snug">{zone.label}</div>
@@ -302,6 +426,7 @@
 	</div>
 
 	<p class="text-xs text-white/20">Venue information is confidential and subject to the NDA you accepted.</p>
+	{/if}
 </div>
 
 <!-- Zone modal -->

@@ -30,7 +30,7 @@ export const ACCESS_PAGES: AccessPage[] = [
 	{ slug: 'revenue-precedent',     label: 'Revenue Precedent Report', group: 'Core',   defaultRole: 'advanced' },
 	{ slug: 'sponsorships',          label: 'Sponsorships',          group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'player-commitments',    label: 'Player Commitments',    group: 'Core',      defaultRole: 'advanced' },
-	{ slug: 'inaugural-venue',       label: 'Inaugural Venue',       group: 'Core',      defaultRole: 'advanced' },
+	{ slug: 'inaugural-venue',       label: 'Venues',                group: 'Core',      defaultRole: 'advanced' },
 	{ slug: 'financial-projections', label: 'Financial Projections', group: 'Finance',   defaultRole: 'advanced' },
 	{ slug: 'financial-statements',  label: 'Financial Statements',  group: 'Finance',   defaultRole: 'advanced' },
 	{ slug: 'cpa-financials',        label: 'CPA Financials',        group: 'Finance',   defaultRole: 'advanced' },

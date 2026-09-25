@@ -23,13 +23,13 @@
 	const inputClass = 'w-full rounded-md border border-white/15 bg-navy-800/50 px-3 py-2 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/50';
 </script>
 
-<svelte:head><title>Inaugural Venue — Content Editor</title></svelte:head>
+<svelte:head><title>Venues — Content Editor</title></svelte:head>
 
 <div class="max-w-3xl space-y-6">
 	<div>
 		<a href="/admin/content" class="text-xs text-white/30 hover:text-white/60 transition-colors">← Content Editor</a>
-		<h1 class="text-2xl font-black text-white mt-1">Planned Inaugural Venue</h1>
-		<p class="text-sm text-white/50 mt-1">Enter details for the confirmed inaugural venue (Turf Paradise). These appear on the investor-facing venue page.</p>
+		<h1 class="text-2xl font-black text-white mt-1">Venue Candidates</h1>
+		<p class="text-sm text-white/50 mt-1">Enter details for preferred and competing venues. These appear on the investor-facing Venues page.</p>
 	</div>
 
 	{#if form?.success}

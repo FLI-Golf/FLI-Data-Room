@@ -443,7 +443,7 @@
 						<div class="h-8 w-8 rounded-lg bg-white/8 flex items-center justify-center shrink-0">
 							<MapPin class="h-4 w-4 text-brand-300" />
 						</div>
-						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Inaugural Venue</div>
+						<div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">Venues</div>
 					</div>
 					<div class="text-xs text-white/40">Top 2 venue candidates · site analysis</div>
 				</a>

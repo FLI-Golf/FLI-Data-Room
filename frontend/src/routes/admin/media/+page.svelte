@@ -37,7 +37,16 @@
 		{ name: 'fg-connected-platform-stadium-image', tag: 'background', note: 'Connected platform night stadium visual' },
 		{ name: 'fg-market-globe-image', tag: 'background', note: 'Global fantasy market opportunity globe graphic' },
 		{ name: 'fg-partner-headshot', tag: 'team', note: 'Kevin Coghlan / development partner headshot' },
-		{ name: 'fg-yac-logo', tag: 'logo', note: 'Young America Capital logo asset (FG deck)' }
+		{ name: 'fg-yac-logo', tag: 'logo', note: 'Young America Capital logo asset (FG deck)' },
+		{ name: 'fg-aag-hole-1', tag: 'background', note: 'Arizona Athletic Grounds hole 1 render' },
+		{ name: 'fg-aag-hole-2', tag: 'background', note: 'Arizona Athletic Grounds hole 2 render' },
+		{ name: 'fg-aag-hole-3', tag: 'background', note: 'Arizona Athletic Grounds hole 3 render' },
+		{ name: 'fg-aag-hole-4', tag: 'background', note: 'Arizona Athletic Grounds hole 4 render' },
+		{ name: 'fg-aag-hole-5', tag: 'background', note: 'Arizona Athletic Grounds hole 5 render' },
+		{ name: 'fg-aag-hole-6', tag: 'background', note: 'Arizona Athletic Grounds hole 6 render' },
+		{ name: 'fg-aag-hole-7', tag: 'background', note: 'Arizona Athletic Grounds hole 7 render' },
+		{ name: 'fg-aag-hole-8', tag: 'background', note: 'Arizona Athletic Grounds hole 8 render' },
+		{ name: 'fg-aag-hole-9', tag: 'background', note: 'Arizona Athletic Grounds hole 9 render' }
 	] as const;
 
 	function fileUrl(record: { collectionId: string; id: string; file: string }) {

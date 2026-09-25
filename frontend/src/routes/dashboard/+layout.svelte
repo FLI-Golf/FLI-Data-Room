@@ -90,7 +90,7 @@
 		]},
 		{ href: '/dashboard/sponsorships',           label: 'Sponsorships',        icon: Handshake,   children: [] },
 		{ href: '/dashboard/player-commitments',     label: 'Player Commitments',  icon: UserSquare2, children: [] },
-		{ href: '/dashboard/inaugural-venue',        label: 'Inaugural Venue',     icon: MapPin,      children: [] },
+		{ href: '/dashboard/inaugural-venue',        label: 'Venues',              icon: MapPin,      children: [] },
 		{ href: '/dashboard/financial-projections',  label: 'Financial Projections', icon: Table2,    children: [] },
 		{ href: '/dashboard/financial-statements',   label: 'Financial Statements', icon: Receipt,    pending: true, children: [] },
 		{ href: '/dashboard/cpa-financials',         label: 'CPA Financials',       icon: BookOpen,   children: [

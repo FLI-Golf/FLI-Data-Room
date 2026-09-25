@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
 	import {
-		LayoutDashboard, FileText, Disc, Globe, Trophy, Heart,
+		LayoutDashboard, FileText, Disc, Globe, Trophy, Heart, Home, LogOut,
 		TrendingUp, Star, Settings, Users, Image, Hash, Scale, DollarSign, UserCheck, PieChart,
 		Briefcase, BarChart2, Handshake, UserSquare2, MapPin, Table2, Receipt, PieChart as PieChartIcon, PlayCircle, Cpu, BookOpen, LineChart, Rocket, ChevronDown
 	} from 'lucide-svelte';
@@ -201,30 +201,18 @@
 			</a>
 
 			<nav class="flex-1 px-2 py-3 overflow-y-auto">
-				<div class="px-1 pb-3 mb-3 border-b border-white/10">
-					<div class="flex items-center gap-2.5 px-2 py-2 mb-1 rounded-lg bg-white/5">
-						<div class="h-7 w-7 rounded-full bg-brand-600/30 border border-brand-500/40 flex items-center justify-center text-xs font-black text-brand-400 shrink-0">
-							{data.user?.name?.charAt(0) ?? '?'}
-						</div>
-						<div class="min-w-0 flex-1">
-							<div class="text-xs font-semibold text-white truncate">{data.user?.name}</div>
-							<div class="text-xs text-white/35 truncate">{data.user?.email}</div>
-						</div>
-						<span class="shrink-0 rounded-full bg-yellow-500/15 px-1.5 py-0.5 text-xs font-medium text-yellow-400 capitalize">{data.user?.role}</span>
-					</div>
-					<form method="POST" action="/logout">
-						<button type="submit" class="w-full rounded-md px-3 py-1.5 text-left text-sm text-white/35 hover:bg-white/6 hover:text-white transition-colors">
-							Sign Out
-						</button>
-					</form>
-				</div>
+				<div class="px-1 pb-3 mb-3 border-b border-white/10"></div>
 
 
 				{#if !isTechPreview && visibleNav.length > 0}
-					<button type="button" on:click={() => toggleGroup('fli')} class="flex w-full items-center justify-between gap-2.5 rounded-xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 px-3 py-3 text-left text-sm font-semibold text-white transition-all duration-200 hover:bg-fli-blue-600/75 hover:border-fli-blue-200">
-						<span class="flex items-start gap-2.5"><Disc class="h-4 w-4 shrink-0 text-fli-blue-200 mt-0.5" /><span><span class="block">FLI Golf League</span><span class="mt-0.5 block text-xs font-normal text-fli-blue-100/75">Sport, league, media &amp; sponsorship</span></span></span>
-						<ChevronDown class="h-3.5 w-3.5 text-fli-blue-100 transition-transform {openGroup === 'fli' ? 'rotate-180' : ''}" />
-					</button>
+					<div class="flex w-full items-stretch rounded-xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 text-white transition-all duration-200 hover:border-fli-blue-200">
+						<a href={withPreview('/dashboard/pitch-deck')} class="flex min-w-0 flex-1 items-start gap-2.5 px-3 py-3 text-left text-sm font-semibold hover:bg-fli-blue-600/75 rounded-l-lg">
+							<Disc class="h-4 w-4 shrink-0 text-fli-blue-200 mt-0.5" /><span><span class="block">FLI Golf League</span><span class="mt-0.5 block text-xs font-normal text-fli-blue-100/75">Sport, league, media &amp; sponsorship</span></span>
+						</a>
+						<button type="button" aria-label="Toggle FLI Golf League menu" on:click={() => toggleGroup('fli')} class="shrink-0 px-3 text-fli-blue-100 hover:bg-fli-blue-600/75 rounded-r-lg">
+							<ChevronDown class="h-3.5 w-3.5 transition-transform {openGroup === 'fli' ? 'rotate-180' : ''}" />
+						</button>
+					</div>
 					{#if openGroup === 'fli'}
 					<div class="space-y-0.5">
 					{#each visibleNav as item}
@@ -263,10 +251,14 @@
 
 				{#if visibleTechNav.length > 0}
 					<div class="mt-3 pt-3 border-t border-white/10">
-						<button type="button" on:click={() => toggleGroup('fg')} class="flex w-full items-center justify-between gap-2.5 rounded-xl border-2 border-fg-teal/60 bg-fg-green-900/85 px-3 py-3 text-left text-sm font-semibold text-white transition-all duration-200 hover:bg-fg-green-800 hover:border-fg-cyan">
-							<span class="flex items-start gap-2.5"><Rocket class="h-4 w-4 shrink-0 text-fg-cyan mt-0.5" /><span><span class="block">FG Sports Technologies</span><span class="mt-0.5 block text-xs font-normal text-fg-cyan/75">FLIHub, FGF Fantasy, AI &amp; licensing</span></span></span>
-							<ChevronDown class="h-3.5 w-3.5 text-fg-cyan transition-transform {openGroup === 'fg' ? 'rotate-180' : ''}" />
-						</button>
+						<div class="flex w-full items-stretch rounded-xl border-2 border-fg-teal/60 bg-fg-green-900/85 text-white transition-all duration-200 hover:border-fg-cyan">
+							<a href={withPreview('/dashboard/fg-sports-technologies')} class="flex min-w-0 flex-1 items-start gap-2.5 px-3 py-3 text-left text-sm font-semibold hover:bg-fg-green-800 rounded-l-lg">
+								<Rocket class="h-4 w-4 shrink-0 text-fg-cyan mt-0.5" /><span><span class="block">FG Sports Technologies</span><span class="mt-0.5 block text-xs font-normal text-fg-cyan/75">FLIHub, FGF Fantasy, AI &amp; licensing</span></span>
+							</a>
+							<button type="button" aria-label="Toggle FG Sports Technologies menu" on:click={() => toggleGroup('fg')} class="shrink-0 px-3 text-fg-cyan hover:bg-fg-green-800 rounded-r-lg">
+								<ChevronDown class="h-3.5 w-3.5 transition-transform {openGroup === 'fg' ? 'rotate-180' : ''}" />
+							</button>
+						</div>
 						{#if openGroup === 'fg'}
 						<div class="space-y-0.5">
 							{#each visibleTechNav as item}
@@ -364,7 +356,44 @@
 			</nav>
 		</aside>
 
-		<main class="flex-1 p-8">
+		<main class="flex-1 min-w-0 p-8">
+			<nav class="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/15 bg-navy-950/55 px-4 py-3">
+				<div class="flex flex-wrap items-center gap-2">
+					<a href={withPreview('/dashboard')} class="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/70 hover:bg-white/10 hover:text-white transition-colors">
+						<Home class="h-4 w-4" />
+						Home
+					</a>
+					<span class="h-5 w-px bg-white/15"></span>
+					{#if activePath === '/dashboard/fg-sports-technologies'}
+						<a href={withPreview('/dashboard/pitch-deck')} class="inline-flex items-center gap-2 rounded-md bg-fli-blue-700/60 px-3 py-2 text-sm font-semibold text-fli-blue-100 hover:bg-fli-blue-600/70 transition-colors">
+							<Disc class="h-4 w-4" />
+							FLI Golf League Deck
+						</a>
+					{:else}
+						<a href={withPreview('/dashboard/fg-sports-technologies')} class="inline-flex items-center gap-2 rounded-md bg-fg-green-900/80 px-3 py-2 text-sm font-semibold text-fg-cyan hover:bg-fg-green-800 transition-colors">
+							<Rocket class="h-4 w-4" />
+							FG Sports Technologies
+						</a>
+					{/if}
+				</div>
+				<div class="flex items-center gap-3">
+					<div class="flex items-center gap-2.5 rounded-lg bg-white/5 px-3 py-1.5">
+						<div class="h-7 w-7 rounded-full bg-brand-600/30 border border-brand-500/40 flex items-center justify-center text-xs font-black text-brand-400 shrink-0">
+							{data.user?.name?.charAt(0) ?? '?'}
+						</div>
+						<div class="hidden sm:block min-w-0">
+							<div class="text-xs font-semibold text-white truncate">{data.user?.name}</div>
+							<div class="text-xs text-white/35 truncate">{data.user?.email}</div>
+						</div>
+					</div>
+					<form method="POST" action="/logout">
+					<button type="submit" class="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/55 hover:bg-white/10 hover:text-white transition-colors">
+						<LogOut class="h-4 w-4" />
+						Sign Out
+					</button>
+					</form>
+				</div>
+			</nav>
 			<slot />
 		</main>
 	</div>

@@ -118,17 +118,22 @@
 	];
 
 	const techNav = [
-		{ href: '/dashboard/fg-sports-technologies', label: 'FG Sports Technologies', icon: Rocket, children: [
-			{ id: 'overview',    label: 'Overview' },
-			{ id: 'structure',   label: 'Company Structure' },
-			{ id: 'platforms',   label: 'FLIHub + FGF Fantasy' },
-			{ id: 'market',      label: 'Market Opportunity' },
-			{ id: 'ai',          label: 'Embedded AI' },
-			{ id: 'revenue',     label: 'Revenue Model' },
-			{ id: 'projections', label: 'Financial Projections' },
-			{ id: 'partner',     label: 'Development Partner' },
-			{ id: 'financing',   label: 'Financing Request' },
-			{ id: 'contact',     label: 'Investor Contact' },
+		{ href: '/dashboard/fg-sports-technologies', label: 'FLI Sport Technologies', icon: Rocket, children: [
+			{ id: 'overview',       label: 'Overview' },
+			{ id: 'important',      label: 'Important Information' },
+			{ id: 'market',         label: 'Market Opportunity' },
+			{ id: 'company',        label: 'Company Overview' },
+			{ id: 'p1-problem',     label: 'FLIHub Problem' },
+			{ id: 'platforms',      label: 'FLIHub Solution' },
+			{ id: 'p2-problem',     label: 'Fantasy Problem' },
+			{ id: 'fantasy-market', label: 'Fantasy Market' },
+			{ id: 'p2-solution',    label: 'Fantasy Solution' },
+			{ id: 'ai',             label: 'Shared Technology' },
+			{ id: 'leadership',     label: 'Leadership' },
+			{ id: 'partner',        label: 'Development Partner' },
+			{ id: 'projections',    label: 'Five-Year Outlook' },
+			{ id: 'financing',      label: 'Financing Request' },
+			{ id: 'contact',        label: 'Investor Contact' },
 		]},
 	];
 
@@ -253,9 +258,9 @@
 					<div class="mt-3 pt-3 border-t border-white/10">
 						<div class="flex w-full items-stretch rounded-xl border-2 border-fg-teal/60 bg-fg-green-900/85 text-white transition-all duration-200 hover:border-fg-cyan">
 							<a href={withPreview('/dashboard/fg-sports-technologies')} class="flex min-w-0 flex-1 items-start gap-2.5 px-3 py-3 text-left text-sm font-semibold hover:bg-fg-green-800 rounded-l-lg">
-								<Rocket class="h-4 w-4 shrink-0 text-fg-cyan mt-0.5" /><span><span class="block">FG Sports Technologies</span><span class="mt-0.5 block text-xs font-normal text-fg-cyan/75">FLIHub, FGF Fantasy, AI &amp; licensing</span></span>
+								<Rocket class="h-4 w-4 shrink-0 text-fg-cyan mt-0.5" /><span><span class="block">FLI Sport Technologies</span><span class="mt-0.5 block text-xs font-normal text-fg-cyan/75">FLIHub, FLI Fantasy Gaming &amp; shared technology</span></span>
 							</a>
-							<button type="button" aria-label="Toggle FG Sports Technologies menu" on:click={() => toggleGroup('fg')} class="shrink-0 px-3 text-fg-cyan hover:bg-fg-green-800 rounded-r-lg">
+							<button type="button" aria-label="Toggle FLI Sport Technologies menu" on:click={() => toggleGroup('fg')} class="shrink-0 px-3 text-fg-cyan hover:bg-fg-green-800 rounded-r-lg">
 								<ChevronDown class="h-3.5 w-3.5 transition-transform {openGroup === 'fg' ? 'rotate-180' : ''}" />
 							</button>
 						</div>
@@ -321,8 +326,8 @@
 				{/if}
 
 				<!-- Admin -->
-				{#if data.user?.role === 'admin'}
-					<div class="mt-3 pt-3 border-t border-white/10 space-y-0.5">
+				{#if data.user?.role === 'admin' && !data.previewRole}
+					<div class="mt-3 pt-3 border-t border-white/10 space-y-0.5 print:hidden">
 						<div class="px-3 mb-1 text-xs font-semibold text-white/25 uppercase tracking-widest">Admin</div>
 						{#if allowedSlugs.has('documents')}
 									<a href={withPreview('/dashboard/documents')}
@@ -372,7 +377,7 @@
 					{:else}
 						<a href={withPreview('/dashboard/fg-sports-technologies')} class="inline-flex items-center gap-2 rounded-md bg-fg-green-900/80 px-3 py-2 text-sm font-semibold text-fg-cyan hover:bg-fg-green-800 transition-colors">
 							<Rocket class="h-4 w-4" />
-							FG Sports Technologies
+							FLI Sport Technologies
 						</a>
 					{/if}
 				</div>

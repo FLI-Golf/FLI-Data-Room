@@ -46,7 +46,7 @@
 				{placeholderClass}
 			/>
 			{#if src}
-				<span class="absolute inset-3 rounded-xl bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+				<span class="absolute inset-3 rounded-xl bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center print:hidden">
 					<span class="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-fg-ink shadow">
 						<Upload class="h-3 w-3" /> Replace image
 					</span>
@@ -58,7 +58,7 @@
 	{/if}
 
 	{#if isAdmin}
-		<div class="space-y-2">
+		<div class="space-y-2 print:hidden">
 			{#if showUploadForm}
 				<form
 					method="POST"

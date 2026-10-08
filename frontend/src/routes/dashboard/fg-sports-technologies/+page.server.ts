@@ -31,7 +31,14 @@ const placeholderNames = [
 	'fg-connected-platform-stadium-image',
 	'fg-market-globe-image',
 	'fg-partner-headshot',
-	'fg-yac-logo'
+	'fg-yac-logo',
+	'fg-team-andrew-panza',
+	'fg-team-mark-coleman',
+	'fg-team-ina-masten',
+	'fg-team-gary-santos',
+	'fg-advisor-stephen-crystal',
+	'fg-advisor-ricky-wysocki',
+	'fg-advisor-ohn-scoggins'
 ];
 
 async function loadMediaPlaceholders(): Promise<MediaRecord[]> {

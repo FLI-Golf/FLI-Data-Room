@@ -69,3 +69,22 @@
 		color: #ff8f8f;
 	}
 }
+
+/* Print/export: the FLI Sport Technologies deck sets body.printing-fg-deck on mount.
+   Hide dashboard chrome (sidebar, top nav, back-link bar) so exported output matches
+   the investor deck. Admin editing controls carry print:hidden in AdminDeckImageSlot. */
+@media print {
+	body.printing-fg-deck aside,
+	body.printing-fg-deck main > nav,
+	body.printing-fg-deck .fg-deck-chrome {
+		display: none !important;
+	}
+
+	body.printing-fg-deck main {
+		padding: 0 !important;
+	}
+
+	body.printing-fg-deck .-m-8 {
+		margin: 0 !important;
+	}
+}

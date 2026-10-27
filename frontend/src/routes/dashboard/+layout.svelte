@@ -189,8 +189,8 @@
 </script>
 
 <div class="min-h-screen bg-navy-900 text-white">
-	<div class="flex">
-		<aside class="w-64 min-h-screen border-r border-white/10 bg-navy-950 flex flex-col">
+	<div class="flex flex-col lg:flex-row">
+		<aside class="w-full lg:w-64 lg:min-h-screen border-r border-white/10 bg-navy-950 flex flex-col">
 
 			<!-- Logo -->
 			<a href="/dashboard" class="px-5 py-4 border-b border-white/10 flex items-center gap-3 hover:bg-white/5 transition-colors">
@@ -296,6 +296,17 @@
 					</div>
 				{/if}
 
+				{#if allowedSlugs.has('fg-sports-technologies')}
+					<a
+						href={withPreview('/dashboard/fli-sports-technologies-financial-projections')}
+						aria-current={activePath === '/dashboard/fli-sports-technologies-financial-projections' ? 'page' : undefined}
+						class="mt-3 flex items-start gap-2.5 rounded-lg border-2 border-fg-teal/60 bg-fg-green-900/85 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-fg-green-800"
+					>
+						<Table2 class="mt-0.5 h-4 w-4 shrink-0 text-fg-cyan" />
+						<span>FLI Sports Technologies Financial Projections</span>
+					</a>
+				{/if}
+
 				<!-- Dynamic sections -->
 				{#if data.sections?.length > 0}
 					<div class="mt-3 pt-3 border-t border-white/10">
@@ -361,9 +372,9 @@
 			</nav>
 		</aside>
 
-		<main class="flex-1 min-w-0 p-8">
+		<main class="flex-1 min-w-0 p-4 sm:p-8">
 			<nav class="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/15 bg-navy-950/55 px-4 py-3">
-				<div class="flex flex-wrap items-center gap-2">
+				<div class="flex min-w-0 max-w-full flex-wrap items-center gap-2">
 					<a href={withPreview('/dashboard')} class="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/70 hover:bg-white/10 hover:text-white transition-colors">
 						<Home class="h-4 w-4" />
 						Home
@@ -378,6 +389,16 @@
 						<a href={withPreview('/dashboard/fg-sports-technologies')} class="inline-flex items-center gap-2 rounded-md bg-fg-green-900/80 px-3 py-2 text-sm font-semibold text-fg-cyan hover:bg-fg-green-800 transition-colors">
 							<Rocket class="h-4 w-4" />
 							FLI Sport Technologies
+						</a>
+					{/if}
+					{#if allowedSlugs.has('fg-sports-technologies')}
+						<a
+							href={withPreview('/dashboard/fli-sports-technologies-financial-projections')}
+							aria-current={activePath === '/dashboard/fli-sports-technologies-financial-projections' ? 'page' : undefined}
+							class="inline-flex min-w-0 max-w-full items-center gap-2 rounded-md bg-fg-green-900/80 px-3 py-2 text-sm font-semibold text-fg-cyan hover:bg-fg-green-800 transition-colors"
+						>
+							<Table2 class="h-4 w-4 shrink-0" />
+							<span class="min-w-0 break-words">FLI Sports Technologies Financial Projections</span>
 						</a>
 					{/if}
 				</div>

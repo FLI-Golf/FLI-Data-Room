@@ -6,6 +6,7 @@
 	export let data: PageData;
 
 	$: allowedSlugs = new Set(data.visibleSlugs ?? []);
+	$: previewSuffix = data.previewRole ? `?view=${data.previewRole}` : '';
 	const canSee = (slug: string) => allowedSlugs.has(slug);
 
 	const stats = [
@@ -150,17 +151,17 @@
 	</div>
 
 	<div class="rounded-xl border-2 border-white/20 bg-navy-700/45 p-5">
-		<div class="text-xs font-semibold uppercase tracking-widest text-white/40">Two connected investment areas</div>
+		<div class="text-xs font-semibold uppercase tracking-widest text-white/40">Connected investment areas</div>
 		<p class="mt-2 max-w-3xl text-sm leading-relaxed text-white/65">
 			FLI Golf League covers the sport, league, media and sponsorship opportunity. FG Sports Technologies covers
 			FLIHub, FGF Fantasy, embedded AI, licensing and technology financing.
 		</p>
 	</div>
 
-	<div class="grid md:grid-cols-2 gap-5">
+	<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
 		{#if canSee('pitch-deck')}
-			<a href="/dashboard/pitch-deck" class="group rounded-2xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 p-7 shadow-lg shadow-fli-blue-900/20 transition-all duration-200 hover:-translate-y-1 hover:border-fli-blue-200 hover:bg-fli-blue-600/75 hover:shadow-xl hover:shadow-fli-blue-900/35">
-				<div class="flex items-start justify-between gap-4">
+			<a href="/dashboard/pitch-deck{previewSuffix}" class="group min-w-0 rounded-2xl border-2 border-fli-blue-300/65 bg-fli-blue-700/65 p-7 shadow-lg shadow-fli-blue-900/20 transition-all duration-200 hover:-translate-y-1 hover:border-fli-blue-200 hover:bg-fli-blue-600/75 hover:shadow-xl hover:shadow-fli-blue-900/35">
+				<div class="flex flex-wrap items-start justify-between gap-4">
 					<div class="h-16 w-16 rounded-2xl border border-fli-blue-200/35 bg-fli-blue-500/15 flex items-center justify-center"><Trophy class="h-8 w-8 text-fli-blue-200" /></div>
 					<span class="text-xs font-semibold uppercase tracking-widest text-fli-blue-200">Investment Area 01</span>
 				</div>
@@ -171,14 +172,26 @@
 		{/if}
 
 		{#if canSee('fg-sports-technologies')}
-			<a href="/dashboard/fg-sports-technologies" class="group rounded-2xl border-2 border-fg-teal/60 bg-fg-green-900/85 p-7 shadow-lg shadow-fg-green-900/25 transition-all duration-200 hover:-translate-y-1 hover:border-fg-cyan hover:bg-fg-green-800 hover:shadow-xl hover:shadow-fg-green-900/45">
-				<div class="flex items-start justify-between gap-4">
+			<a href="/dashboard/fg-sports-technologies{previewSuffix}" class="group min-w-0 rounded-2xl border-2 border-fg-teal/60 bg-fg-green-900/85 p-7 shadow-lg shadow-fg-green-900/25 transition-all duration-200 hover:-translate-y-1 hover:border-fg-cyan hover:bg-fg-green-800 hover:shadow-xl hover:shadow-fg-green-900/45">
+				<div class="flex flex-wrap items-start justify-between gap-4">
 					<div class="h-16 w-16 rounded-2xl border border-fg-cyan/40 bg-fg-cyan/15 flex items-center justify-center"><Cpu class="h-8 w-8 text-fg-cyan" /></div>
 					<span class="text-xs font-semibold uppercase tracking-widest text-fg-cyan">Investment Area 02</span>
 				</div>
 				<h2 class="mt-6 text-2xl font-black text-white">FG Sports Technologies</h2>
 				<p class="mt-2 text-sm leading-relaxed text-white/60">FLIHub, FGF Fantasy, AI &amp; licensing</p>
 				<div class="mt-6 text-sm font-semibold text-fg-cyan group-hover:text-white transition-colors">Open FG Sports Technologies <span aria-hidden="true">→</span></div>
+			</a>
+		{/if}
+
+		{#if canSee('fg-sports-technologies')}
+			<a href="/dashboard/fli-sports-technologies-financial-projections{previewSuffix}" class="group min-w-0 rounded-2xl border-2 border-fg-teal/60 bg-fg-green-900/85 p-7 shadow-lg shadow-fg-green-900/25 transition-all duration-200 hover:-translate-y-1 hover:border-fg-cyan hover:bg-fg-green-800 hover:shadow-xl hover:shadow-fg-green-900/45">
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<div class="h-16 w-16 rounded-2xl border border-fg-cyan/40 bg-fg-cyan/15 flex items-center justify-center"><Table2 class="h-8 w-8 text-fg-cyan" /></div>
+					<span class="text-xs font-semibold uppercase tracking-widest text-fg-cyan">Investment Area 03</span>
+				</div>
+				<h2 class="mt-6 break-words text-2xl font-black text-white">FLI Sports Technologies Financial Projections</h2>
+				<p class="mt-2 text-sm leading-relaxed text-white/60">Management planning model supporting the investor-deck forecast. USD, calendar years 2027–2031.</p>
+				<div class="mt-6 text-sm font-semibold text-fg-cyan group-hover:text-white transition-colors">Open Financial Projections <span aria-hidden="true">→</span></div>
 			</a>
 		{/if}
 	</div>
